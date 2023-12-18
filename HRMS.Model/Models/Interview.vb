@@ -1,8 +1,9 @@
 ﻿Imports System
 Imports System.Collections.Generic
+Imports Infrastructure
 
 Namespace Models
-    Partial Public Class Interview
+    Partial Public Class Interview : Inherits BaseEntity(Of Long)
         Public Property Id As Long
 
         Public Property Interviewdate As Date
@@ -14,8 +15,6 @@ Namespace Models
         Public Property Candidateid As Long
 
         Public Property Interviewerid As Long
-
-        Public Property Isactive As Boolean
 
         Public Overridable Property Candidate As Candidate
 

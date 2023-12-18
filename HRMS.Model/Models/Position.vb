@@ -1,9 +1,9 @@
 ﻿Imports System
 Imports System.Collections.Generic
+Imports Infrastructure
 
 Namespace Models
-    Partial Public Class Position
-        Public Property Id As Long
+    Partial Public Class Position : Inherits BaseEntity(Of Long)
 
         Public Property Positiontitle As String
 
@@ -11,7 +11,6 @@ Namespace Models
 
         Public Property Salarygrade As Long
 
-        Public Property Isactive As Boolean
 
         Public Overridable ReadOnly Property Candidates As ICollection(Of Candidate) = New List(Of Candidate)()
 

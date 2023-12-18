@@ -16,7 +16,6 @@ Namespace Models
 
         Public Property Leavetypeid As Long?
 
-        Public Property Isactive As Boolean
 
         Public Overridable Property Employee As Employee
 

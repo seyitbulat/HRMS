@@ -1,8 +1,9 @@
 ﻿Imports System
 Imports System.Collections.Generic
+Imports Infrastructure
 
 Namespace Models
-    Partial Public Class Salary
+    Partial Public Class Salary : Inherits BaseEntity(Of Long)
         Public Property Id As Long
 
         Public Property Basesalary As Decimal
@@ -15,7 +16,6 @@ Namespace Models
 
         Public Property Employeeid As Long?
 
-        Public Property Isactive As Boolean
 
         Public Overridable Property Employee As Employee
     End Class
