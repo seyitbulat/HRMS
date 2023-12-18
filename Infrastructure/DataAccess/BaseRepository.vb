@@ -1,4 +1,5 @@
-﻿Imports System.Threading.Tasks
+﻿Imports System.Linq.Expressions
+Imports System.Threading.Tasks
 Imports Microsoft.EntityFrameworkCore
 
 Public Class BaseRepository(Of T As BaseEntity(Of TKey), TKey As {Structure, IEquatable(Of TKey)}, TContext As DbContext)
@@ -43,5 +44,31 @@ Public Class BaseRepository(Of T As BaseEntity(Of TKey), TKey As {Structure, IEq
         Dim updated = _context.Set(Of T)().Update(entity)
         Await _context.SaveChangesAsync()
         Return updated.Entity
+    End Function
+
+    Public Async Function GetAsync(Optional predicate As Expression(Of Func(Of T, Boolean)) = Nothing, Optional includeList As List(Of String) = Nothing) As Task(Of T) Implements IBaseRepository(Of T, TKey).GetAsync
+        Dim dbSet = _context.Set(Of T)()
+        If predicate IsNot Nothing Then
+            dbSet = dbSet.Where(predicate)
+        End If
+        If includeList IsNot Nothing Then
+            For Each include In includeList
+                dbSet = dbSet.Include(include)
+            Next
+        End If
+        Return Await dbSet.FirstOrDefaultAsync()
+    End Function
+
+    Public Async Function GetListAsync(Optional predicate As Expression(Of Func(Of T, Boolean)) = Nothing, Optional includeList As List(Of String) = Nothing) As Task(Of IEnumerable(Of T)) Implements IBaseRepository(Of T, TKey).GetListAsync
+        Dim dbSet = _context.Set(Of T)()
+        If predicate IsNot Nothing Then
+            dbSet = dbSet.Where(predicate)
+        End If
+        If includeList IsNot Nothing Then
+            For Each include In includeList
+                dbSet = dbSet.Include(include)
+            Next
+        End If
+        Return Await dbSet.ToListAsync()
     End Function
 End Class
