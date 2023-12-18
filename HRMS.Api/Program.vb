@@ -1,6 +1,5 @@
 Imports HRMS.Business
 Imports HRMS.Repository
-Imports HRMS.Repository.DataAccess
 Imports Microsoft.AspNetCore.Builder
 Imports Microsoft.AspNetCore.Hosting
 Imports Microsoft.AspNetCore.Rewrite
@@ -18,12 +17,20 @@ Module Program
         builder.Services.AddEndpointsApiExplorer()
         builder.Services.AddSwaggerGen()
 
-        builder.Services.AddDbContext(Of HrmsContext)
+        builder.Services.AddDbContext(Of HRMSContext)
         builder.Services.AddAutoMapper(GetType(AutoMapperProfiles))
 
         builder.Services.AddScoped(Of ILeavesTypeRepository, LeavesTypeRepository)
         builder.Services.AddScoped(Of ILeavesTypeBs, LeavesTypeBs)
 
+        builder.Services.AddScoped(Of ICandidateRepository, CandidateRepository)
+        builder.Services.AddScoped(Of ICandidateBs, CandidateBs)
+
+        builder.Services.AddScoped(Of IEmployeeRepository, EmployeeRepository)
+        builder.Services.AddScoped(Of IEmployeeBs, EmployeeBs)
+
+        builder.Services.AddScoped(Of IDepartmentRepository, DepartmentRepository)
+        builder.Services.AddScoped(Of IDepartmentBs, DepartmentBs)
         Dim app = builder.Build()
 
         app.UseRewriter(New RewriteOptions().AddRedirect("^$", "swagger"))
