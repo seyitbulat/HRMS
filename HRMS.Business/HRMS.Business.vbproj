@@ -5,4 +5,15 @@
     <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HRMS.Model\HRMS.Model.vbproj" />
+    <ProjectReference Include="..\HRMS.Repository\HRMS.DataAccess.vbproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.vbproj" />
+  </ItemGroup>
+
 </Project>

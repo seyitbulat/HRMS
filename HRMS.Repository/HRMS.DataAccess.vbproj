@@ -6,8 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Impelentations\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HRMS.Model\HRMS.Model.vbproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.vbproj" />
   </ItemGroup>
 
 </Project>

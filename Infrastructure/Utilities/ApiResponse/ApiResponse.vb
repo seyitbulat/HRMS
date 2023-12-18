@@ -1,12 +1,4 @@
-﻿Imports Infrastructure.Utilities.Security.JWT
-Imports System
-Imports System.Collections.Generic
-Imports System.Linq
-Imports System.Text
-Imports System.Text.Json.Serialization
-Imports System.Threading.Tasks
-
-Namespace Infrastructure.Utilities.ApiResponses
+﻿Namespace Infrastructure.Utilities.ApiResponses
     Public Class ApiResponse(Of T)
         Public Property Data As T
         Public Property ErrorMessages As List(Of String)

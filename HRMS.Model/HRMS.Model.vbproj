@@ -25,4 +25,8 @@
     <Folder Include="Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.vbproj" />
+  </ItemGroup>
+
 </Project>

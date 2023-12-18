@@ -1,3 +1,6 @@
+Imports HRMS.Business
+Imports HRMS.Repository
+Imports HRMS.Repository.DataAccess
 Imports Microsoft.AspNetCore.Builder
 Imports Microsoft.AspNetCore.Hosting
 Imports Microsoft.AspNetCore.Rewrite
@@ -14,6 +17,12 @@ Module Program
         ' Learn more about configuring Swagger/OpenAPI at https://aka.ms/
         builder.Services.AddEndpointsApiExplorer()
         builder.Services.AddSwaggerGen()
+
+        builder.Services.AddDbContext(Of HrmsContext)
+        builder.Services.AddAutoMapper(GetType(AutoMapperProfiles))
+
+        builder.Services.AddScoped(Of ILeavesTypeRepository, LeavesTypeRepository)
+        builder.Services.AddScoped(Of ILeavesTypeBs, LeavesTypeBs)
 
         Dim app = builder.Build()
 

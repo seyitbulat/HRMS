@@ -1,9 +1,9 @@
-﻿Imports System
-Imports System.Collections.Generic
+﻿
+
+Imports Infrastructure
 
 Namespace Models
-    Partial Public Class LeavesType
-        Public Property Id As Long
+    Partial Public Class LeavesType : Inherits BaseEntity(Of Long)
 
         Public Property Typename As String
 

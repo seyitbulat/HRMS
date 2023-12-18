@@ -6,12 +6,6 @@ Namespace Models
     Partial Public Class HrmsContext
         Inherits DbContext
 
-        Public Sub New()
-        End Sub
-
-        Public Sub New(options As DbContextOptions(Of HrmsContext))
-            MyBase.New(options)
-        End Sub
 
         Public Overridable Property Candidates As DbSet(Of Candidate)
 
