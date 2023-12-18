@@ -10,7 +10,6 @@
 End Class
 
 Public Class PerformanceReviewPostDto
-    Public Property Id As Long
 
     Public Property Reviewdate As Date
 
