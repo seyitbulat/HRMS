@@ -1,7 +1,7 @@
 ﻿Imports System.Threading.Tasks
 Imports Microsoft.EntityFrameworkCore
 
-Public Class BaseRepository(Of T As BaseEntity(Of TKey), TKey, TContext As DbContext)
+Public Class BaseRepository(Of T As BaseEntity(Of TKey), TKey As {Structure, IEquatable(Of TKey)}, TContext As DbContext)
     Implements IBaseRepository(Of T, TKey)
 
 
@@ -14,8 +14,8 @@ Public Class BaseRepository(Of T As BaseEntity(Of TKey), TKey, TContext As DbCon
     End Sub
 
     Public Async Function AddAsync(entity As T) As Task(Of T) Implements IBaseRepository(Of T, TKey).AddAsync
-        entity.Isactive = True
         Dim newEntity = Await _context.Set(Of T)().AddAsync(entity)
+        newEntity.Entity.Isactive = True
         Await _context.SaveChangesAsync()
         Return newEntity.Entity
     End Function
@@ -27,7 +27,7 @@ Public Class BaseRepository(Of T As BaseEntity(Of TKey), TKey, TContext As DbCon
             Await _context.SaveChangesAsync()
             Return True
         End If
-        Return false
+        Return False
     End Function
 
     Public Async Function GetAllAsync() As Task(Of IEnumerable(Of T)) Implements IBaseRepository(Of T, TKey).GetAllAsync
@@ -35,7 +35,8 @@ Public Class BaseRepository(Of T As BaseEntity(Of TKey), TKey, TContext As DbCon
     End Function
 
     Public Async Function GetByIdAsync(id As TKey) As Task(Of T) Implements IBaseRepository(Of T, TKey).GetByIdAsync
-        Return Await _context.Set(Of T)().Where(Function(e) e.Isactive = True).FirstOrDefaultAsync(Function(e) e.Id.Equals(id))
+        Return Await _context.Set(Of T)().FirstOrDefaultAsync(Function(e) e.Isactive AndAlso e.Id.Equals(id))
+
     End Function
 
     Public Async Function UpdateAsync(entity As T) As Task(Of T) Implements IBaseRepository(Of T, TKey).UpdateAsync

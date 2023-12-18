@@ -14,7 +14,7 @@ Namespace HRMS.Api.Controllers
             _service = service
         End Sub
 
-        <HttpGet("GetById")>
+        <HttpGet("GetById/{id}")>
         Async Function GetById(<FromRoute> id As Long) As Task(Of IActionResult)
             Dim response = Await _service.GetById(id)
             Return SendResponse(response)

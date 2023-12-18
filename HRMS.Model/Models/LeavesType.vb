@@ -9,7 +9,6 @@ Namespace Models
 
         Public Property Description As String
 
-        Public Property Isactive As Boolean
 
         Public Overridable ReadOnly Property Leaves As ICollection(Of Leaf) = New List(Of Leaf)()
     End Class
