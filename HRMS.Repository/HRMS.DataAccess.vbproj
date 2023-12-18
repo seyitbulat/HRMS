@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>Infrastructure</RootNamespace>
+    <RootNamespace>HRMS.Repository</RootNamespace>
     <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DataAccess\Interfaces\" />
-    <Folder Include="DataAccess\Implentations\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Impelentations\" />
   </ItemGroup>
 
 </Project>
