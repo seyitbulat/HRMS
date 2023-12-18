@@ -1,9 +1,10 @@
 ﻿Imports System
 Imports System.Collections.Generic
+Imports Infrastructure
 
 Namespace Models
-    Partial Public Class Leaf
-        Public Property Id As Long
+    Partial Public Class Leaf : Inherits BaseEntity(Of Long)
+
 
         Public Property Startdate As Date?
 
@@ -14,6 +15,8 @@ Namespace Models
         Public Property Employeeid As Long?
 
         Public Property Leavetypeid As Long?
+
+        Public Property Isactive As Boolean
 
         Public Overridable Property Employee As Employee
 

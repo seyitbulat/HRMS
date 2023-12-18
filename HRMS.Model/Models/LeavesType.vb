@@ -1,5 +1,5 @@
-﻿
-
+﻿Imports System
+Imports System.Collections.Generic
 Imports Infrastructure
 
 Namespace Models
@@ -8,6 +8,8 @@ Namespace Models
         Public Property Typename As String
 
         Public Property Description As String
+
+        Public Property Isactive As Boolean
 
         Public Overridable ReadOnly Property Leaves As ICollection(Of Leaf) = New List(Of Leaf)()
     End Class

@@ -9,6 +9,8 @@ Namespace Models
 
         Public Property Managerid As Long?
 
+        Public Property Isactive As Boolean
+
         Public Overridable ReadOnly Property Employees As ICollection(Of Employee) = New List(Of Employee)()
 
         Public Overridable Property Manager As Employee

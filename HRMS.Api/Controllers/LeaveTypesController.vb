@@ -33,5 +33,10 @@ Namespace HRMS.Api.Controllers
             Return SendResponse(response)
         End Function
 
+        <HttpDelete("{id}")>
+        Async Function DeleteLeaveType(<FromRoute> id As Long) As Task(Of IActionResult)
+            Dim response = Await _service.Delete(id)
+            Return SendResponse(response)
+        End Function
     End Class
 End Namespace

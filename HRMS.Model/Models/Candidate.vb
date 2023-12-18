@@ -15,6 +15,8 @@ Namespace Models
 
         Public Property Appliedpositionid As Long
 
+        Public Property Isactive As Boolean
+
         Public Overridable Property Appliedposition As Position
 
         Public Overridable ReadOnly Property Interviews As ICollection(Of Interview) = New List(Of Interview)()

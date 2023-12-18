@@ -3,9 +3,15 @@ Imports System.Collections.Generic
 Imports Microsoft.EntityFrameworkCore
 
 Namespace Models
-    Partial Public Class HrmsContext
+    Partial Public Class HRMSContext
         Inherits DbContext
 
+        Public Sub New()
+        End Sub
+
+        Public Sub New(options As DbContextOptions(Of HRMSContext))
+            MyBase.New(options)
+        End Sub
 
         Public Overridable Property Candidates As DbSet(Of Candidate)
 
@@ -42,6 +48,7 @@ Namespace Models
                         IsRequired().
                         HasMaxLength(50).
                         HasColumnName("FIRSTNAME")
+                    entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
                     entity.Property(Function(e) e.Lastname).
                         IsRequired().
                         HasMaxLength(50).
@@ -63,6 +70,7 @@ Namespace Models
                         IsRequired().
                         HasMaxLength(100).
                         HasColumnName("DEPARTMENTNAME")
+                    entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
                     entity.Property(Function(e) e.Managerid).HasColumnName("MANAGERID")
 
                     entity.HasOne(Function(d) d.Manager).WithMany(Function(p) p.Departments).
@@ -89,6 +97,7 @@ Namespace Models
                     entity.Property(Function(e) e.Hiredate).
                         HasColumnType("date").
                         HasColumnName("HIREDATE")
+                    entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
                     entity.Property(Function(e) e.Lastname).
                         IsRequired().
                         HasMaxLength(50).
@@ -129,6 +138,7 @@ Namespace Models
                     entity.Property(Function(e) e.Interviewoutcome).
                         HasMaxLength(50).
                         HasColumnName("INTERVIEWOUTCOME")
+                    entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
 
                     entity.HasOne(Function(d) d.Candidate).WithMany(Function(p) p.Interviews).
                         HasForeignKey(Function(d) d.Candidateid).
@@ -148,6 +158,7 @@ Namespace Models
                     entity.Property(Function(e) e.Enddate).
                         HasColumnType("date").
                         HasColumnName("ENDDATE")
+                    entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
                     entity.Property(Function(e) e.Leavetypeid).HasColumnName("LEAVETYPEID")
                     entity.Property(Function(e) e.Startdate).
                         HasColumnType("date").
@@ -173,6 +184,7 @@ Namespace Models
                     entity.Property(Function(e) e.Description).
                         HasMaxLength(500).
                         HasColumnName("DESCRIPTION")
+                    entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
                     entity.Property(Function(e) e.Typename).
                         IsRequired().
                         HasMaxLength(50).
@@ -186,6 +198,7 @@ Namespace Models
                         HasMaxLength(1000).
                         HasColumnName("COMMENTS")
                     entity.Property(Function(e) e.Employeeid).HasColumnName("EMPLOYEEID")
+                    entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
                     entity.Property(Function(e) e.Reviewdate).
                         HasColumnType("date").
                         HasColumnName("REVIEWDATE")
@@ -209,6 +222,7 @@ Namespace Models
                     entity.Property(Function(e) e.Description).
                         HasMaxLength(500).
                         HasColumnName("DESCRIPTION")
+                    entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
                     entity.Property(Function(e) e.Positiontitle).
                         IsRequired().
                         HasMaxLength(100).
@@ -232,6 +246,7 @@ Namespace Models
                         HasColumnType("date").
                         HasColumnName("EFFECTIVEDATE")
                     entity.Property(Function(e) e.Employeeid).HasColumnName("EMPLOYEEID")
+                    entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
 
                     entity.HasOne(Function(d) d.Employee).WithMany(Function(p) p.Salaries).
                         HasForeignKey(Function(d) d.Employeeid).

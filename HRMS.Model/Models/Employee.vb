@@ -25,6 +25,8 @@ Namespace Models
 
         Public Property Managerid As Long
 
+        Public Property Isactive As Boolean
+
         Public Overridable Property Departman As Department
 
         Public Overridable ReadOnly Property Departments As ICollection(Of Department) = New List(Of Department)()

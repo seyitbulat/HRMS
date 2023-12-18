@@ -14,3 +14,11 @@ Public Class LeavesTypePostDto
     Public Property Description As String
 
 End Class
+
+Public Class LeavesTypePutDto
+    Public Property Id As Long
+    Public Property Typename As String
+
+    Public Property Description As String
+
+End Class

@@ -15,6 +15,8 @@ Namespace Models
 
         Public Property Reviewerid As Long
 
+        Public Property Isactive As Boolean
+
         Public Overridable Property Employee As Employee
 
         Public Overridable Property Reviewer As Employee

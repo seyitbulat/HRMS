@@ -15,6 +15,8 @@ Namespace Models
 
         Public Property Employeeid As Long?
 
+        Public Property Isactive As Boolean
+
         Public Overridable Property Employee As Employee
     End Class
 End Namespace
