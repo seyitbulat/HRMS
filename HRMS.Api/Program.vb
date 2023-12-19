@@ -31,6 +31,9 @@ Module Program
 
         builder.Services.AddScoped(Of IDepartmentRepository, DepartmentRepository)
         builder.Services.AddScoped(Of IDepartmentBs, DepartmentBs)
+
+        builder.Services.AddScoped(Of IPositionRepository, PositionRepository)
+        builder.Services.AddScoped(Of IPositionBs, PositionBs)
         Dim app = builder.Build()
 
         app.UseRewriter(New RewriteOptions().AddRedirect("^$", "swagger"))

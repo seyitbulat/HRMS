@@ -12,5 +12,10 @@ Public Class AutoMapperProfiles : Inherits Profile
         CreateMap(Of Department, DepartmentGetDto)()
         CreateMap(Of DepartmentPostDto, Department)()
         CreateMap(Of DepartmentPutDto, Department)()
+
+        CreateMap(Of Position, PositionGetDto)()
+        CreateMap(Of PositionPostDto, Position)()
+        CreateMap(Of PositionPutDto, Position)()
+
     End Sub
 End Class
