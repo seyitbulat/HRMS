@@ -1,4 +1,5 @@
 ﻿Public Class CandidateGetDto
+    Public Property Id As Long
     Public Property Firstname As String
     Public Property Lastname As String
     Public Property Applicationdate As Date
