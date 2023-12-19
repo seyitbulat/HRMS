@@ -85,6 +85,7 @@ Namespace Models
             modelBuilder.Entity(Of Employee)(
                 Sub(entity)
                     entity.Property(Function(e) e.Id).HasColumnName("ID")
+                    entity.Property(Function(e) e.Annualleave).HasColumnName("ANNUALLEAVE")
                     entity.Property(Function(e) e.Birthdate).
                         HasColumnType("date").
                         HasColumnName("BIRTHDATE")
@@ -97,7 +98,10 @@ Namespace Models
                         IsRequired().
                         HasMaxLength(50).
                         HasColumnName("FIRSTNAME")
-                    entity.Property(Function(e) e.Gender).HasColumnName("GENDER")
+                    entity.Property(Function(e) e.Gender).
+                        IsRequired().
+                        HasMaxLength(20).
+                        HasColumnName("GENDER")
                     entity.Property(Function(e) e.Hiredate).
                         HasColumnType("date").
                         HasColumnName("HIREDATE")
@@ -160,12 +164,12 @@ Namespace Models
                     entity.Property(Function(e) e.Id).HasColumnName("ID")
                     entity.Property(Function(e) e.Employeeid).HasColumnName("EMPLOYEEID")
                     entity.Property(Function(e) e.Enddate).
-                        HasColumnType("date").
+                        HasColumnType("datetime").
                         HasColumnName("ENDDATE")
                     entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
                     entity.Property(Function(e) e.Leavetypeid).HasColumnName("LEAVETYPEID")
                     entity.Property(Function(e) e.Startdate).
-                        HasColumnType("date").
+                        HasColumnType("datetime").
                         HasColumnName("STARTDATE")
                     entity.Property(Function(e) e.Status).
                         HasMaxLength(50).

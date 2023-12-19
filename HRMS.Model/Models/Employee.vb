@@ -25,6 +25,7 @@ Namespace Models
 
         Public Property Managerid As Long
 
+        Public Property Annualleave As String
 
         Public Overridable Property Departman As Department
 
