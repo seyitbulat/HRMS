@@ -1,9 +1,9 @@
 ﻿Imports System
 Imports System.Collections.Generic
+Imports Infrastructure
 
 Namespace Models
-    Partial Public Class PerformanceReview
-        Public Property Id As Long
+    Partial Public Class PerformanceReview : Inherits BaseEntity(Of Long)
 
         Public Property Reviewdate As Date
 
@@ -15,7 +15,6 @@ Namespace Models
 
         Public Property Reviewerid As Long
 
-        Public Property Isactive As Boolean
 
         Public Overridable Property Employee As Employee
 

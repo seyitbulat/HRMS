@@ -4,7 +4,6 @@ Imports Infrastructure
 
 Namespace Models
     Partial Public Class Salary : Inherits BaseEntity(Of Long)
-        Public Property Id As Long
 
         Public Property Basesalary As Decimal
 

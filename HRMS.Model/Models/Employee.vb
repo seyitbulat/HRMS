@@ -1,9 +1,9 @@
 ﻿Imports System
 Imports System.Collections.Generic
+Imports Infrastructure
 
 Namespace Models
-    Partial Public Class Employee
-        Public Property Id As Long
+    Partial Public Class Employee : Inherits BaseEntity(Of Long)
 
         Public Property Firstname As String
 
@@ -25,7 +25,7 @@ Namespace Models
 
         Public Property Managerid As Long
 
-        Public Property Isactive As Boolean
+        Public Property Annualleave As String
 
         Public Overridable Property Departman As Department
 

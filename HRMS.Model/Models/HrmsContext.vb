@@ -25,11 +25,15 @@ Namespace Models
 
         Public Overridable Property LeavesTypes As DbSet(Of LeavesType)
 
+        Public Overridable Property OpenPositions As DbSet(Of OpenPosition)
+
         Public Overridable Property PerformanceReviews As DbSet(Of PerformanceReview)
 
         Public Overridable Property Positions As DbSet(Of Position)
 
         Public Overridable Property Salaries As DbSet(Of Salary)
+
+        Public Overridable Property Users As DbSet(Of User)
 
         Protected Overrides Sub OnConfiguring(optionsBuilder As DbContextOptionsBuilder)
             'TODO /!\ To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -81,6 +85,7 @@ Namespace Models
             modelBuilder.Entity(Of Employee)(
                 Sub(entity)
                     entity.Property(Function(e) e.Id).HasColumnName("ID")
+                    entity.Property(Function(e) e.Annualleave).HasColumnName("ANNUALLEAVE")
                     entity.Property(Function(e) e.Birthdate).
                         HasColumnType("date").
                         HasColumnName("BIRTHDATE")
@@ -93,7 +98,10 @@ Namespace Models
                         IsRequired().
                         HasMaxLength(50).
                         HasColumnName("FIRSTNAME")
-                    entity.Property(Function(e) e.Gender).HasColumnName("GENDER")
+                    entity.Property(Function(e) e.Gender).
+                        IsRequired().
+                        HasMaxLength(20).
+                        HasColumnName("GENDER")
                     entity.Property(Function(e) e.Hiredate).
                         HasColumnType("date").
                         HasColumnName("HIREDATE")
@@ -156,12 +164,12 @@ Namespace Models
                     entity.Property(Function(e) e.Id).HasColumnName("ID")
                     entity.Property(Function(e) e.Employeeid).HasColumnName("EMPLOYEEID")
                     entity.Property(Function(e) e.Enddate).
-                        HasColumnType("date").
+                        HasColumnType("datetime").
                         HasColumnName("ENDDATE")
                     entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
                     entity.Property(Function(e) e.Leavetypeid).HasColumnName("LEAVETYPEID")
                     entity.Property(Function(e) e.Startdate).
-                        HasColumnType("date").
+                        HasColumnType("datetime").
                         HasColumnName("STARTDATE")
                     entity.Property(Function(e) e.Status).
                         HasMaxLength(50).
@@ -189,6 +197,25 @@ Namespace Models
                         IsRequired().
                         HasMaxLength(50).
                         HasColumnName("TYPENAME")
+                End Sub)
+
+            modelBuilder.Entity(Of OpenPosition)(
+                Sub(entity)
+                    entity.Property(Function(e) e.Id).HasColumnName("ID")
+                    entity.Property(Function(e) e.Closingdate).
+                        HasColumnType("date").
+                        HasColumnName("CLOSINGDATE")
+                    entity.Property(Function(e) e.Description).HasColumnName("DESCRIPTION")
+                    entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
+                    entity.Property(Function(e) e.Openinggdate).
+                        HasColumnType("date").
+                        HasColumnName("OPENINGGDATE")
+                    entity.Property(Function(e) e.Positionid).HasColumnName("POSITIONID")
+
+                    entity.HasOne(Function(d) d.Position).WithMany(Function(p) p.OpenPositions).
+                        HasForeignKey(Function(d) d.Positionid).
+                        OnDelete(DeleteBehavior.ClientSetNull).
+                        HasConstraintName("FK_OpenPositions_Positions")
                 End Sub)
 
             modelBuilder.Entity(Of PerformanceReview)(
@@ -251,6 +278,28 @@ Namespace Models
                     entity.HasOne(Function(d) d.Employee).WithMany(Function(p) p.Salaries).
                         HasForeignKey(Function(d) d.Employeeid).
                         HasConstraintName("FK_Salaries_Employees")
+                End Sub)
+
+            modelBuilder.Entity(Of User)(
+                Sub(entity)
+                    entity.Property(Function(e) e.Id).HasColumnName("ID")
+                    entity.Property(Function(e) e.Email).
+                        IsRequired().
+                        HasMaxLength(50).
+                        HasColumnName("EMAIL")
+                    entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
+                    entity.Property(Function(e) e.Password).
+                        IsRequired().
+                        HasMaxLength(50).
+                        HasColumnName("PASSWORD")
+                    entity.Property(Function(e) e.Phone).
+                        IsRequired().
+                        HasMaxLength(50).
+                        HasColumnName("PHONE")
+                    entity.Property(Function(e) e.Username).
+                        IsRequired().
+                        HasMaxLength(50).
+                        HasColumnName("USERNAME")
                 End Sub)
 
             OnModelCreatingPartial(modelBuilder)

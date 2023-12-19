@@ -1,0 +1,3 @@
+﻿Class DepartmentTable
+
+End Class
