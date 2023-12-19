@@ -25,6 +25,8 @@ Namespace Models
 
         Public Overridable Property LeavesTypes As DbSet(Of LeavesType)
 
+        Public Overridable Property OpenPositions As DbSet(Of OpenPosition)
+
         Public Overridable Property PerformanceReviews As DbSet(Of PerformanceReview)
 
         Public Overridable Property Positions As DbSet(Of Position)
@@ -35,7 +37,7 @@ Namespace Models
 
         Protected Overrides Sub OnConfiguring(optionsBuilder As DbContextOptionsBuilder)
             'TODO /!\ To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-R04PVQ3\SQLEXPRESS02; Initial Catalog=HRMS; Integrated Security=true; TrustServerCertificate=True")
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-R04PVQ3\SQLEXPRESS; Initial Catalog=HRMS; Integrated Security=true; TrustServerCertificate=True")
         End Sub
 
         Protected Overrides Sub OnModelCreating(modelBuilder As ModelBuilder)
@@ -191,6 +193,25 @@ Namespace Models
                         IsRequired().
                         HasMaxLength(50).
                         HasColumnName("TYPENAME")
+                End Sub)
+
+            modelBuilder.Entity(Of OpenPosition)(
+                Sub(entity)
+                    entity.Property(Function(e) e.Id).HasColumnName("ID")
+                    entity.Property(Function(e) e.Closingdate).
+                        HasColumnType("date").
+                        HasColumnName("CLOSINGDATE")
+                    entity.Property(Function(e) e.Description).HasColumnName("DESCRIPTION")
+                    entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
+                    entity.Property(Function(e) e.Openinggdate).
+                        HasColumnType("date").
+                        HasColumnName("OPENINGGDATE")
+                    entity.Property(Function(e) e.Positionid).HasColumnName("POSITIONID")
+
+                    entity.HasOne(Function(d) d.Position).WithMany(Function(p) p.OpenPositions).
+                        HasForeignKey(Function(d) d.Positionid).
+                        OnDelete(DeleteBehavior.ClientSetNull).
+                        HasConstraintName("FK_OpenPositions_Positions")
                 End Sub)
 
             modelBuilder.Entity(Of PerformanceReview)(
