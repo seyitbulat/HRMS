@@ -5,7 +5,6 @@ Imports Infrastructure
 Namespace Models
     Partial Public Class Leaf : Inherits BaseEntity(Of Long)
 
-
         Public Property Startdate As Date?
 
         Public Property Enddate As Date?

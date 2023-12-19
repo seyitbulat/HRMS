@@ -15,6 +15,7 @@ Namespace Models
 
         Public Property Interviewerid As Long
 
+
         Public Overridable Property Candidate As Candidate
 
         Public Overridable Property Interviewer As Employee

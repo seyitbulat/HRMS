@@ -4,6 +4,7 @@ Imports Infrastructure
 
 Namespace Models
     Partial Public Class Employee : Inherits BaseEntity(Of Long)
+
         Public Property Firstname As String
 
         Public Property Lastname As String
@@ -23,6 +24,8 @@ Namespace Models
         Public Property Departmanid As Long
 
         Public Property Managerid As Long
+
+
         Public Overridable Property Departman As Department
 
         Public Overridable ReadOnly Property Departments As ICollection(Of Department) = New List(Of Department)()

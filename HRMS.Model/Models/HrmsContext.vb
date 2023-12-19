@@ -31,6 +31,8 @@ Namespace Models
 
         Public Overridable Property Salaries As DbSet(Of Salary)
 
+        Public Overridable Property Users As DbSet(Of User)
+
         Protected Overrides Sub OnConfiguring(optionsBuilder As DbContextOptionsBuilder)
             'TODO /!\ To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
             optionsBuilder.UseSqlServer("Data Source=DESKTOP-R04PVQ3\SQLEXPRESS; Initial Catalog=HRMS; Integrated Security=true; TrustServerCertificate=True")
@@ -251,6 +253,28 @@ Namespace Models
                     entity.HasOne(Function(d) d.Employee).WithMany(Function(p) p.Salaries).
                         HasForeignKey(Function(d) d.Employeeid).
                         HasConstraintName("FK_Salaries_Employees")
+                End Sub)
+
+            modelBuilder.Entity(Of User)(
+                Sub(entity)
+                    entity.Property(Function(e) e.Id).HasColumnName("ID")
+                    entity.Property(Function(e) e.Email).
+                        IsRequired().
+                        HasMaxLength(50).
+                        HasColumnName("EMAIL")
+                    entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
+                    entity.Property(Function(e) e.Password).
+                        IsRequired().
+                        HasMaxLength(50).
+                        HasColumnName("PASSWORD")
+                    entity.Property(Function(e) e.Phone).
+                        IsRequired().
+                        HasMaxLength(50).
+                        HasColumnName("PHONE")
+                    entity.Property(Function(e) e.Username).
+                        IsRequired().
+                        HasMaxLength(50).
+                        HasColumnName("USERNAME")
                 End Sub)
 
             OnModelCreatingPartial(modelBuilder)
