@@ -1,0 +1,3 @@
+﻿Class EmployeeTable
+
+End Class

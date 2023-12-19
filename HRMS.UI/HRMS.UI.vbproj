@@ -8,10 +8,138 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Icons\candidate-64-1.png" />
+    <None Remove="Icons\candidate-64.png" />
+    <None Remove="Icons\department-100-1.png" />
+    <None Remove="Icons\department-100.png" />
+    <None Remove="Icons\department-50.png" />
+    <None Remove="Icons\employee-100.png" />
+    <None Remove="Icons\employee-48.png" />
+    <None Remove="Icons\employee-50.png" />
+    <None Remove="Icons\employee-96.png" />
+    <None Remove="Icons\home-100.png" />
+    <None Remove="Icons\home-48.png" />
+    <None Remove="Icons\home-50.png" />
+    <None Remove="Icons\home-96.png" />
+    <None Remove="Icons\interview-64-1.png" />
+    <None Remove="Icons\interview-64-2.png" />
+    <None Remove="Icons\interview-64.png" />
+    <None Remove="Icons\leave-100.png" />
+    <None Remove="Icons\leave-48.png" />
+    <None Remove="Icons\leave-50.png" />
+    <None Remove="Icons\leave-64.png" />
+    <None Remove="Icons\leave-80.png" />
+    <None Remove="Icons\leave-96.png" />
+    <None Remove="Icons\position-64 -1.png" />
+    <None Remove="Icons\position-64.png" />
+    <None Remove="Icons\review-100-1.png" />
+    <None Remove="Icons\review-100.png" />
+    <None Remove="Icons\review-50-1.png" />
+    <None Remove="Icons\review-50.png" />
+    <None Remove="Icons\salary-100.png" />
+    <None Remove="Icons\salary-48.png" />
+    <None Remove="Icons\salary-50.png" />
+    <None Remove="Icons\salary-96.png" />
     <None Remove="Images\login.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Icons\candidate-64-1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\candidate-64.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\department-100-1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\department-100.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\department-50.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\employee-100.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\employee-48.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\employee-50.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\employee-96.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\home-100.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\home-48.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\home-50.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\home-96.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\interview-64-1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\interview-64-2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\interview-64.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\leave-100.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\leave-48.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\leave-50.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\leave-64.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\leave-80.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\leave-96.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\position-64 -1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\position-64.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\review-100-1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\review-100.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\review-50-1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\review-50.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\salary-100.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\salary-48.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\salary-50.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\salary-96.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\login.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -31,6 +159,7 @@
 
   <ItemGroup>
     <PackageReference Include="DevExpress.Wpf.Core" Version="23.1.6" />
+    <PackageReference Include="devexpress.wpf.grid.core" Version="23.1.6" />
     <PackageReference Include="DevExpress.Wpf.Themes.All" Version="23.1.6" />
   </ItemGroup>
 
