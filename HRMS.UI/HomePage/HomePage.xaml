@@ -19,20 +19,20 @@
             <RowDefinition Height="65*"/>
             <RowDefinition Height="291*"/>
         </Grid.RowDefinitions>
-        <!--<Border Grid.Row="1" CornerRadius="10" Background="#FEFADF" BorderBrush="{x:Null}" Margin="372,2,403,62">
-            <TextBox Text="UserName" Width="217" BorderBrush="{x:Null}" Background="{x:Null}" RenderTransformOrigin="0.47,-0.499" HorizontalAlignment="Center"/>
+        <Border Grid.Row="1" CornerRadius="10" Background="#FEFADF" BorderBrush="{x:Null}" Margin="299,0,323,34">
+            <TextBox Text="UserName" Width="178" BorderBrush="{x:Null}" Background="{x:Null}" RenderTransformOrigin="0.47,-0.499" HorizontalAlignment="Center"/>
         </Border>
-        <Border Grid.Row="1" CornerRadius="10" Background="#FEFADF" BorderBrush="{x:Null}" Margin="372,58,403,6">
-            <TextBox Text="Password" Width="217" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalAlignment="Center"/>
+        <Border Grid.Row="1" CornerRadius="10" Background="#FEFADF" BorderBrush="{x:Null}" Margin="299,31,323,2" RenderTransformOrigin="0.5,0.5">
+            <TextBox Text="Password" Width="178" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalAlignment="Center"/>
         </Border>
 
-        <Border Grid.Row="2" CornerRadius="20" Background="#FF64D7D1" BorderBrush="{x:Null}" Margin="372,16,509,5">
-            <Button Content="Şifremi Unuttum" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        <Border Grid.Row="2" CornerRadius="20" Background="#FF64D7D1" BorderBrush="{x:Null}" Margin="294,7,400,167" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
+            <Button Content="Şifremi Unuttum" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="113" Margin="-7,0,0,0"/>
         </Border>
-        <Border Grid.Row="2" CornerRadius="24" Background="#FFB9E8DD" BorderBrush="{x:Null}" Margin="500,18,375,7">
+        <Border Grid.Row="2" CornerRadius="24" Background="#FFB9E8DD" BorderBrush="{x:Null}" Margin="400,7,296,167" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
             <Button Content="Giriş Yap" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,-2,0"/>
         </Border>
-        <Label Content="HRMS" HorizontalAlignment="Left" Margin="372,258,0,0" VerticalAlignment="Top" Width="253" Height="70" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontSize="24" FontFamily="Engravers MT" Foreground="#FF71BFAD" />-->
+        <Label Content="HRMS" HorizontalAlignment="Left" Margin="337,151,0,0" VerticalAlignment="Top" Width="115" Height="39" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontSize="24" FontFamily="Engravers MT" Foreground="#FF71BFAD" Grid.RowSpan="2" />
 
     </Grid>
 </Page>
