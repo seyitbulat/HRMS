@@ -161,6 +161,7 @@
     <PackageReference Include="DevExpress.Wpf.Core" Version="23.1.6" />
     <PackageReference Include="devexpress.wpf.grid.core" Version="23.1.6" />
     <PackageReference Include="DevExpress.Wpf.Themes.All" Version="23.1.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>

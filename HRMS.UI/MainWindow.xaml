@@ -41,7 +41,7 @@
                             </BeginStoryboard>
                         </EventTrigger>
 
-                    </Style.Triggers>
+                  </Style.Triggers>
                 </Style>
             </StackPanel.Style>
 
@@ -51,6 +51,15 @@
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Anasayfa" VerticalAlignment="Center" Width="100" FontWeight="Bold" Foreground="White"/>
                         <Image Source="Icons/home-96.png" Width="25" Height="25"/>
+                    </StackPanel>
+                </Button>
+            </DockPanel>
+
+            <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10">
+                <Button Background="#FF468094" BorderBrush="{x:Null}" Click="Department_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Departman" VerticalAlignment="Center" Width="100" FontWeight="Bold" Foreground="White"/>
+                        <Image Source="Icons/department-100-1.png" Width="25" Height="25"/>
                     </StackPanel>
                 </Button>
             </DockPanel>
@@ -127,7 +136,7 @@
             </DockPanel>
         </StackPanel>
 
-        <Frame Margin="55,0,0,0" Name="MainContentFrame2" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Frame Margin="55,0,0,0" Name="pageView" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
 
         <!-- Diğer içerikler için ikinci sütun -->
         <!-- İkinci sütun içeriği buraya -->
