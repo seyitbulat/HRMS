@@ -47,6 +47,8 @@ Module Program
             app.UseSwaggerUI()
         End If
 
+        app.UseCustomException()
+
         app.UseHttpsRedirection()
 
         app.UseAuthorization()

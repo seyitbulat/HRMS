@@ -16,6 +16,9 @@ Public Class DepartmentBs : Implements IDepartmentBs
     End Sub
 
     Public Async Function GetById(id As Long) As Task(Of ApiResponse(Of DepartmentGetDto)) Implements IDepartmentBs.GetById
+        If id <= 0 Then
+            Throw New BadRequestException("id negatif olamaz ve en az 1 degerinde olmalidir")
+        End If
         Dim department = Await _repo.GetByIdAsync(id)
         Dim mappedDepartment = _mapper.Map(Of DepartmentGetDto)(department)
 
