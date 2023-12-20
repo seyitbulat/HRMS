@@ -10,7 +10,7 @@
       Title="DepartmentTable">
     <Grid>
 
-        <dxg:GridControl AutoGenerateColumns="None" EnableSmartColumnsGeneration="True">
+        <dxg:GridControl x:Name="DepartmentGrid" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True">
             <dxg:GridControl.Columns>
                 <dxg:GridColumn FieldName="DEPARTMENTNAME" Header="Department Name" Width="*"/>
                 <dxg:GridColumn FieldName="MANAGER" Header="Manager Name" Width="*"/>
