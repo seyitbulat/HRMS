@@ -12,8 +12,8 @@
 
         <dxg:GridControl x:Name="DepartmentGrid" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True">
             <dxg:GridControl.Columns>
-                <dxg:GridColumn FieldName="DEPARTMENTNAME" Header="Department Name" Width="*"/>
-                <dxg:GridColumn FieldName="MANAGER" Header="Manager Name" Width="*"/>
+                <dxg:GridColumn FieldName="Departmentname" Header="Department Name" Width="*"/>
+                <dxg:GridColumn FieldName="Managerid" Header="Manager Name" Width="*"/>
                 <dxg:GridColumn FieldName="ISACTIVE" Header="Is Active" Width="*"/>
             </dxg:GridControl.Columns>
             <dxg:GridControl.View>

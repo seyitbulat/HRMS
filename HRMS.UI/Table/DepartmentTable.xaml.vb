@@ -22,7 +22,9 @@ Partial Public Class DepartmentTable
             Dim response As HttpResponseMessage = Await client.GetAsync("https://localhost:50099/Department/GetAll")
             If response.IsSuccessStatusCode Then
                 Dim json As String = Await response.Content.ReadAsStringAsync()
-                Return JsonConvert.DeserializeObject(Of ObservableCollection(Of Department))(json)
+                Dim responseBody As ResponseBody(Of ObservableCollection(Of Department)) = JsonConvert.DeserializeObject(Of ResponseBody(Of ObservableCollection(Of Department)))(json)
+                Dim data = responseBody.Data
+                Return responseBody.Data ' This is your ObservableCollection<Department>
             Else
                 ' Handle error situation
                 Return New ObservableCollection(Of Department)()
