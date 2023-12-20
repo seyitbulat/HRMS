@@ -3,13 +3,13 @@ Imports System.Collections.Generic
 Imports Microsoft.EntityFrameworkCore
 
 Namespace Models
-    Partial Public Class HRMSContext
+    Partial Public Class HrmsContext
         Inherits DbContext
 
         Public Sub New()
         End Sub
 
-        Public Sub New(options As DbContextOptions(Of HRMSContext))
+        Public Sub New(options As DbContextOptions(Of HrmsContext))
             MyBase.New(options)
         End Sub
 
@@ -37,7 +37,7 @@ Namespace Models
 
         Protected Overrides Sub OnConfiguring(optionsBuilder As DbContextOptionsBuilder)
             'TODO /!\ To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-R04PVQ3\SQLEXPRESS; Initial Catalog=HRMS; Integrated Security=true; TrustServerCertificate=True")
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-R04PVQ3\SQLEXPRESS02; Initial Catalog=HRMS; Integrated Security=true; TrustServerCertificate=True")
         End Sub
 
         Protected Overrides Sub OnModelCreating(modelBuilder As ModelBuilder)
@@ -118,17 +118,14 @@ Namespace Models
 
                     entity.HasOne(Function(d) d.Departman).WithMany(Function(p) p.Employees).
                         HasForeignKey(Function(d) d.Departmanid).
-                        OnDelete(DeleteBehavior.ClientSetNull).
                         HasConstraintName("FK_Employees_Departments")
 
                     entity.HasOne(Function(d) d.Manager).WithMany(Function(p) p.InverseManager).
                         HasForeignKey(Function(d) d.Managerid).
-                        OnDelete(DeleteBehavior.ClientSetNull).
                         HasConstraintName("FK_Employees_Employees2")
 
                     entity.HasOne(Function(d) d.Position).WithMany(Function(p) p.Employees).
                         HasForeignKey(Function(d) d.Positionid).
-                        OnDelete(DeleteBehavior.ClientSetNull).
                         HasConstraintName("FK_Employees_Positions")
                 End Sub)
 

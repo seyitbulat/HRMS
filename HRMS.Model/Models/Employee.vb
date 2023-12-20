@@ -11,7 +11,7 @@ Namespace Models
 
         Public Property Birthdate As Date
 
-        Public Property Gender As Boolean
+        Public Property Gender As String
 
         Public Property Hiredate As Date
 
@@ -19,13 +19,14 @@ Namespace Models
 
         Public Property Phonenumber As String
 
-        Public Property Positionid As Long
+        Public Property Positionid As Long?
 
-        Public Property Departmanid As Long
+        Public Property Departmanid As Long?
 
-        Public Property Managerid As Long
+        Public Property Managerid As Long?
 
-        Public Property Annualleave As String
+        Public Property Annualleave As Integer?
+
 
         Public Overridable Property Departman As Department
 
