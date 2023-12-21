@@ -13,12 +13,16 @@ Partial Public Class MainWindow
         ''MainContentFrame1.Navigate(New CandidateTable())
         ''MainContentFrame2.Navigate(New EmployeeTable())
         'MainContentFrame3.Navigate(New DepartmentTable())
+        'MainContentFrame3.Navigate(New DepartmentTable())
 
     End Sub
 
 
     Private Sub Department_Click(sender As Object, e As RoutedEventArgs)
-        Dim departmentTable As New DepartmentTable()
-        pageView.Content = departmentTable
+
+    End Sub
+    Private Sub Employee_click(sender As Object, e As RoutedEventArgs)
+        Dim employeeTable As New EmployeeUserControl()
+        pageView.Navigate(employeeTable)
     End Sub
 End Class

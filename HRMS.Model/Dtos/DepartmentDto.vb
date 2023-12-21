@@ -3,6 +3,7 @@
 Public Class DepartmentGetDto
     Public Property Departmentname As String
     Public Property Managerid As Long?
+    Public Property Isactive As Boolean
 End Class
 
 Public Class DepartmentPostDto

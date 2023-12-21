@@ -64,7 +64,7 @@
                 </Button>
             </DockPanel>
             <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10">
-                <Button Background="#FF468094" BorderBrush="{x:Null}">
+                <Button Background="#FF468094" BorderBrush="{x:Null}" Click="Employee_click">
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Personel" VerticalAlignment="Center" Width="100" FontWeight="Bold" Foreground="White"/>
                         <Image Source="Icons/employee-96.png" Width="25" Height="25"/>
