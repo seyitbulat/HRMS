@@ -25,9 +25,14 @@ Public Class AutoMapperProfiles : Inherits Profile
         CreateMap(Of EmployeePostDto, Employee)()
         CreateMap(Of EmployeePutDto, Employee)()
 
+
         CreateMap(Of Interview, InterviewGetDto)()
         CreateMap(Of InterviewPostDto, Interview)()
         CreateMap(Of InterviewPutDto, Interview)()
+
+        CreateMap(Of Leaf, LeafGetDto)()
+        CreateMap(Of LeafPostDto, Leaf)()
+        CreateMap(Of LeafPutDto, Leaf).ReverseMap()
 
         CreateMap(Of User, UserGetDto)()
         CreateMap(Of UserPostDto, User)()

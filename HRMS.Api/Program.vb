@@ -5,6 +5,7 @@ Imports Microsoft.AspNetCore.Hosting
 Imports Microsoft.AspNetCore.Rewrite
 Imports Microsoft.Extensions.DependencyInjection
 Imports Microsoft.Extensions.Hosting
+Imports Microsoft.OpenApi
 
 Module Program
     Sub Main(args As String())

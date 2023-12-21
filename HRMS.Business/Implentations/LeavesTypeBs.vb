@@ -60,4 +60,6 @@ Public Class LeavesTypeBs : Implements ILeavesTypeBs
 
         Return ApiResponse(Of LeavesTypeGetDto).Success(200, updatedDto)
     End Function
+
+
 End Class

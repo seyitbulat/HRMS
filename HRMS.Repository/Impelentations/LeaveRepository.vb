@@ -1,14 +1,14 @@
-﻿Imports Microsoft.Data.SqlClient
+﻿Imports HRMS.Model.Models
+Imports Infrastructure
+Imports Microsoft.Data.SqlClient
 Imports Microsoft.EntityFrameworkCore
 Imports System.Data
-
-Public Class LeaveRepository
-    Implements ILeaveRepository
+Public Class LeaveRepository : Inherits BaseRepository(Of Leaf, Long, HRMSContext) : Implements ILeaveRepository
 
     Private ReadOnly _context As HRMSContext ' Replace with your actual DbContext
 
     Public Sub New(context As HRMSContext)
-        _context = context
+        MyBase.New(context)
     End Sub
 
     Public Async Function ManageLeave(leaveId As Long?, startDate As DateTime, endDate As DateTime, status As String, employeeId As Long, leaveTypeId As Long, operation As String) As Task(Of String) Implements ILeaveRepository.ManageLeave

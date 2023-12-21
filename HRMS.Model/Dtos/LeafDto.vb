@@ -30,7 +30,7 @@ Public Class LeafPutDto
 
     Public Property Status As String
 
-    Public Property Employeeid As Long?
+    Public Property Employee As EmployeeGetDto
 
     Public Property Leavetypeid As Long?
     Public Property Operation As String
