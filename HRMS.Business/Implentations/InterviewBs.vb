@@ -58,4 +58,14 @@ Public Class InterviewBs : Implements IInterviewBs
 
         Return ApiResponse(Of InterviewGetDto).Success(200, updatedDto)
     End Function
+
+    Public Async Function ScheduleInterview(interviewDate As Date, candidateId As Long, interviewerId As Long, Optional interviewNotes As String = Nothing, Optional interviewOutcome As String = Nothing) As Task(Of ApiResponse(Of String)) Implements IInterviewBs.ScheduleInterview
+        Dim result = Await _repo.ScheduleInterview(interviewDate, candidateId, interviewerId, interviewNotes, interviewOutcome)
+
+        If Not String.IsNullOrWhiteSpace(result) Then
+            Return ApiResponse(Of String).Success(200, result)
+        Else
+            Return ApiResponse(Of String).Fail(500, "An error occurred while scheduling the interview.")
+        End If
+    End Function
 End Class

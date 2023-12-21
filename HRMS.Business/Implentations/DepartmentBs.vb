@@ -60,4 +60,14 @@ Public Class DepartmentBs : Implements IDepartmentBs
 
         Return ApiResponse(Of DepartmentGetDto).Success(200, updatedDto)
     End Function
+
+    Public Async Function ManageDepartment(departmentId As Long?, departmentName As String, managerId As Long?, operation As String) As Task(Of ApiResponse(Of String)) Implements IDepartmentBs.ManageDepartment
+        Dim result = Await _repo.ManageDepartment(departmentId, departmentName, managerId, operation)
+
+        If Not String.IsNullOrWhiteSpace(result) Then
+            Return ApiResponse(Of String).Success(200, result)
+        Else
+            Return ApiResponse(Of String).Fail(500, "An error occurred during the department management operation.")
+        End If
+    End Function
 End Class

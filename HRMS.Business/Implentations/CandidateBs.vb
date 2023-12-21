@@ -60,4 +60,10 @@ Public Class CandidateBs : Implements ICandidateBs
 
         Return ApiResponse(Of CandidateGetDto).Success(200, updatedDto)
     End Function
+
+    Public Async Function AddNewCandidateProcedure(firstName As String, lastName As String, applicationDate As Date, resumeLink As String, appliedPositionId As Long) As Task(Of String) Implements ICandidateBs.AddNewCandidateProcedure
+        Dim message = Await _repo.AddNewCandidateProcedure(firstName, lastName, applicationDate, resumeLink, appliedPositionId)
+
+        Return message
+    End Function
 End Class

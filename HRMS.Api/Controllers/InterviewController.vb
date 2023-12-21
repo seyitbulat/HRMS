@@ -35,5 +35,11 @@ Public Class InterviewController
         Dim response = Await _service.Delete(id)
         Return SendResponse(response)
     End Function
+
+    <HttpPost("Schedule")>
+    Public Async Function ScheduleInterview(<FromBody> dto As InterviewPostDto) As Task(Of IActionResult)
+        Dim response = Await _service.ScheduleInterview(dto.Interviewdate, dto.Candidateid, dto.Interviewerid, dto.Interviewnotes, dto.Interviewoutcome)
+        Return SendResponse(response)
+    End Function
 End Class
 

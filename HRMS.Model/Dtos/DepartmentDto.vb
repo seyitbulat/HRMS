@@ -15,4 +15,5 @@ Public Class DepartmentPutDto
     Public Property Id As Long
     Public Property Departmentname As String
     Public Property Managerid As Long?
+    Public Property Operation As String
 End Class

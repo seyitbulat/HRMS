@@ -42,4 +42,10 @@ Public Class EmployeeController
         Dim response = Await _service.SearchByBirthdateAndLastname(birthdate, lastname)
         Return SendResponse(response)
     End Function
+
+    <HttpGet("Report")>
+    Public Async Function GetEmployeeReport(Optional departmentId As Long? = Nothing, Optional startDate As Date? = Nothing, Optional endDate As Date? = Nothing) As Task(Of IActionResult)
+        Dim response = Await _service.GetEmployeeReport(departmentId, startDate, endDate)
+        Return SendResponse(response)
+    End Function
 End Class

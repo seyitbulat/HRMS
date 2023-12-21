@@ -37,6 +37,22 @@ Module Program
 
         builder.Services.AddScoped(Of IInterviewRepository, InterviewRepository)
         builder.Services.AddScoped(Of IInterviewBs, InterviewBs)
+
+        builder.Services.AddScoped(Of IUserRepository, UserRepository)
+        builder.Services.AddScoped(Of IUserBs, UserBs)
+
+        builder.Services.AddScoped(Of IPerformanceReviewRepository, PerformanceReviewRepository)
+        builder.Services.AddScoped(Of IPerformanceReviewBs, PerformanceReviewBs)
+
+
+        builder.Services.AddScoped(Of ILeaveRepository, LeaveRepository)
+        builder.Services.AddScoped(Of ILeaveBs, LeaveBs)
+
+
+        builder.Services.AddScoped(Of ISalaryRepository, SalaryRepository)
+        builder.Services.AddScoped(Of ISalaryBs, SalaryBs)
+
+
         Dim app = builder.Build()
 
         app.UseRewriter(New RewriteOptions().AddRedirect("^$", "swagger"))

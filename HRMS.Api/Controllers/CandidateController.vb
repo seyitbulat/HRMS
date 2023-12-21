@@ -35,5 +35,12 @@ Public Class CandidateController
         Dim response = Await _service.Delete(id)
         Return SendResponse(response)
     End Function
+
+
+    <HttpPost("Procedure")>
+    Async Function Procedure(<FromBody> dto As CandidatePostDto) As Task(Of IActionResult)
+        Dim response = Await _service.AddNewCandidateProcedure(dto.Firstname, dto.Lastname, dto.Applicationdate, dto.Resumelink, dto.Appliedpositionid)
+        Return Ok(response)
+    End Function
 End Class
 

@@ -28,5 +28,9 @@ Public Class AutoMapperProfiles : Inherits Profile
         CreateMap(Of Interview, InterviewGetDto)()
         CreateMap(Of InterviewPostDto, Interview)()
         CreateMap(Of InterviewPutDto, Interview)()
+
+        CreateMap(Of User, UserGetDto)()
+        CreateMap(Of UserPostDto, User)()
+        CreateMap(Of UserPutDto, User)()
     End Sub
 End Class
