@@ -3,14 +3,14 @@ Imports HRMS.Business
 Imports HRMS.Model
 Imports Microsoft.AspNetCore.Mvc
 
-Public Class InterviewController
+Public Class UserController
     Inherits BaseController
+    Private ReadOnly _service As IUserBs
 
-    Private ReadOnly _service As IInterviewBs
-
-    Public Sub New(service As IInterviewBs)
+    Public Sub New(service As IUserBs)
         _service = service
     End Sub
+
     <HttpGet("GetById/{id}")>
     Async Function GetById(<FromRoute> id As Long) As Task(Of IActionResult)
         Dim response = Await _service.GetById(id)
@@ -25,21 +25,14 @@ Public Class InterviewController
     End Function
 
     <HttpPost>
-    Async Function AddInterview(<FromBody> dto As InterviewPostDto) As Task(Of IActionResult)
+    Async Function AddUser(<FromBody> dto As UserPostDto) As Task(Of IActionResult)
         Dim response = Await _service.Add(dto)
         Return SendResponse(response)
     End Function
 
     <HttpDelete("{id}")>
-    Async Function DeleteInterview(<FromRoute> id As Long) As Task(Of IActionResult)
+    Async Function DeleteUser(<FromRoute> id As Long) As Task(Of IActionResult)
         Dim response = Await _service.Delete(id)
         Return SendResponse(response)
     End Function
-
-    <HttpPost("Schedule")>
-    Public Async Function ScheduleInterview(<FromBody> dto As InterviewPostDto) As Task(Of IActionResult)
-        Dim response = Await _service.ScheduleInterview(dto.Interviewdate, dto.Candidateid, dto.Interviewerid, dto.Interviewnotes, dto.Interviewoutcome)
-        Return SendResponse(response)
-    End Function
 End Class
-

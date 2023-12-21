@@ -36,4 +36,6 @@ Public Class SalaryPutDto
 
     Public Property Employeeid As Long?
 
+    Public Property Operation As String
+
 End Class

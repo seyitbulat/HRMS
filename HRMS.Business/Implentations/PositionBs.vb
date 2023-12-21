@@ -63,4 +63,13 @@ Public Class PositionBs : Implements IPositionBs
         Return ApiResponse(Of PositionGetDto).Success(200, updatedDto)
     End Function
 
+    Public Async Function ManagePosition(positionId As Long?, positionTitle As String, description As String, salaryGrade As Long, operation As String) As Task(Of ApiResponse(Of String)) Implements IPositionBs.ManagePosition
+        Dim result = Await _repo.ManagePosition(positionId, positionTitle, description, salaryGrade, operation)
+
+        If Not String.IsNullOrWhiteSpace(result) Then
+            Return ApiResponse(Of String).Success(200, result)
+        Else
+            Return ApiResponse(Of String).Fail(500, "An error occurred during the position management operation.")
+        End If
+    End Function
 End Class

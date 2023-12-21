@@ -23,6 +23,7 @@ End Class
 
 
 Public Class LeafPutDto
+    Public Property Id As Long
     Public Property Startdate As Date?
 
     Public Property Enddate As Date?
@@ -32,4 +33,5 @@ Public Class LeafPutDto
     Public Property Employeeid As Long?
 
     Public Property Leavetypeid As Long?
+    Public Property Operation As String
 End Class

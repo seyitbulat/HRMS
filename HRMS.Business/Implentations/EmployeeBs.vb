@@ -77,5 +77,11 @@ Public Class EmployeeBs : Implements IEmployeeBs
         Return ApiResponse(Of IEnumerable(Of EmployeeGetDto)).Success(200, dtoList)
     End Function
 
+    Public Async Function GetEmployeeReport(departmentId As Long?, startDate As Date?, endDate As Date?) As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto))) Implements IEmployeeBs.GetEmployeeReport
+        Dim employees = Await _repo.GetEmployeeReport(departmentId, startDate, endDate)
+        Dim employeeDtos = _mapper.Map(Of IEnumerable(Of EmployeeGetDto))(employees)
+
+        Return ApiResponse(Of IEnumerable(Of EmployeeGetDto)).Success(200, employeeDtos)
+    End Function
 End Class
 

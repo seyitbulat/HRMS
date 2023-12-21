@@ -26,4 +26,6 @@ Public Class PositionPutDto
 
     Public Property Salarygrade As Long
 
+    Public Property Operation As String
+
 End Class

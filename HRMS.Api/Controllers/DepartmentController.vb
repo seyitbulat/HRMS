@@ -35,4 +35,10 @@ Public Class DepartmentController
         Dim response = Await _service.Delete(id)
         Return SendResponse(response)
     End Function
+
+    <HttpPost("ManageDepartment")>
+    Public Async Function ManageDepartment(<FromBody> dto As DepartmentPutDto) As Task(Of IActionResult)
+        Dim response = Await _service.ManageDepartment(dto.Id, dto.Departmentname, dto.Managerid, dto.Operation)
+        Return SendResponse(response)
+    End Function
 End Class
