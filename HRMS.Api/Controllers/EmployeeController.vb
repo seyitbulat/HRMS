@@ -36,4 +36,10 @@ Public Class EmployeeController
         Dim response = Await _service.Delete(id)
         Return SendResponse(response)
     End Function
+
+    <HttpGet("Search")>
+    Async Function SearchByBirthdateAndLastname(<FromQuery> birthdate As Date, <FromQuery> lastname As String) As Task(Of IActionResult)
+        Dim response = Await _service.SearchByBirthdateAndLastname(birthdate, lastname)
+        Return SendResponse(response)
+    End Function
 End Class

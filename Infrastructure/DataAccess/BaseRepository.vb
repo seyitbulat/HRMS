@@ -48,15 +48,19 @@ Public Class BaseRepository(Of T As BaseEntity(Of TKey), TKey As {Structure, IEq
 
     Public Async Function GetAsync(Optional predicate As Expression(Of Func(Of T, Boolean)) = Nothing, Optional includeList As List(Of String) = Nothing) As Task(Of T) Implements IBaseRepository(Of T, TKey).GetAsync
         Dim dbSet = _context.Set(Of T)()
-        If predicate IsNot Nothing Then
-            dbSet = dbSet.Where(predicate)
-        End If
+        Dim queryable As IQueryable(Of T) = dbSet
+
         If includeList IsNot Nothing Then
             For Each include In includeList
-                dbSet = dbSet.Include(include)
+                queryable = queryable.Include(include)
             Next
         End If
-        Return Await dbSet.FirstOrDefaultAsync()
+
+        If predicate IsNot Nothing Then
+            queryable = queryable.Where(predicate)
+        End If
+
+        Return Await queryable.FirstOrDefaultAsync()
     End Function
 
     Public Async Function GetListAsync(Optional predicate As Expression(Of Func(Of T, Boolean)) = Nothing, Optional includeList As List(Of String) = Nothing) As Task(Of IEnumerable(Of T)) Implements IBaseRepository(Of T, TKey).GetListAsync

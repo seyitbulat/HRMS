@@ -60,4 +60,22 @@ Public Class EmployeeBs : Implements IEmployeeBs
 
         Return ApiResponse(Of EmployeeGetDto).Success(200, updatedDto)
     End Function
+
+
+    Public Async Function SearchByBirthdateAndLastname(birthdate As Date, lastname As String) As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto))) Implements IEmployeeBs.SearchByBirthdateAndLastname
+        If birthdate = Nothing OrElse String.IsNullOrWhiteSpace(lastname) Then
+            Return ApiResponse(Of IEnumerable(Of EmployeeGetDto)).Fail(400, "Both birthdate and lastname must be provided")
+        End If
+
+        Dim filteredEmployees = Await _repo.SearchByBirthdateAndLastnameProcedure(birthdate, lastname)
+
+        If Not filteredEmployees.Any() Then
+            Return ApiResponse(Of IEnumerable(Of EmployeeGetDto)).Fail(404, "No matching employees found")
+        End If
+
+        Dim dtoList = _mapper.Map(Of IEnumerable(Of EmployeeGetDto))(filteredEmployees)
+        Return ApiResponse(Of IEnumerable(Of EmployeeGetDto)).Success(200, dtoList)
+    End Function
+
 End Class
+

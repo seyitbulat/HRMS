@@ -8,4 +8,5 @@ Public Interface IEmployeeBs
     Function GetAll() As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto)))
     Function Delete(id As Long) As Task(Of ApiResponse(Of NoData))
     Function Update(id As Long, dto As EmployeePutDto) As Task(Of ApiResponse(Of EmployeeGetDto))
+    Function SearchByBirthdateAndLastname(birthdate As Date, lastname As String) As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto)))
 End Interface
