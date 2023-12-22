@@ -32,7 +32,7 @@ Partial Public Class HRMSContext
 
     Protected Overrides Sub OnConfiguring(optionsBuilder As DbContextOptionsBuilder)
         'TODO /!\ To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        optionsBuilder.UseSqlServer("Data Source=DESKTOP-R04PVQ3\SQLEXPRESS; Initial Catalog=HRMS; Integrated Security=true; TrustServerCertificate=True")
+        optionsBuilder.UseSqlServer("Data Source=DESKTOP-R04PVQ3\SQLEXPRESS02 ; Initial Catalog=HRMS; Integrated Security=true; TrustServerCertificate=True")
     End Sub
 
     Protected Overrides Sub OnModelCreating(modelBuilder As ModelBuilder)
@@ -174,6 +174,8 @@ Partial Public Class HRMSContext
                     entity.HasOne(Function(d) d.Leavetype).WithMany(Function(p) p.Leaves).
                         HasForeignKey(Function(d) d.Leavetypeid).
                         HasConstraintName("FK_Leaves_LeavesTypes")
+
+
                 End Sub)
 
         modelBuilder.Entity(Of LeavesType)(
@@ -292,6 +294,7 @@ Partial Public Class HRMSContext
                         IsRequired().
                         HasMaxLength(50).
                         HasColumnName("USERNAME")
+                    entity.ToTable(Function(e) e.HasTrigger("HashUserPassword"))
                 End Sub)
 
         OnModelCreatingPartial(modelBuilder)
