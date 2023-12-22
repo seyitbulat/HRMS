@@ -31,7 +31,9 @@
                     <TextBox Text="Müdür Adı Giriniz:" Grid.Column="1" Margin="40,50,600,0" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top"/>
                     <Label Content="Aktif Mi?" Grid.Column="0" Margin="10,90,10,0" VerticalAlignment="Top"/>
                     <CheckBox Grid.Column="1" Margin="40,90,600,0" VerticalAlignment="Top"/>
-                    <Button Grid.Column="1" Margin="197,123,600,0" VerticalAlignment="Top" Height="21" Width="100" Content="ARA"/>
+                    <Button Grid.Column="1" Margin="197,123,600,0" VerticalAlignment="Top" Height="21" Width="100" Content="EKLE"/>
+
+
 
 
 
