@@ -10,5 +10,5 @@ Public Interface IEmployeeBs
     Function Update(id As Long, dto As EmployeePutDto) As Task(Of ApiResponse(Of EmployeeGetDto))
     Function SearchByBirthdateAndLastname(birthdate As Date, lastname As String) As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto)))
     Function GetEmployeeReport(departmentId As Long?, startDate As Date?, endDate As Date?) As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto)))
-
+    Function GetAnnualLeave(id As Long, dto As EmployeePutDto) As Task(Of ApiResponse(Of EmployeePutDto))
 End Interface
