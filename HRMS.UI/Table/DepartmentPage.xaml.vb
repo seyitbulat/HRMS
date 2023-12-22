@@ -1,3 +1,0 @@
-﻿Class DepartmentPage
-
-End Class
