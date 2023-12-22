@@ -48,4 +48,9 @@ Public Class EmployeeController
         Dim response = Await _service.GetEmployeeReport(departmentId, startDate, endDate)
         Return SendResponse(response)
     End Function
+    <HttpPost("GetAnnualLeave/{id}")>
+    Async Function GetAnnualLeave(id As Long, dto As EmployeePutDto) As Task(Of IActionResult)
+        Dim response = Await _service.GetAnnualLeave(id, dto)
+        Return SendResponse(response)
+    End Function
 End Class

@@ -83,5 +83,51 @@ Public Class EmployeeBs : Implements IEmployeeBs
 
         Return ApiResponse(Of IEnumerable(Of EmployeeGetDto)).Success(200, employeeDtos)
     End Function
+
+    Public Async Function GetAnnualLeave(id As Long, dto As EmployeePutDto) As Task(Of ApiResponse(Of EmployeePutDto)) Implements IEmployeeBs.GetAnnualLeave
+        ' Veritabanından kişiyi id'ye göre al
+        Dim employee = Await _repo.GetByIdAsync(id)
+
+
+        ' Eğer kişi bulunamazsa hata döndür
+        If employee Is Nothing Then
+            Return ApiResponse(Of EmployeePutDto).Fail(404, "Employee not found")
+        End If
+
+        ' Hiredate değeri null ise hata döndür
+        If employee.Hiredate.Equals(Nothing) Then
+            Return ApiResponse(Of EmployeePutDto).Fail(400, "Hiredate is null")
+        End If
+
+        ' Hiredate tarihinden bugünkü tarih çıkarılarak çalışma süresi hesaplanır
+        Dim workDuration As TimeSpan = DateTime.Now - employee.Hiredate
+
+        ' Elde edilen toplam gün sayısını yıl olarak hesaplamak için 365.25 kullanılır (artık yılları da hesaba katmak için)
+        Dim yearsWorked As Integer = CInt(Math.Floor(workDuration.TotalDays / 365.25))
+
+        Dim total As Integer = employee.Annualleave
+
+        ' Yıllık izni hesapla
+        If yearsWorked >= 1 AndAlso yearsWorked <= 5 Then
+            total += 14
+        ElseIf yearsWorked > 5 AndAlso yearsWorked <= 15 Then
+            total += 24
+        ElseIf yearsWorked > 15 Then
+            total += 26
+        Else
+            ' Hesaplama yapılamazsa hata döndür
+            Return ApiResponse(Of EmployeePutDto).Fail(500, "Error calculating annual leave")
+        End If
+
+        ' Veritabanındaki ANNUALLEAVE sütununu güncelle
+        employee.Annualleave = total ' Varsayılan olarak Employee varlığınızdaki yıllık izin özelliği
+
+        ' Değişiklikleri veritabanına kaydet
+        Await _repo.UpdateAsync(employee)
+
+        ' Hesaplanan yıllık izinle ApiResponse'ı döndür
+        Return ApiResponse(Of EmployeePutDto).Success(200, _mapper.Map(Of EmployeePutDto)(employee))
+
+    End Function
 End Class
 
