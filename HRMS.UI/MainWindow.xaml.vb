@@ -1,4 +1,5 @@
 ﻿Imports System.Text
+Imports DevExpress.Pdf.Native
 Imports DevExpress.Xpf.Bars
 Imports DevExpress.Xpf.Core
 
@@ -24,6 +25,16 @@ Namespace HRMS.UI
 
             ' UserControl'ü ana içerik paneline ekleyin
             MainContentPanel.Children.Add(departmentPage)
+        End Sub
+        Private Sub EmployeeButton_Click(ByVal sender As Object, ByVal e As ItemClickEventArgs)
+            ' Öncelikle mevcut içeriği temizleyin
+            MainContentPanel.Children.Clear()
+
+            ' DepartmentPage UserControl'ünü oluşturun
+            Dim employeePage As New EmployeePage()
+
+            ' UserControl'ü ana içerik paneline ekleyin
+            MainContentPanel.Children.Add(employeePage)
         End Sub
     End Class
 End Namespace

@@ -40,7 +40,7 @@
                         <dxb:BarButtonItem Content="Yenile" LargeGlyph="{dx:DXImage SvgImages/Icon Builder/Actions_Refresh.svg}"/>
                         <dxb:BarButtonItem Content="Departmanlar" LargeGlyph="{dx:DXImage SvgImages/Business Objects/BO_Department.svg}" ItemClick="DepartmanlarButton_Click"/>
 
-                        <dxb:BarButtonItem Content="Çalışan" LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Employees.svg}"/>
+                        <dxb:BarButtonItem Content="Çalışan" LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Employees.svg}" ItemClick="EmployeeButton_Click"/>
                         <dxb:BarButtonItem Content="Poziyon" LargeGlyph="{dx:DXImage SvgImages/Business Objects/BO_Position_v92.svg}"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>

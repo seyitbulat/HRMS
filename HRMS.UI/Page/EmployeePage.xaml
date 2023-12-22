@@ -1,0 +1,54 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HRMS.UI"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" x:Class="EmployeePage"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DockPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Background="DarkGray">
+                <Grid Height="200">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Doğum Tarihi:" Grid.Column="0" VerticalAlignment="Top" Margin="10,10,10,0"/>
+                    <DatePicker x:Name="DateSelector" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,10,0,0" Grid.Column="1" Width="155"/>
+                    <Label Content="Soyad:" Grid.Column="0" Margin="10,50,10,0" VerticalAlignment="Top"/>
+                    <TextBox Text="Soyad Giriniz:" Grid.Column="1" Margin="40,50,513,0" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top"/>
+                    <Button Content="ARA" Grid.Column="1" Margin="40,90,513,84" HorizontalAlignment="Left"/>
+                </Grid>
+            </Border>
+            <Border Grid.Row="1" Background="LightGray"/>
+            <dxg:GridControl AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" Grid.Row="1" Background="LightGray">
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn FieldName="FIRSTNAME" Header="AD" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="LASTNAME" Header="SOYAD" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="BIRTHDATE" Header="DOĞUM TARİHİ" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="GENDER" Header="CİNSİYET" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="HIREDATE" Header="İŞE GİRİŞ TARİHİ" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="EMAIL" Header="EMAIL" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="PHONENUMBER" Header="TELEFON" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="POSITIONID" Header="POZİSYON" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="DEPARTMANID" Header="DEPARTMAN" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="MANAGERID" Header="MÜDÜR" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="ANNUALLEAVE" Header="YILLIK İZNİ" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="ISACTIVE" Header="AKTİF/PASİF" AllowEditing="False"/>
+
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.View>
+                    <dxg:TableView AutoWidth="True" ShowGroupPanel="False" ShowIndicator="False"/>
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+
+
+        </Grid>
+    </DockPanel>
+</UserControl>
