@@ -1,4 +1,5 @@
 ﻿Imports System.Text
+Imports DevExpress.Xpf.Bars
 Imports DevExpress.Xpf.Core
 
 Namespace HRMS.UI
@@ -13,6 +14,16 @@ Namespace HRMS.UI
 
         Private Sub DataGrid_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
 
+        End Sub
+        Private Sub DepartmanlarButton_Click(ByVal sender As Object, ByVal e As ItemClickEventArgs)
+            ' Öncelikle mevcut içeriği temizleyin
+            MainContentPanel.Children.Clear()
+
+            ' DepartmentPage UserControl'ünü oluşturun
+            Dim departmentPage As New DepartmentPage()
+
+            ' UserControl'ü ana içerik paneline ekleyin
+            MainContentPanel.Children.Add(departmentPage)
         End Sub
     End Class
 End Namespace

@@ -38,7 +38,8 @@
                         <dxb:BarButtonItem Content="PDF" LargeGlyph="{dx:DXImage SvgImages/PDF Viewer/DocumentPDF.svg}"/>
                         <dxb:BarButtonItem Content="Excel" LargeGlyph="{dx:DXImage SvgImages/Export/ExportToXLS.svg}"/>
                         <dxb:BarButtonItem Content="Yenile" LargeGlyph="{dx:DXImage SvgImages/Icon Builder/Actions_Refresh.svg}"/>
-                        <dxb:BarButtonItem Content="Departman" LargeGlyph="{dx:DXImage SvgImages/Business Objects/BO_Department.svg}"/>
+                        <dxb:BarButtonItem Content="Departmanlar" LargeGlyph="{dx:DXImage SvgImages/Business Objects/BO_Department.svg}" ItemClick="DepartmanlarButton_Click"/>
+
                         <dxb:BarButtonItem Content="Çalışan" LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Employees.svg}"/>
                         <dxb:BarButtonItem Content="Poziyon" LargeGlyph="{dx:DXImage SvgImages/Business Objects/BO_Position_v92.svg}"/>
                     </dxr:RibbonPageGroup>
@@ -52,7 +53,7 @@
             </dxr:RibbonStatusBarControl.RightItems>
         </dxr:RibbonStatusBarControl>
 
-        <local:DepartmentPage Grid.Row="1"/>
 
+        <Grid x:Name="MainContentPanel" Grid.Row="1"/>
     </DockPanel>
 </dx:ThemedWindow>
