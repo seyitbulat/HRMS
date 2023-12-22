@@ -1,3 +1,0 @@
-﻿Class SalaryTable
-
-End Class

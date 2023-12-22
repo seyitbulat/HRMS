@@ -1,3 +1,0 @@
-﻿Class LeavesTable
-
-End Class

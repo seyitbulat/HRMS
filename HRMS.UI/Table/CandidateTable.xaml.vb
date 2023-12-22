@@ -1,3 +1,0 @@
-﻿Class CandidateTable
-
-End Class

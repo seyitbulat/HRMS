@@ -1,3 +1,0 @@
-﻿Class LeavesTypeTable
-
-End Class

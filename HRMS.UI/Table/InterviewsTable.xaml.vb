@@ -1,3 +1,0 @@
-﻿Class InterviewsTable
-
-End Class

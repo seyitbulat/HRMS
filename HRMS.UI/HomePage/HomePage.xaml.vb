@@ -1,3 +1,0 @@
-﻿Class HomePage
-
-End Class

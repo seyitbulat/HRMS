@@ -1,3 +1,0 @@
-﻿Class PositionTable
-
-End Class
