@@ -28,7 +28,7 @@
                     </Style>
                 </TextBox.Style>
             </TextBox>
-            <Button Margin="45,15,0,0" Height="52" Width="58" Background="{x:Null}" BorderBrush="{x:Null}">
+            <Button Margin="45,5,0,0" Height="64" Width="69" Background="{x:Null}" BorderBrush="{x:Null}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="{x:Null}" />
@@ -52,7 +52,7 @@
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
-                <Image Source="/Icons/icons8-search.png" Width="40" Height="37" Stretch="UniformToFill" />
+                <Image Source="/Icons/icons8-search.png" Width="67" Height="60" Stretch="UniformToFill" />
             </Button>
 
 
