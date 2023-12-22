@@ -23,18 +23,6 @@ Public Class PositionController
         Return SendResponse(response)
     End Function
 
-    <HttpPost>
-    Public Async Function AddPosition(<FromBody> dto As PositionPostDto) As Task(Of IActionResult)
-        Dim response = Await _service.Add(dto)
-        Return SendResponse(response)
-    End Function
-
-    <HttpDelete("{id}")>
-    Public Async Function DeletePosition(<FromRoute> id As Long) As Task(Of IActionResult)
-        Dim response = Await _service.Delete(id)
-        Return SendResponse(response)
-    End Function
-
     <HttpPost("ManagePosition")>
     Public Async Function ManagePosition(<FromBody> dto As PositionPutDto) As Task(Of IActionResult)
         Dim response = Await _service.ManagePosition(dto.Id, dto.Positiontitle, dto.Description, dto.Salarygrade, dto.Operation)

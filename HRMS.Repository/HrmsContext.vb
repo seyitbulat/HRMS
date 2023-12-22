@@ -174,6 +174,8 @@ Partial Public Class HRMSContext
                     entity.HasOne(Function(d) d.Leavetype).WithMany(Function(p) p.Leaves).
                         HasForeignKey(Function(d) d.Leavetypeid).
                         HasConstraintName("FK_Leaves_LeavesTypes")
+
+
                 End Sub)
 
         modelBuilder.Entity(Of LeavesType)(
@@ -292,6 +294,7 @@ Partial Public Class HRMSContext
                         IsRequired().
                         HasMaxLength(50).
                         HasColumnName("USERNAME")
+                    entity.ToTable(Function(e) e.HasTrigger("HashUserPassword"))
                 End Sub)
 
         OnModelCreatingPartial(modelBuilder)

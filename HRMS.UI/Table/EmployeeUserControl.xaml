@@ -14,32 +14,139 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Width="800">
-            <TextBox Width="192" Text="Soyisim" Height="30" />
-            <TextBox Width="184" Text="Dogum günü" Margin="50,0,0,0" Height="30"  />
-            <Button Content="ARA" Margin="65,0,0,0" Height="30" Width="111"/>
+            <TextBox Width="192" Text="Soyisim" Height="30" Background="{x:Null}">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <TextBox Width="184" Text="Dogum günü" Margin="50,0,0,0" Height="30" Background="{x:Null}">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <Button Margin="45,5,0,0" Height="64" Width="69" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <!-- MouseOver durumu için stil tanımlaması -->
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <!-- Mouse üzerine geldiğinde değişiklik yapmamak için boş bırakın -->
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Image Source="/Icons/icons8-search.png" Width="67" Height="60" Stretch="UniformToFill" />
+            </Button>
+
+
+
         </StackPanel>
+
         <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center">
             <!-- İlk Sıra -->
             <StackPanel Orientation="Horizontal" Height="78">
-                <TextBox Width="192" Text="İsim" Height="30" Margin="5,0"/>
-                <TextBox Width="192" Text="Soyad" Height="30" Margin="5,0"/>
-                <TextBox Width="192" Text="DTARİHİ" Height="30" Margin="5,0"/>
-                <TextBox Width="192" Text="CİNSİYET" Height="30" Margin="5,0"/>
+                <TextBox Width="192" Text="İsim" Height="30" Margin="5,0" Background="{x:Null}">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+                <TextBox Width="192" Text="Soyad" Height="30" Margin="5,0" Background="{x:Null}">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+                <TextBox Width="192" Text="DTARİHİ" Height="30" Margin="5,0" Background="{x:Null}">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+                <TextBox Width="192" Text="CİNSİYET" Height="30" Margin="5,0" Background="{x:Null}">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
             </StackPanel>
 
             <!-- İkinci Sıra -->
             <StackPanel Orientation="Horizontal" Height="80">
-                <TextBox Width="192" Text="İŞEALIMTARİH" Height="30" Margin="5,0"/>
-                <TextBox Width="192" Text="MAİL" Height="30" Margin="5,0"/>
-                <TextBox Width="192" Text="TELNO" Height="30" Margin="5,0"/>
-                <TextBox Width="192" Text="POZİSYON" Height="30" Margin="5,0"/>
+                <TextBox Width="192" Text="İŞEALIMTARİH" Height="30" Margin="5,0" Background="{x:Null}">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+                <TextBox Width="192" Text="MAİL" Height="30" Margin="5,0" Background="{x:Null}">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+                <TextBox Width="192" Text="TELNO" Height="30" Margin="5,0" Background="{x:Null}">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+                <TextBox Width="192" Text="POZİSYON" Height="30" Margin="5,0" Background="{x:Null}">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
             </StackPanel>
 
             <!-- Üçüncü Sıra -->
             <StackPanel Orientation="Horizontal" Height="82">
-                <TextBox Width="192" Text="Departmant" Height="30" Margin="5,0"/>
-                <TextBox Width="192" Text="MANAGER" Height="30" Margin="5,0"/>
-                <TextBox Width="192" Text="YIllıkizin" Height="30" Margin="5,0"/>
+                <TextBox Width="192" Text="Departmant" Height="30" Margin="5,0" Background="{x:Null}">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+                <TextBox Width="192" Text="MANAGER" Height="30" Margin="5,0" Background="{x:Null}">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+                <TextBox Width="192" Text="YIllıkizin" Height="30" Margin="5,0" Background="{x:Null}">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
                 <CheckBox Height="30" Margin="95,0"/>
             </StackPanel>
         </StackPanel>

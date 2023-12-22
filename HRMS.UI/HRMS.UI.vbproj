@@ -21,6 +21,7 @@
     <None Remove="Icons\home-48.png" />
     <None Remove="Icons\home-50.png" />
     <None Remove="Icons\home-96.png" />
+    <None Remove="Icons\icons8-search.png" />
     <None Remove="Icons\interview-64-1.png" />
     <None Remove="Icons\interview-64-2.png" />
     <None Remove="Icons\interview-64.png" />
@@ -162,6 +163,12 @@
     <PackageReference Include="devexpress.wpf.grid.core" Version="23.1.6" />
     <PackageReference Include="DevExpress.Wpf.Themes.All" Version="23.1.6" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Icons\icons8-search.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
