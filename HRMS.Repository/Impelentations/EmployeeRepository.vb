@@ -13,7 +13,8 @@ Public Class EmployeeRepository : Inherits BaseRepository(Of Employee, Long, HRM
 
 
     Public Async Function SearchByBirthdateAndLastnameProcedure(birthdate As Date, lastname As String) As Task(Of IEnumerable(Of Employee)) Implements IEmployeeRepository.SearchByBirthdateAndLastnameProcedure
-        Return Await _context.Employees.FromSqlRaw("EXEC dbo.SearchEmployeesByBirthdateAndLastname @birthdate, @lastname", New SqlParameter("@birthdate", birthdate), New SqlParameter("@lastname", lastname)).ToListAsync()
+
+        Return Await _context.Employees.FromSqlRaw("EXEC dbo.GetEmployeeByLastNameAndBirthDate @birthdate, @lastname", New SqlParameter("@birthdate", birthdate), New SqlParameter("@lastname", lastname)).ToListAsync()
     End Function
 
     Public Async Function GetEmployeeReport(departmentId As Long?, startDate As Date?, endDate As Date?) As Task(Of IEnumerable(Of Employee)) Implements IEmployeeRepository.GetEmployeeReport
