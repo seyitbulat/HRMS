@@ -36,5 +36,6 @@ Namespace HRMS.UI
             ' UserControl'ü ana içerik paneline ekleyin
             MainContentPanel.Children.Add(employeePage)
         End Sub
+
     End Class
 End Namespace

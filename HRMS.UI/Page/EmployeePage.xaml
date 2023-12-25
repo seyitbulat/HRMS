@@ -22,7 +22,7 @@
                     <Label Content="Doğum Tarihi:" Grid.Column="0" VerticalAlignment="Top" Margin="10,10,10,0"/>
                     <DatePicker x:Name="DateSelector" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,10,0,0" Grid.Column="1" Width="155"/>
                     <Label Content="Soyad:" Grid.Column="0" Margin="10,50,10,0" VerticalAlignment="Top"/>
-                    <TextBox Text="Soyad Giriniz:" Grid.Column="1" Margin="40,50,513,0" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top"/>
+                    <TextBox Name="lastname" Text="Soyad Giriniz:" Grid.Column="1" Margin="40,50,513,0" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top" GotFocus="LastnameTextBox_GotFocus" />
                     <Button Content="ARA" Grid.Column="1" Margin="40,90,513,84" HorizontalAlignment="Left"/>
                 </Grid>
             </Border>
