@@ -53,5 +53,13 @@ Namespace HRMS.UI
                 _page.Add()
             End If
         End Sub
+        Private Sub PositionButton_Click(ByVal sender As Object, ByVal e As ItemClickEventArgs)
+            _selector = 1
+
+            MainContentPanel.Children.Clear()
+            Dim positionPage As New PositionPage()
+            _page = positionPage
+            MainContentPanel.Children.Add(positionPage)
+        End Sub
     End Class
 End Namespace
