@@ -4,6 +4,8 @@ Public Class DepartmentGetDto
     Public Property Departmentname As String
     Public Property Managerid As Long?
     Public Property Isactive As Boolean
+
+    Public Property Manager As EmployeeGetDto
 End Class
 
 Public Class DepartmentPostDto

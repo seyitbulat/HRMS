@@ -23,11 +23,16 @@ Public Class DepartmentBs : Implements IDepartmentBs
     End Function
 
     Public Async Function GetAll() As Task(Of ApiResponse(Of IEnumerable(Of DepartmentGetDto))) Implements IDepartmentBs.GetAll
-        Dim repoResponse = Await _repo.GetAllAsync()
+        Dim includeList As New List(Of String)
+
+        includeList.Add("Manager")
+        Dim repoResponse = Await _repo.GetListAsync(includeList:=includeList)
         Dim dtoList = _mapper.Map(Of IEnumerable(Of DepartmentGetDto))(repoResponse)
 
         Return ApiResponse(Of IEnumerable(Of DepartmentGetDto)).Success(200, dtoList)
     End Function
+
+
 
     Public Async Function ManageDepartment(departmentId As Long?, departmentName As String, managerId As Long?, operation As String) As Task(Of ApiResponse(Of String)) Implements IDepartmentBs.ManageDepartment
         Dim result = Await _repo.ManageDepartment(departmentId, departmentName, managerId, operation)
@@ -37,5 +42,15 @@ Public Class DepartmentBs : Implements IDepartmentBs
         Else
             Return ApiResponse(Of String).Fail(500, "An error occurred during the department management operation.")
         End If
+    End Function
+
+    Public Async Function GetByNameAsync(departmentName As String) As Task(Of ApiResponse(Of IEnumerable(Of DepartmentGetDto))) Implements IDepartmentBs.GetByNameAsync
+        Dim includeList As New List(Of String)
+
+        includeList.Add("Manager")
+        Dim repoResponse = Await _repo.GetListAsync(includeList:=includeList, predicate:=Function(p) p.Departmentname.Contains(departmentName))
+        Dim dtoList = _mapper.Map(Of IEnumerable(Of DepartmentGetDto))(repoResponse)
+
+        Return ApiResponse(Of IEnumerable(Of DepartmentGetDto)).Success(200, dtoList)
     End Function
 End Class

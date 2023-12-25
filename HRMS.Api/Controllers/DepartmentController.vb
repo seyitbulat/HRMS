@@ -24,6 +24,13 @@ Public Class DepartmentController
         Return SendResponse(response)
     End Function
 
+    <HttpGet("GetByName")>
+    Async Function GetByName(<FromQuery> departmentName As String) As Task(Of IActionResult)
+        Dim response = Await _service.GetByNameAsync(departmentName)
+        Return SendResponse(response)
+
+    End Function
+
     <HttpPost("ManageDepartment")>
     Public Async Function ManageDepartment(<FromBody> dto As DepartmentPutDto) As Task(Of IActionResult)
         Dim response = Await _service.ManageDepartment(dto.Id, dto.Departmentname, dto.Managerid, dto.Operation)

@@ -32,7 +32,7 @@
             <dxr:RibbonDefaultPageCategory>
                 <dxr:RibbonPage Caption="Departmanlar">
                     <dxr:RibbonPageGroup Caption="" IsCaptionButtonEnabled="True" >
-                        <dxb:BarButtonItem Content="Ekle" LargeGlyph="{dx:DXImage SvgImages/Icon Builder/Actions_AddCircled.svg}"/>
+                        <dxb:BarButtonItem Content="Ekle" LargeGlyph="{dx:DXImage SvgImages/Icon Builder/Actions_AddCircled.svg}" ItemClick="BarButtonItem_ItemClick"/>
                         <dxb:BarButtonItem Content="Sil" LargeGlyph="{dx:DXImage SvgImages/Dashboards/Delete.svg}"/>
                         <dxb:BarButtonItem Content="Güncelle" LargeGlyph="{dx:DXImage SvgImages/Dashboards/AutomaticUpdates.svg}"/>
                         <dxb:BarButtonItem Content="PDF" LargeGlyph="{dx:DXImage SvgImages/PDF Viewer/DocumentPDF.svg}"/>

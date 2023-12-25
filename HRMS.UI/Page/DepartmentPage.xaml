@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
 
             <Border Grid.Row="0" Background="LightGray">
-                <Grid Height="200">
+                <Grid Height="200" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <!-- Etiket için otomatik genişlik -->
@@ -26,12 +26,12 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Content="Departman Adı:" Grid.Column="0" Margin="10,10,10,0" VerticalAlignment="Top"/>
-                    <TextBox Text="Departman Adı Giriniz:" Grid.Column="1" Margin="40,10,600,0" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top"/>
+                    <TextBox x:Name="departmentName" Text="Departman Adı Giriniz:" Grid.Column="1" Margin="40,10,600,0" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top" GotFocus="departmentName_GotFocus" LostFocus="departmentName_LostFocus"/>
                     <Label Content="Müdür Adı:" Grid.Column="0" Margin="10,50,10,0" VerticalAlignment="Top"/>
-                    <TextBox Text="Müdür Adı Giriniz:" Grid.Column="1" Margin="40,50,600,0" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top"/>
+                    <TextBox  Text="Müdür Adı Giriniz:" Grid.Column="1" Margin="40,50,600,0" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top" GotFocus="TextBox_GotFocus"/>
                     <Label Content="Aktif Mi?" Grid.Column="0" Margin="10,90,10,0" VerticalAlignment="Top"/>
                     <CheckBox Grid.Column="1" Margin="40,90,600,0" VerticalAlignment="Top"/>
-                    <Button Grid.Column="1" Margin="197,123,600,0" VerticalAlignment="Top" Height="21" Width="100" Content="EKLE"/>
+                    <Button x:Name="searchButton" Grid.Column="1" Margin="197,123,600,0" VerticalAlignment="Top" Height="21" Width="100" Content="Ara" Click="searchButton_Click" HorizontalAlignment="Left"/>
 
 
 
@@ -43,11 +43,11 @@
             </Border>
             <Border Grid.Row="1" Background="DarkGray">
 
-                <dxg:GridControl AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True">
+                <dxg:GridControl AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" x:Name="departmentGrid">
                     <dxg:GridControl.Columns>
-                        <dxg:GridColumn FieldName="DEPARTMENTNAME" Header="DEPARTMAN ADI" AllowEditing="False"/>
-                        <dxg:GridColumn FieldName="MANAGERID" Header="ÇALIŞAN" AllowEditing="False"/>
-                        <dxg:GridColumn FieldName="ISACTIVE" Header="AKTİF/PASİF" AllowEditing="False"/>
+                        <dxg:GridColumn FieldName="Departmentname" Header="DEPARTMAN ADI" AllowEditing="False"/>
+                        <dxg:GridColumn FieldName="Manager.FullName" Header="MÜDÜR" AllowEditing="False"/>
+                        <dxg:GridColumn FieldName="Isactive" Header="AKTİF/PASİF" AllowEditing="False"/>
 
 
 

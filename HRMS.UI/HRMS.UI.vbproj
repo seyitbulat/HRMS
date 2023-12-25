@@ -31,5 +31,6 @@
 
   <ItemGroup>
     <PackageReference Include="DevExpress.Wpf" Version="23.1.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
