@@ -53,4 +53,10 @@ Public Class EmployeeController
         Dim response = Await _service.GetAnnualLeave(id, dto)
         Return SendResponse(response)
     End Function
+
+    <HttpGet("GetByPosition")>
+    Async Function GetByPosition(<FromQuery> positionId As Long) As Task(Of IActionResult)
+        Dim response = Await _service.GetByPosition(positionId)
+        Return SendResponse(response)
+    End Function
 End Class

@@ -53,6 +53,10 @@ Namespace HRMS.UI
                 _page.Add()
             End If
         End Sub
+
+        Private Sub btnDelete_ItemClick(sender As Object, e As ItemClickEventArgs)
+            _page.Delete()
+        End Sub
         Private Sub PositionButton_Click(ByVal sender As Object, ByVal e As ItemClickEventArgs)
             _selector = 1
 

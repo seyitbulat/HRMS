@@ -24,9 +24,9 @@ Public Class DepartmentController
         Return SendResponse(response)
     End Function
 
-    <HttpGet("GetByName")>
-    Async Function GetByName(<FromQuery> departmentName As String) As Task(Of IActionResult)
-        Dim response = Await _service.GetByNameAsync(departmentName)
+    <HttpGet("Search")>
+    Async Function GetByName(<FromQuery> departmentName As String, <FromQuery> departmentManager As Long) As Task(Of IActionResult)
+        Dim response = Await _service.GetByFilter(departmentName, departmentManager)
         Return SendResponse(response)
 
     End Function

@@ -1,4 +1,6 @@
 ﻿Public Class Employee
+    Public Property Id As Long
+
     Public Property Firstname As String
     Public Property Lastname As String
     Public Property Birthdate As Date
@@ -17,7 +19,6 @@
             Return Firstname + " " + Lastname
         End Get
         Set(value As String)
-
         End Set
     End Property
 End Class

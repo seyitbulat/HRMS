@@ -44,11 +44,15 @@ Public Class DepartmentBs : Implements IDepartmentBs
         End If
     End Function
 
-    Public Async Function GetByNameAsync(departmentName As String) As Task(Of ApiResponse(Of IEnumerable(Of DepartmentGetDto))) Implements IDepartmentBs.GetByNameAsync
+    Public Async Function GetByFilter(departmentName As String, Optional departmentManager As Long = Nothing) As Task(Of ApiResponse(Of IEnumerable(Of DepartmentGetDto))) Implements IDepartmentBs.GetByFilter
         Dim includeList As New List(Of String)
-
+        Dim repoResponse As IEnumerable(Of Department)
         includeList.Add("Manager")
-        Dim repoResponse = Await _repo.GetListAsync(includeList:=includeList, predicate:=Function(p) p.Departmentname.Contains(departmentName))
+        If departmentManager = 0 Then
+            repoResponse = Await _repo.GetListAsync(includeList:=includeList, predicate:=Function(p) p.Departmentname.Contains(departmentName) Or p.Managerid = departmentManager)
+        Else
+            repoResponse = Await _repo.GetListAsync(includeList:=includeList, predicate:=Function(p) p.Departmentname.Contains(departmentName) And p.Managerid = departmentManager)
+        End If
         Dim dtoList = _mapper.Map(Of IEnumerable(Of DepartmentGetDto))(repoResponse)
 
         Return ApiResponse(Of IEnumerable(Of DepartmentGetDto)).Success(200, dtoList)

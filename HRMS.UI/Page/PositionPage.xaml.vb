@@ -7,30 +7,33 @@ Public Class PositionPage : Implements IPage
     Private httpClient As HttpClient
     Public Property Positions As ObservableCollection(Of Position)
 
+
     Public Sub New()
         InitializeComponent()
         httpClient = New HttpClient()
+        ' BaseAddress'i sadece bir kez burada ayarlayın
+        httpClient.BaseAddress = New Uri("https://localhost:50099/")
         Positions = New ObservableCollection(Of Position)()
         LoadPositions()
     End Sub
     Public Class ApiResponse
         Public Property Data As List(Of Position)
     End Class
-    Public Async Sub LoadPositions()
+
+    Public Async Function LoadPositions() As Task
         Try
-            httpClient.BaseAddress = New Uri("https://localhost:50099/")
+            ' httpClient.BaseAddress artık burada ayarlanmıyor
             Dim response = Await httpClient.GetAsync("Position/GetAll")
             If response.IsSuccessStatusCode Then
                 Dim apiResponse = Await response.Content.ReadAsAsync(Of ApiResponse)()
-                ' API'den gelen listeyi doğrudan ObservableCollection'a dönüştürün
                 Positions = New ObservableCollection(Of Position)(apiResponse.Data)
-                ' GridControl'ün ItemsSource'unu güncelleyin
                 positionGridControl.ItemsSource = Positions
             End If
         Catch ex As Exception
-            Throw New Exception(ex.Message)
+            MessageBox.Show("Bir hata oluştu: " & ex.Message, "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
         End Try
-    End Sub
+    End Function
+
 
 
     Private Sub positionTitle_GotFocus(sender As Object, e As RoutedEventArgs)
@@ -69,25 +72,30 @@ Public Class PositionPage : Implements IPage
         Dim PositionDescription = description.Text
         Dim PositionSalaryGrade = salaryGrade.Text
 
-        Dim _httpClient As New HttpClient
-
+        ' Mevcut httpClient nesnesini kullanın
         Dim postObject As New With {
-           Key .Positiontitle = title,
-           Key .Description = PositionDescription,
-           Key .Salarygrade = PositionSalaryGrade,
-           Key .operation = "ADD"
+            Key .Positiontitle = title,
+            Key .Description = PositionDescription,
+            Key .Salarygrade = PositionSalaryGrade,
+            Key .operation = "ADD"
         }
 
         Dim jsonContent = JsonConvert.SerializeObject(postObject)
         Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
 
-        Dim response As HttpResponseMessage = Await _httpClient.PostAsync("https://localhost:50099/Position/ManagePosition", content)
+        Dim response As HttpResponseMessage = Await httpClient.PostAsync("https://localhost:50099/Position/ManagePosition", content)
 
-        If response.StatusCode = Net.HttpStatusCode.OK Then
-
+        If response.IsSuccessStatusCode Then
+            MessageBox.Show("Pozisyon başarıyla eklendi.", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information)
+            ' Verileri yeniden yükleyin
+            Await LoadPositions()
         Else
             MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
         End If
+    End Function
+
+    Public Function Delete() As Task Implements IPage.Delete
+        Throw New NotImplementedException()
     End Function
 End Class
 

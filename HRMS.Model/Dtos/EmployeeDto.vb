@@ -1,4 +1,6 @@
 ﻿Public Class EmployeeGetDto
+    Public Property Id As Long
+
     Public Property Firstname As String
     Public Property Lastname As String
     Public Property Birthdate As Date
