@@ -1,4 +1,5 @@
 ﻿Public Class PositionGetDto
+    Public Property Id As Long
     Public Property Positiontitle As String
 
     Public Property Description As String

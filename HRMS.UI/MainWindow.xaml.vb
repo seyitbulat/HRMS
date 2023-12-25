@@ -65,5 +65,12 @@ Namespace HRMS.UI
             _page = positionPage
             MainContentPanel.Children.Add(positionPage)
         End Sub
+        Private Sub btnUpdate_ItemClick(sender As Object, e As ItemClickEventArgs)
+            If _selector = 1 AndAlso TypeOf _page Is IPage Then
+                CType(_page, IPage).Update()
+            End If
+        End Sub
+
+
     End Class
 End Namespace

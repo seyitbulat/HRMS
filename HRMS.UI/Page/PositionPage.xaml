@@ -30,7 +30,7 @@
             </Border>
             <Border Grid.Row="1" Background="DarkGray">
 
-                <dxg:GridControl AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" ItemsSource="{Binding Positions}" x:Name="positionGridControl">
+                <dxg:GridControl AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" ItemsSource="{Binding Positions}" x:Name="positionGridControl" SelectionMode="Row" SelectedItemChanged="positionGrid_SelectedItemChanged">
                     <dxg:GridControl.Columns>
                         <dxg:GridColumn FieldName="PositionTitle" Header="Pozisyon Başlığı" AllowEditing="False"/>
                         <dxg:GridColumn FieldName="Description" Header="Kaynak" AllowEditing="False"/>

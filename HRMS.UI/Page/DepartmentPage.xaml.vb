@@ -143,6 +143,10 @@ Partial Public Class DepartmentPage : Implements IPage
             MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
         End If
     End Function
+
+    Public Function Update() As Task Implements IPage.Update
+        Throw New NotImplementedException()
+    End Function
 End Class
 
 

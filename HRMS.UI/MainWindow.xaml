@@ -34,7 +34,7 @@
                     <dxr:RibbonPageGroup Caption="" IsCaptionButtonEnabled="True" >
                         <dxb:BarButtonItem Content="Ekle" LargeGlyph="{dx:DXImage SvgImages/Icon Builder/Actions_AddCircled.svg}" ItemClick="BarButtonItem_ItemClick"/>
                         <dxb:BarButtonItem x:Name="btnDelete" Content="Sil" LargeGlyph="{dx:DXImage SvgImages/Dashboards/Delete.svg}" ItemClick="btnDelete_ItemClick"/>
-                        <dxb:BarButtonItem Content="Güncelle" LargeGlyph="{dx:DXImage SvgImages/Dashboards/AutomaticUpdates.svg}"/>
+                        <dxb:BarButtonItem Content="Güncelle" LargeGlyph="{dx:DXImage SvgImages/Dashboards/AutomaticUpdates.svg}" ItemClick="btnUpdate_ItemClick"/>
                         <dxb:BarButtonItem Content="PDF" LargeGlyph="{dx:DXImage SvgImages/PDF Viewer/DocumentPDF.svg}"/>
                         <dxb:BarButtonItem Content="Excel" LargeGlyph="{dx:DXImage SvgImages/Export/ExportToXLS.svg}"/>
                         <dxb:BarButtonItem Content="Yenile" LargeGlyph="{dx:DXImage SvgImages/Icon Builder/Actions_Refresh.svg}"/>

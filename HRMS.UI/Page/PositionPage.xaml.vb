@@ -22,7 +22,6 @@ Public Class PositionPage : Implements IPage
 
     Public Async Function LoadPositions() As Task
         Try
-            ' httpClient.BaseAddress artık burada ayarlanmıyor
             Dim response = Await httpClient.GetAsync("Position/GetAll")
             If response.IsSuccessStatusCode Then
                 Dim apiResponse = Await response.Content.ReadAsAsync(Of ApiResponse)()
@@ -33,6 +32,7 @@ Public Class PositionPage : Implements IPage
             MessageBox.Show("Bir hata oluştu: " & ex.Message, "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
         End Try
     End Function
+
 
 
 
@@ -93,9 +93,69 @@ Public Class PositionPage : Implements IPage
             MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
         End If
     End Function
+    Private Sub positionGrid_SelectedItemChanged(sender As Object, e As DevExpress.Xpf.Grid.SelectedItemChangedEventArgs)
+        Dim selected As Position = TryCast(positionGridControl.SelectedItem, Position)
+        If selected IsNot Nothing Then
+            positionTitle.Text = selected.PositionTitle
+            description.Text = selected.Description
+            salaryGrade.Text = selected.SalaryGrade
 
-    Public Function Delete() As Task Implements IPage.Delete
-        Throw New NotImplementedException()
+        End If
+    End Sub
+
+    Public Async Function Delete() As Task Implements IPage.Delete
+        Dim selected As Position = TryCast(positionGridControl.SelectedItem, Position)
+
+        Dim _httpClient As New HttpClient
+
+        Dim postObject As New With {
+           Key .id = selected.Id,
+           Key .positionTitle = selected.PositionTitle,
+           Key .description = selected.Description,
+           Key .salaryGrade = selected.SalaryGrade,
+           Key .operation = "DELETE"
+        }
+
+        Dim jsonContent = JsonConvert.SerializeObject(postObject)
+        Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
+
+        Dim response As HttpResponseMessage = Await _httpClient.PostAsync("https://localhost:50099/Position/ManagePosition", content)
+
+        If response.StatusCode = Net.HttpStatusCode.OK Then
+
+        Else
+            MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
+        End If
+    End Function
+
+
+    Private Async Function IPage_Update() As Task Implements IPage.Update
+        Dim selected As Position = TryCast(positionGridControl.SelectedItem, Position)
+
+        If selected IsNot Nothing Then
+            Dim updatedPosition As New With {
+            Key .Id = selected.Id,
+            Key .PositionTitle = positionTitle.Text,
+            Key .Description = description.Text,
+            Key .SalaryGrade = salaryGrade.Text,
+            Key .Operation = "UPDATE"
+        }
+
+            Dim jsonContent = JsonConvert.SerializeObject(updatedPosition)
+            Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
+
+            Dim response As HttpResponseMessage = Await httpClient.PostAsync("https://localhost:50099/Position/ManagePosition", content)
+
+            If response.StatusCode = Net.HttpStatusCode.OK Then
+                MessageBox.Show("Pozisyon başarıyla güncellendi.", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information)
+                ' Verileri yeniden yükleyin
+                Await LoadPositions()
+            Else
+                MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
+            End If
+        Else
+            MessageBox.Show("Lütfen güncellenecek bir pozisyon seçin.", "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
+        End If
     End Function
 End Class
 
