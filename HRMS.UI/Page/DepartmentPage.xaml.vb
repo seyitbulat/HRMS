@@ -9,7 +9,7 @@ Imports Newtonsoft.Json
 Partial Public Class DepartmentPage : Implements IPage
 
     Public Async Function Add() As Task Implements IPage.Add
-        Dim name = departmentName.Text
+        Dim name = Departmentname.Text
 
         Dim _httpClient As New HttpClient
 
@@ -32,8 +32,8 @@ Partial Public Class DepartmentPage : Implements IPage
 
     Private Async Sub searchButton_Click(sender As Object, e As RoutedEventArgs)
         Using client As New HttpClient()
-            If Not departmentName.Text = "Departman Adı Giriniz:" Then
-                Dim response As HttpResponseMessage = Await client.GetAsync($"https://localhost:50099/Department/GetByName?departmentName={departmentName.Text}")
+            If Not Departmentname.Text = "Departman Adı Giriniz:" Then
+                Dim response As HttpResponseMessage = Await client.GetAsync($"https://localhost:50099/Department/GetByName?departmentName={Departmentname.Text}")
                 If response.IsSuccessStatusCode Then
                     Dim json As String = Await response.Content.ReadAsStringAsync()
                     Dim wrapper = JsonConvert.DeserializeObject(Of DataWrapper)(json)
@@ -61,8 +61,8 @@ Partial Public Class DepartmentPage : Implements IPage
     End Class
 
     Private Sub departmentName_GotFocus(sender As Object, e As RoutedEventArgs)
-        If departmentName.Text = "Departman Adı Giriniz:" Then
-            departmentName.Text = ""
+        If Departmentname.Text = "Departman Adı Giriniz:" Then
+            Departmentname.Text = ""
         End If
     End Sub
 
@@ -71,10 +71,10 @@ Partial Public Class DepartmentPage : Implements IPage
     End Sub
 
     Private Sub departmentName_LostFocus(sender As Object, e As RoutedEventArgs)
-            If departmentName.Text = "" Then
-                departmentName.Text = "Departman Adı Giriniz:"
-            End If
-        End Sub
-    End Class
+        If Departmentname.Text = "" Then
+            Departmentname.Text = "Departman Adı Giriniz:"
+        End If
+    End Sub
+End Class
 
 
