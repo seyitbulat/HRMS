@@ -130,5 +130,13 @@ Public Class EmployeeBs : Implements IEmployeeBs
         ' Hesaplanan yıllık izinle ApiResponse'ı döndür
         Return ApiResponse(Of EmployeePutDto).Success(200, _mapper.Map(Of EmployeePutDto)(employee))
     End Function
+
+    Public Async Function GetByPosition(positionId As Long) As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto))) Implements IEmployeeBs.GetByPosition
+        Dim includeList As New List(Of String)
+        includeList.Add("Position")
+        Dim repoResponse = Await _repo.GetListAsync(Function(e) e.Positionid = positionId, includeList)
+        Dim dtoList = _mapper.Map(Of IEnumerable(Of EmployeeGetDto))(repoResponse)
+        Return dtoList
+    End Function
 End Class
 

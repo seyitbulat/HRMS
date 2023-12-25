@@ -89,5 +89,9 @@ Public Class PositionPage : Implements IPage
             MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
         End If
     End Function
+
+    Public Function Delete() As Task Implements IPage.Delete
+        Throw New NotImplementedException()
+    End Function
 End Class
 
