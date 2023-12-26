@@ -57,4 +57,18 @@ Public Class DepartmentBs : Implements IDepartmentBs
 
         Return ApiResponse(Of IEnumerable(Of DepartmentGetDto)).Success(200, dtoList)
     End Function
+
+    Public Async Function ListPositionsByDepartmentId(departmentId As Long) As Task(Of ApiResponse(Of IEnumerable(Of PositionGetDto))) Implements IDepartmentBs.ListPositionsByDepartmentId
+        Try
+            Dim positions = Await _repo.ListPositionsByDepartmentId(departmentId)
+
+            ' AutoMapper kullanarak Position nesnelerini PositionGetDto'ya dönüştür
+            Dim positionDtos = _mapper.Map(Of IEnumerable(Of PositionGetDto))(positions)
+
+            Return ApiResponse(Of IEnumerable(Of PositionGetDto)).Success(200, positionDtos)
+        Catch ex As Exception
+            ' Hata durumunda uygun bir ApiResponse döndür
+            Return ApiResponse(Of IEnumerable(Of PositionGetDto)).Fail(500, ex.Message)
+        End Try
+    End Function
 End Class

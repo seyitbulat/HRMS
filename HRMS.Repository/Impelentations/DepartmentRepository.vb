@@ -31,4 +31,28 @@ Public Class DepartmentRepository : Inherits BaseRepository(Of Department, Long,
                                   End Using
                               End Function)
     End Function
+
+    Public Async Function ListPositionsByDepartmentId(departmentId As Long) As Task(Of List(Of Position)) Implements IDepartmentRepository.ListPositionsByDepartmentId
+        Dim positions As New List(Of Position)()
+
+        Using conn As New SqlConnection(_context.Database.GetDbConnection().ConnectionString)
+            Using cmd As New SqlCommand("[dbo].[ListPositionsByDepartmentId]", conn)
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.Parameters.AddWithValue("@DepartmentID", departmentId)
+
+                Await conn.OpenAsync()
+                Using reader As SqlDataReader = Await cmd.ExecuteReaderAsync()
+                    While Await reader.ReadAsync()
+                        Dim position As New Position() With {
+                            .Id = reader.GetInt64(reader.GetOrdinal("ID")),
+                            .Positiontitle = reader.GetString(reader.GetOrdinal("POSITIONTITLE"))
+                        }
+                        positions.Add(position)
+                    End While
+                End Using
+            End Using
+        End Using
+
+        Return positions
+    End Function
 End Class

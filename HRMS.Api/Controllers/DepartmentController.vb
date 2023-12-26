@@ -36,4 +36,10 @@ Public Class DepartmentController
         Dim response = Await _service.ManageDepartment(dto.Id, dto.Departmentname, dto.Managerid, dto.Operation)
         Return SendResponse(response)
     End Function
+
+    <HttpGet("ListPositions/{departmentId}")>
+    Public Async Function ListPositionsByDepartmentId(<FromRoute> departmentId As Long) As Task(Of IActionResult)
+        Dim response = Await _service.ListPositionsByDepartmentId(departmentId)
+        Return SendResponse(response)
+    End Function
 End Class
