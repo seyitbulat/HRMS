@@ -136,7 +136,7 @@ Public Class EmployeeBs : Implements IEmployeeBs
         includeList.Add("Position")
         Dim repoResponse = Await _repo.GetListAsync(Function(e) e.Positionid = positionId, includeList)
         Dim dtoList = _mapper.Map(Of IEnumerable(Of EmployeeGetDto))(repoResponse)
-        Return dtoList
+        Return ApiResponse(Of IEnumerable(Of EmployeeGetDto)).Success(200, dtoList)
     End Function
 
     Public Async Function SearchEmployeesByLastNameAndBirthdate(lastname As String, birthdate As Date) As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto))) Implements IEmployeeBs.SearchEmployeesByLastNameAndBirthdate

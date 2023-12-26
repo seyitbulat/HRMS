@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>HRMS.Api</RootNamespace>
     <TargetFramework>net7.0</TargetFramework>
+    <UserSecretsId>2d4180c9-3e7a-4bac-866d-e595a30626a2</UserSecretsId>
   </PropertyGroup>
 
 	<ItemGroup>

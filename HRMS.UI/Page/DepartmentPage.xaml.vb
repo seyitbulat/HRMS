@@ -7,29 +7,32 @@ Imports Newtonsoft.Json
 Partial Public Class DepartmentPage : Implements IPage
 
     Public Async Function Add() As Task Implements IPage.Add
-        Dim name = Departmentname.Text
+        Dim name = departmentName.Text
 
-        Dim _httpClient As New HttpClient
+        Using _httpClient = HttpClientFactory.Create()
 
-        Dim postObject As New With {
+
+
+            Dim postObject As New With {
            Key .departmentName = name,
            Key .operation = "ADD"
-        }
+            }
 
-        Dim jsonContent = JsonConvert.SerializeObject(postObject)
-        Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
+            Dim jsonContent = JsonConvert.SerializeObject(postObject)
+            Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
 
-        Dim response As HttpResponseMessage = Await _httpClient.PostAsync("https://localhost:50099/Department/ManageDepartment", content)
+            Dim response As HttpResponseMessage = Await _httpClient.PostAsync("Department/ManageDepartment", content)
 
-        If response.StatusCode = Net.HttpStatusCode.OK Then
+            If response.StatusCode = Net.HttpStatusCode.OK Then
 
-        Else
-            MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
-        End If
+            Else
+                MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
+            End If
+        End Using
     End Function
 
     Private Async Sub searchButton_Click(sender As Object, e As RoutedEventArgs)
-        Using client As New HttpClient()
+        Using client = HttpClientFactory.Create()
             Dim response As HttpResponseMessage
             Dim selected = managerComboBox.SelectedValue
 
@@ -37,7 +40,7 @@ Partial Public Class DepartmentPage : Implements IPage
                 If selected Is Nothing Then
                     selected = 0
                 End If
-                response = Await client.GetAsync($"https://localhost:50099/Department/Search?departmentName={departmentName.Text}&departmentManager={selected}")
+                response = Await client.GetAsync($"Department/Search?departmentName={departmentName.Text}&departmentManager={selected}")
 
                 If response.IsSuccessStatusCode Then
                     Dim json As String = Await response.Content.ReadAsStringAsync()
@@ -48,7 +51,7 @@ Partial Public Class DepartmentPage : Implements IPage
                     departmentGrid.ItemsSource = New ObservableCollection(Of Department)() ' Hata durumunda boş bir koleksiyon atayın
                 End If
             Else
-                response = Await client.GetAsync("https://localhost:50099/Department/GetAll")
+                response = Await client.GetAsync("Department/GetAll")
                 If response.IsSuccessStatusCode Then
                     Dim json As String = Await response.Content.ReadAsStringAsync()
                     Dim wrapper = JsonConvert.DeserializeObject(Of DataWrapper(Of Department))(json)
@@ -82,8 +85,8 @@ Partial Public Class DepartmentPage : Implements IPage
     End Sub
 
     Private Async Sub UserControl_Loaded(sender As Object, e As RoutedEventArgs)
-        Using client As New HttpClient()
-            Dim response As HttpResponseMessage = Await client.GetAsync("https://localhost:50099/Employee/GetByPosition?positionId=3")
+        Using client = HttpClientFactory.Create()
+            Dim response As HttpResponseMessage = Await client.GetAsync("Employee/GetByPosition?positionId=3")
             If response.IsSuccessStatusCode Then
                 Dim json As String = Await response.Content.ReadAsStringAsync()
                 Dim wrapper = JsonConvert.DeserializeObject(Of DataWrapper(Of Employee))(json)
@@ -114,52 +117,59 @@ Partial Public Class DepartmentPage : Implements IPage
     Public Async Function Delete() As Task Implements IPage.Delete
         Dim selected As Department = TryCast(departmentGrid.SelectedItem, Department)
 
-        Dim _httpClient As New HttpClient
+        Using _httpClient = HttpClientFactory.Create()
 
-        Dim postObject As New With {
+
+            Dim postObject As New With {
            Key .id = selected.Id,
            Key .departmentName = selected.Departmentname,
            Key .operation = "DELETE"
         }
 
-        Dim jsonContent = JsonConvert.SerializeObject(postObject)
-        Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
+            Dim jsonContent = JsonConvert.SerializeObject(postObject)
+            Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
 
-        Dim response As HttpResponseMessage = Await _httpClient.PostAsync("https://localhost:50099/Department/ManageDepartment", content)
+            Dim response As HttpResponseMessage = Await _httpClient.PostAsync("Department/ManageDepartment", content)
 
-        If response.StatusCode = Net.HttpStatusCode.OK Then
+            If response.StatusCode = Net.HttpStatusCode.OK Then
 
-        Else
-            MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
-        End If
+            Else
+                MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
+            End If
+
+        End Using
+
     End Function
 
     Public Async Function Update() As Task Implements IPage.Update
         Dim selected As Department = TryCast(departmentGrid.SelectedItem, Department)
 
-        Dim _httpClient As New HttpClient
+        Using _httpClient = HttpClientFactory.Create()
 
-        Dim postObject As New With {
+
+            Dim postObject As New With {
            Key .id = selected.Id,
-           Key .departmentName = selected.Departmentname,
+           Key .departmentName = departmentName.Text,
            Key .managerId = managerComboBox.SelectedValue,
            Key .operation = "UPDATE"
         }
 
-        Dim jsonContent = JsonConvert.SerializeObject(postObject)
-        Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
+            Dim jsonContent = JsonConvert.SerializeObject(postObject)
+            Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
 
-        Dim response As HttpResponseMessage = Await _httpClient.PostAsync("https://localhost:50099/Department/ManageDepartment", content)
+            Dim response As HttpResponseMessage = Await _httpClient.PostAsync("Department/ManageDepartment", content)
 
-        If response.StatusCode = Net.HttpStatusCode.OK Then
+            If response.StatusCode = Net.HttpStatusCode.OK Then
 
-        Else
-            MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
-        End If
+            Else
+                MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
+            End If
+        End Using
+
     End Function
 
     Public Async Function LoadDepartments() As Task
-        Using client As New HttpClient()
+        Using client = HttpClientFactory.Create()
             Dim response As HttpResponseMessage
             Dim selected = managerComboBox.SelectedValue
 
@@ -167,7 +177,7 @@ Partial Public Class DepartmentPage : Implements IPage
                 If selected Is Nothing Then
                     selected = 0
                 End If
-                response = Await client.GetAsync($"https://localhost:50099/Department/Search?departmentName={departmentName.Text}&departmentManager={selected}")
+                response = Await client.GetAsync($"Department/Search?departmentName={departmentName.Text}&departmentManager={selected}")
 
                 If response.IsSuccessStatusCode Then
                     Dim json As String = Await response.Content.ReadAsStringAsync()
@@ -178,7 +188,7 @@ Partial Public Class DepartmentPage : Implements IPage
                     departmentGrid.ItemsSource = New ObservableCollection(Of Department)() ' Hata durumunda boş bir koleksiyon atayın
                 End If
             Else
-                response = Await client.GetAsync("https://localhost:50099/Department/GetAll")
+                response = Await client.GetAsync("Department/GetAll")
                 If response.IsSuccessStatusCode Then
                     Dim json As String = Await response.Content.ReadAsStringAsync()
                     Dim wrapper = JsonConvert.DeserializeObject(Of DataWrapper(Of Department))(json)
