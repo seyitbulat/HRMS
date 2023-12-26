@@ -61,7 +61,7 @@
                 </Grid>
             </Border>
             <Border Grid.Row="1" Background="LightGray"/>
-            <dxg:GridControl AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" Grid.Row="1" Background="LightGray" x:Name="employeeGrid">
+            <dxg:GridControl AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" Grid.Row="1" Background="LightGray" x:Name="employeeGrid">
                 <dxg:GridControl.Columns>
                     <dxg:GridColumn FieldName="Firstname" Header="AD" AllowEditing="False"/>
                     <dxg:GridColumn FieldName="Lastname" Header="SOYAD" AllowEditing="False"/>
@@ -74,11 +74,11 @@
                     <dxg:GridColumn FieldName="Departmanid" Header="DEPARTMAN" AllowEditing="False"/>
                     <dxg:GridColumn FieldName="Managerid" Header="MÜDÜR" AllowEditing="False"/>
                     <dxg:GridColumn FieldName="Annualleave" Header="YILLIK İZNİ" AllowEditing="False"/>
-                    <dxg:GridColumn FieldName="ISACTIVE" Header="AKTİF/PASİF" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="Isactive" Header="AKTİF/PASİF" AllowEditing="False"/>
 
                 </dxg:GridControl.Columns>
                 <dxg:GridControl.View>
-                    <dxg:TableView AutoWidth="True" ShowGroupPanel="False" ShowIndicator="False"/>
+                    <dxg:TableView  AutoWidth="True" ShowGroupPanel="False" ShowIndicator="False" />
                 </dxg:GridControl.View>
             </dxg:GridControl>
 

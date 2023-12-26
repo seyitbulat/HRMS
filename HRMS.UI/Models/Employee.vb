@@ -12,6 +12,7 @@
     Public Property Departmanid As Long
     Public Property Managerid As Long
     Public Property Annualleave As Integer?
+    Public Property Isactive As Boolean
 
 
     Public Property FullName() As String
