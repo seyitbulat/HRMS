@@ -63,17 +63,17 @@
             <Border Grid.Row="1" Background="LightGray"/>
             <dxg:GridControl AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" Grid.Row="1" Background="LightGray" x:Name="employeeGrid">
                 <dxg:GridControl.Columns>
-                    <dxg:GridColumn FieldName="FIRSTNAME" Header="AD" AllowEditing="False"/>
-                    <dxg:GridColumn FieldName="LASTNAME" Header="SOYAD" AllowEditing="False"/>
-                    <dxg:GridColumn FieldName="BIRTHDATE" Header="DOĞUM TARİHİ" AllowEditing="False"/>
-                    <dxg:GridColumn FieldName="GENDER" Header="CİNSİYET" AllowEditing="False"/>
-                    <dxg:GridColumn FieldName="HIREDATE" Header="İŞE GİRİŞ TARİHİ" AllowEditing="False"/>
-                    <dxg:GridColumn FieldName="EMAIL" Header="EMAIL" AllowEditing="False"/>
-                    <dxg:GridColumn FieldName="PHONENUMBER" Header="TELEFON" AllowEditing="False"/>
-                    <dxg:GridColumn FieldName="POSITIONID" Header="POZİSYON" AllowEditing="False"/>
-                    <dxg:GridColumn FieldName="DEPARTMANID" Header="DEPARTMAN" AllowEditing="False"/>
-                    <dxg:GridColumn FieldName="MANAGERID" Header="MÜDÜR" AllowEditing="False"/>
-                    <dxg:GridColumn FieldName="ANNUALLEAVE" Header="YILLIK İZNİ" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="Firstname" Header="AD" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="Lastname" Header="SOYAD" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="Birthdate" Header="DOĞUM TARİHİ" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="Gender" Header="CİNSİYET" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="Hiredate" Header="İŞE GİRİŞ TARİHİ" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="Email" Header="EMAIL" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="Phonenumber" Header="TELEFON" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="Positionid" Header="POZİSYON" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="Departmanid" Header="DEPARTMAN" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="Managerid" Header="MÜDÜR" AllowEditing="False"/>
+                    <dxg:GridColumn FieldName="Annualleave" Header="YILLIK İZNİ" AllowEditing="False"/>
                     <dxg:GridColumn FieldName="ISACTIVE" Header="AKTİF/PASİF" AllowEditing="False"/>
 
                 </dxg:GridControl.Columns>

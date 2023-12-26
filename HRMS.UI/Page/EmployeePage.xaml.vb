@@ -63,7 +63,10 @@ Public Class EmployeePage : Implements IPage
                     selected = DateTime.MinValue
                 End If
 
-                response = Await client.GetAsync($"https://localhost:50099/Employee/SearchByLastNameAndBirthdate?lastname={lastname.Text}&birthdate={selected}")
+                ' birthdate'i "yyyy-MM-dd" formatına çevir
+                Dim formattedBirthdate As String = selected?.ToString("yyyy-MM-dd")
+
+                response = Await client.GetAsync($"https://localhost:50099/Employee/SearchByLastNameAndBirthdate?lastname={lastname.Text}&birthdate={formattedBirthdate}")
 
                 If response.IsSuccessStatusCode Then
                     Dim json As String = Await response.Content.ReadAsStringAsync()
@@ -86,6 +89,7 @@ Public Class EmployeePage : Implements IPage
             End If
         End Using
     End Sub
+
 
     Public Class DataWrapper
         Public Property Data As ObservableCollection(Of Employee)
