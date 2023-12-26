@@ -42,6 +42,7 @@
 
                         <dxb:BarButtonItem Content="Çalışan" LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Employees.svg}" ItemClick="EmployeeButton_Click"/>
                         <dxb:BarButtonItem Content="Poziyon" LargeGlyph="{dx:DXImage SvgImages/Business Objects/BO_Position_v92.svg}" ItemClick="PositionButton_Click"/>
+                        <dxb:BarButtonItem Content="Adaylar" LargeGlyph="{dx:DXImage SvgImages/Business Objects/BO_Department.svg}" ItemClick="CandidateButton_Click"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
 

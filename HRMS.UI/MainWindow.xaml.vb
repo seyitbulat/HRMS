@@ -69,5 +69,22 @@ Namespace HRMS.UI
         Private Sub btnUpdate_ItemClick(sender As Object, e As ItemClickEventArgs)
             _page.Update()
         End Sub
+<<<<<<< Updated upstream
+=======
+
+        Private Sub CandidateButton_Click(ByVal sender As Object, ByVal e As ItemClickEventArgs)
+
+            ' Öncelikle mevcut içeriği temizleyin
+            MainContentPanel.Children.Clear()
+
+            ' DepartmentPage UserControl'ünü oluşturun
+            Dim canidatePage As New CandidatePage()
+
+
+
+            ' UserControl'ü ana içerik paneline ekleyin
+            MainContentPanel.Children.Add(canidatePage)
+        End Sub
+>>>>>>> Stashed changes
     End Class
 End Namespace
