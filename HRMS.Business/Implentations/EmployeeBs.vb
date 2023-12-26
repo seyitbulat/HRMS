@@ -62,20 +62,20 @@ Public Class EmployeeBs : Implements IEmployeeBs
     End Function
 
 
-    Public Async Function SearchByBirthdateAndLastname(birthdate As Date, lastname As String) As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto))) Implements IEmployeeBs.SearchByBirthdateAndLastname
-        If birthdate = Nothing OrElse String.IsNullOrWhiteSpace(lastname) Then
-            Return ApiResponse(Of IEnumerable(Of EmployeeGetDto)).Fail(400, "Both birthdate and lastname must be provided")
-        End If
+    'Public Async Function SearchByBirthdateAndLastname(birthdate As Date, lastname As String) As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto))) Implements IEmployeeBs.SearchByBirthdateAndLastname
+    '    If birthdate = Nothing OrElse String.IsNullOrWhiteSpace(lastname) Then
+    '        Return ApiResponse(Of IEnumerable(Of EmployeeGetDto)).Fail(400, "Both birthdate and lastname must be provided")
+    '    End If
 
-        Dim filteredEmployees = Await _repo.SearchByBirthdateAndLastnameProcedure(birthdate, lastname)
+    '    Dim filteredEmployees = Await _repo.SearchByBirthdateAndLastnameProcedure(birthdate, lastname)
 
-        If Not filteredEmployees.Any() Then
-            Return ApiResponse(Of IEnumerable(Of EmployeeGetDto)).Fail(404, "No matching employees found")
-        End If
+    '    If Not filteredEmployees.Any() Then
+    '        Return ApiResponse(Of IEnumerable(Of EmployeeGetDto)).Fail(404, "No matching employees found")
+    '    End If
 
-        Dim dtoList = _mapper.Map(Of IEnumerable(Of EmployeeGetDto))(filteredEmployees)
-        Return ApiResponse(Of IEnumerable(Of EmployeeGetDto)).Success(200, dtoList)
-    End Function
+    '    Dim dtoList = _mapper.Map(Of IEnumerable(Of EmployeeGetDto))(filteredEmployees)
+    '    Return ApiResponse(Of IEnumerable(Of EmployeeGetDto)).Success(200, dtoList)
+    'End Function
 
     Public Async Function GetEmployeeReport(departmentId As Long?, startDate As Date?, endDate As Date?) As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto))) Implements IEmployeeBs.GetEmployeeReport
         Dim employees = Await _repo.GetEmployeeReport(departmentId, startDate, endDate)
@@ -137,6 +137,17 @@ Public Class EmployeeBs : Implements IEmployeeBs
         Dim repoResponse = Await _repo.GetListAsync(Function(e) e.Positionid = positionId, includeList)
         Dim dtoList = _mapper.Map(Of IEnumerable(Of EmployeeGetDto))(repoResponse)
         Return dtoList
+    End Function
+
+    Public Async Function SearchEmployeesByLastNameAndBirthdate(lastname As String, birthdate As Date) As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto))) Implements IEmployeeBs.SearchEmployeesByLastNameAndBirthdate
+        ' Repository'den veriyi al
+        Dim employees = Await _repo.SearchEmployeesByLastNameAndBirthdate(lastname, birthdate)
+
+        ' Employee nesnelerini EmployeeGetDto'ya dönüştür
+        Dim employeeDtos = _mapper.Map(Of IEnumerable(Of EmployeeGetDto))(employees)
+
+        ' ApiResponse ile sonucu döndür
+        Return ApiResponse(Of IEnumerable(Of EmployeeGetDto)).Success(200, employeeDtos)
     End Function
 End Class
 

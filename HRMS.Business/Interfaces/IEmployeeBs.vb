@@ -8,7 +8,8 @@ Public Interface IEmployeeBs
     Function GetAll() As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto)))
     Function Delete(id As Long) As Task(Of ApiResponse(Of NoData))
     Function Update(id As Long, dto As EmployeePutDto) As Task(Of ApiResponse(Of EmployeeGetDto))
-    Function SearchByBirthdateAndLastname(birthdate As Date, lastname As String) As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto)))
+    'Function SearchByBirthdateAndLastname(birthdate As Date, lastname As String) As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto)))
+    Function SearchEmployeesByLastNameAndBirthdate(lastname As String, birthdate As Date) As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto)))
     Function GetEmployeeReport(departmentId As Long?, startDate As Date?, endDate As Date?) As Task(Of ApiResponse(Of IEnumerable(Of EmployeeGetDto)))
     Function GetAnnualLeave(id As Long, dto As EmployeePutDto) As Task(Of ApiResponse(Of EmployeePutDto))
 
