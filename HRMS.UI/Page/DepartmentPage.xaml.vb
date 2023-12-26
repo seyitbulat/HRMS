@@ -29,6 +29,8 @@ Partial Public Class DepartmentPage : Implements IPage
                 MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
             End If
         End Using
+        Await LoadDepartments()
+
     End Function
 
     Private Async Sub searchButton_Click(sender As Object, e As RoutedEventArgs)
@@ -85,6 +87,7 @@ Partial Public Class DepartmentPage : Implements IPage
     End Sub
 
     Private Async Sub UserControl_Loaded(sender As Object, e As RoutedEventArgs)
+        Await LoadDepartments()
         Using client = HttpClientFactory.Create()
             Dim response As HttpResponseMessage = Await client.GetAsync("Employee/GetByPosition?positionId=3")
             If response.IsSuccessStatusCode Then
@@ -136,6 +139,7 @@ Partial Public Class DepartmentPage : Implements IPage
             Else
                 MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
             End If
+            Await LoadDepartments()
 
         End Using
 
@@ -164,6 +168,7 @@ Partial Public Class DepartmentPage : Implements IPage
             Else
                 MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
             End If
+            Await LoadDepartments()
         End Using
 
     End Function
@@ -173,30 +178,18 @@ Partial Public Class DepartmentPage : Implements IPage
             Dim response As HttpResponseMessage
             Dim selected = managerComboBox.SelectedValue
 
-            If Not departmentName.Text = "Departman Adı Giriniz:" Then
-                If selected Is Nothing Then
-                    selected = 0
-                End If
-                response = Await client.GetAsync($"Department/Search?departmentName={departmentName.Text}&departmentManager={selected}")
-
-                If response.IsSuccessStatusCode Then
-                    Dim json As String = Await response.Content.ReadAsStringAsync()
-                    Dim wrapper = JsonConvert.DeserializeObject(Of DataWrapper(Of Department))(json)
-                    departmentGrid.ItemsSource = wrapper.Data ' Bu satırı değiştirin
-                Else
-                    ' Hata durumunu ele alın
-                    departmentGrid.ItemsSource = New ObservableCollection(Of Department)() ' Hata durumunda boş bir koleksiyon atayın
-                End If
-            Else
+            Try
                 response = Await client.GetAsync("Department/GetAll")
-                If response.IsSuccessStatusCode Then
-                    Dim json As String = Await response.Content.ReadAsStringAsync()
-                    Dim wrapper = JsonConvert.DeserializeObject(Of DataWrapper(Of Department))(json)
-                    departmentGrid.ItemsSource = wrapper.Data ' Bu satırı değiştirin
-                Else
-                    ' Hata durumunu ele alın
-                    departmentGrid.ItemsSource = New ObservableCollection(Of Department)() ' Hata durumunda boş bir koleksiyon atayın
-                End If
+            Catch ex As Exception
+
+            End Try
+            If response.IsSuccessStatusCode Then
+                Dim json As String = Await response.Content.ReadAsStringAsync()
+                Dim wrapper = JsonConvert.DeserializeObject(Of DataWrapper(Of Department))(json)
+                departmentGrid.ItemsSource = wrapper.Data ' Bu satırı değiştirin
+            Else
+                ' Hata durumunu ele alın
+                departmentGrid.ItemsSource = New ObservableCollection(Of Department)() ' Hata durumunda boş bir koleksiyon atayın
             End If
         End Using
     End Function
