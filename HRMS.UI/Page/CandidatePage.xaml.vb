@@ -10,19 +10,19 @@ Public Class CandidatePage : Implements IPage
     Public Sub New()
         InitializeComponent()
         httpclient = New HttpClient()
-        httpclient.BaseAddress = New Uri("https://localhost:50099/")
+        httpclient.BaseAddress = New Uri("https://localhost:5030/")
         Candidates = New ObservableCollection(Of Candidate)()
         Positions = New ObservableCollection(Of Position)()
         LoadCandidate()
     End Sub
-    Public Class ApiResponse
-        Public Property Data As List(Of Candidate)
+    Public Class ApiResponse(Of T)
+        Public Property Data As List(Of T)
     End Class
     Public Async Function LoadCandidate() As Task
 
         Dim response = Await httpclient.GetAsync("Candidate/GetAll")
         If response.IsSuccessStatusCode Then
-            Dim apiResponse = Await response.Content.ReadAsAsync(Of ApiResponse)()
+            Dim apiResponse = Await response.Content.ReadAsAsync(Of ApiResponse(Of Candidate))()
             Candidates = New ObservableCollection(Of Candidate)(apiResponse.Data)
             candidateGridControl.ItemsSource = Candidates
         End If
@@ -31,7 +31,7 @@ Public Class CandidatePage : Implements IPage
         Try
             Dim comboResponse = Await httpclient.GetAsync("Position/GetAll")
             If comboResponse.IsSuccessStatusCode Then
-                Dim positionsApiResponse = Await comboResponse.Content.ReadAsAsync(Of ApiResponse)()
+                Dim positionsApiResponse = Await comboResponse.Content.ReadAsAsync(Of ApiResponse(Of Position))()
                 ' Data tipinin List(Of Position) olduğundan emin olun.
                 Positions = New ObservableCollection(Of Position)(positionsApiResponse.Data)
                 ' ComboBox'a Positions koleksiyonunu atayın.

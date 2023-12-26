@@ -36,7 +36,7 @@
 
             <Border Grid.Row="1" Background="DarkGray">
 
-                <dxg:GridControl AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" x:Name="candidateGridControl" SelectionMode="Row" SelectedItemChanged="candidateGrid_SelectedItemChanged">
+                <dxg:GridControl AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" x:Name="candidateGridControl" SelectionMode="Row">
                     <dxg:GridControl.Columns>
                         <dxg:GridColumn FieldName="Firstname" Header="Ad" AllowEditing="false"/>
                         <dxg:GridColumn FieldName="Lastname" Header="Soyad" AllowEditing="false"/>
