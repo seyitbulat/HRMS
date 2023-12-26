@@ -157,5 +157,7 @@ Public Class PositionPage : Implements IPage
             MessageBox.Show("Lütfen güncellenecek bir pozisyon seçin.", "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
         End If
     End Function
+
+
 End Class
 
