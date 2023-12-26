@@ -35,13 +35,13 @@ Namespace HRMS.UI
             MainContentPanel.Children.Add(departmentPage)
         End Sub
         Private Sub EmployeeButton_Click(ByVal sender As Object, ByVal e As ItemClickEventArgs)
-
+            _selector = 1
             ' Öncelikle mevcut içeriği temizleyin
             MainContentPanel.Children.Clear()
 
             ' DepartmentPage UserControl'ünü oluşturun
             Dim employeePage As New EmployeePage()
-
+            _page = employeePage
 
 
             ' UserControl'ü ana içerik paneline ekleyin
@@ -69,7 +69,6 @@ Namespace HRMS.UI
         Private Sub btnUpdate_ItemClick(sender As Object, e As ItemClickEventArgs)
             _page.Update()
         End Sub
-
 
         Private Sub CandidateButton_Click(ByVal sender As Object, ByVal e As ItemClickEventArgs)
 

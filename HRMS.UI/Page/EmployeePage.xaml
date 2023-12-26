@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:HRMS.UI"
              xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" x:Class="EmployeePage"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="EmployeeControl_Loaded">
     <DockPanel>
         <Grid>
             <Grid.RowDefinitions>
@@ -25,8 +26,9 @@
                     <Label Content="Doğum Tarihi:" Grid.Column="0" VerticalAlignment="Top" Margin="10,10,10,0"/>
                     <DatePicker x:Name="birthdate" VerticalAlignment="Top" Margin="90,10,0,0" Grid.Column="0" HorizontalAlignment="Left" Width="125"/>
                     <Label Content="Soyad:" Grid.Column="0" Margin="10,50,10,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="lastname" Text="Soyad Giriniz:" Grid.Column="0" Margin="90,50,0,0" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125" />
-                    <Button Content="ARA" Grid.Column="1" Margin="0,147,0,27" HorizontalAlignment="Center" Width="60" Foreground="Black" Background="LightGray" Click="searchEmployeeButton_Click"/>
+                    <TextBox x:Name="lastname" Text="Soyad Giriniz:" Grid.Column="0" Margin="90,50,0,0" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125" GotFocus="LastnameTextBox_GotFocus" LostFocus="LastnameTextBox_LostFocus"/>
+                    
+                    <Button Content="ARA" Grid.Column="1" Margin="0,147,0,27" HorizontalAlignment="Center" Width="60" Foreground="Black" Background="LightGray" Click="searchEmployeeButton_Click" />
 
                     <Label Content="Ad:"  Grid.Column="1" VerticalAlignment="Top" Margin="20,10,0,0" HorizontalAlignment="Left" Width="62"/>
                     <TextBox  x:Name="firstname" Grid.Column="1" BorderThickness="0,0,0,1" Margin="90,10,0,0" Background="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125"/>
@@ -35,8 +37,8 @@
                     <ComboBox  x:Name="gender" Grid.Column="1" BorderThickness="0,0,0,1" Margin="90,50,0,0" Background="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125"/>
 
                     <Label Content="Giriş Tarihi:" Grid.Column="2" VerticalAlignment="Top" Margin="20,10,0,0" HorizontalAlignment="Left"/>
-                    <TextBox  x:Name="hiredate" Grid.Column="2" BorderThickness="0,0,0,1" Margin="90,10,0,0" Background="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125"/>
-
+                    <DatePicker x:Name="hiredate" VerticalAlignment="Top" Margin="90,10,0,0" Grid.Column="2" HorizontalAlignment="Left" Width="125"/>
+                    
                     <Label Content="Telefon:" Grid.Column="2" VerticalAlignment="Top" Margin="20,50,0,0" HorizontalAlignment="Left"/>
                     <TextBox  x:Name="phonenumber" Grid.Column="2" BorderThickness="0,0,0,1" Margin="90,50,0,0" Background="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125"/>
 
@@ -45,23 +47,23 @@
 
                     <Label Content="Yıllık İzin:" Grid.Column="3" VerticalAlignment="Top" Margin="20,50,0,0" HorizontalAlignment="Left"/>
                     <TextBox  x:Name="annualleave" Grid.Column="3" BorderThickness="0,0,0,1" Margin="90,50,0,0" Background="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125"/>
-
+                   
                     <Label Content="Departman:" Grid.Column="0" VerticalAlignment="Top" Margin="10,90,0,0" HorizontalAlignment="Left"/>
-                    <TextBox  x:Name="departmenId" Grid.Column="0" VerticalAlignment="Top" Margin="90,90,0,0" BorderThickness="0,0,0,1" Background="{x:Null}"  HorizontalAlignment="Left" Width="125"/>
+                    <ComboBox  x:Name="departmenId" Grid.Column="0"  SelectedValuePath="Id" DisplayMemberPath="Departmentname" VerticalAlignment="Top" Margin="90,90,0,0" BorderThickness="0,0,0,1" Background="{x:Null}"  HorizontalAlignment="Left" Width="125" SelectionChanged="departmenId_SelectionChanged"/>
 
                     <Label Content="Pozisyon:" Grid.Column="1" VerticalAlignment="Top" Margin="10,90,0,0" HorizontalAlignment="Left"/>
-                    <TextBox  x:Name="positionId" Grid.Column="1" VerticalAlignment="Top" Margin="90,90,0,0" BorderThickness="0,0,0,1" Background="{x:Null}"  HorizontalAlignment="Left" Width="125"/>
+                    <ComboBox  x:Name="positionId" Grid.Column="1" SelectedValuePath="Id" DisplayMemberPath="PositionTitle" VerticalAlignment="Top" Margin="90,90,0,0" BorderThickness="0,0,0,1" Background="{x:Null}"  HorizontalAlignment="Left" Width="125" />
 
 
                     <Label Content="Müdür:" Grid.Column="2" VerticalAlignment="Top" Margin="10,90,0,0" HorizontalAlignment="Left"/>
-                    <TextBox x:Name="manegerId" Grid.Column="2" VerticalAlignment="Top" Margin="90,90,0,0" BorderThickness="0,0,0,1" Background="{x:Null}"  HorizontalAlignment="Left" Width="125"/>
+                    <ComboBox x:Name="manegerId" SelectedValuePath="Id" DisplayMemberPath="FullName" Grid.Column="2" VerticalAlignment="Top" Margin="90,90,0,0" BorderThickness="0,0,0,1" Background="{x:Null}"  HorizontalAlignment="Left" Width="125"/>
 
                     <Label Content="Aktif/Pasif:" Grid.Column="3" VerticalAlignment="Top" Margin="10,90,0,0" HorizontalAlignment="Left"/>
                     <CheckBox x:Name="ısactive" Grid.Column="3" VerticalAlignment="Top" Margin="90,90,0,0"  Background="{x:Null}"  HorizontalAlignment="Left" Width="125"/>
                 </Grid>
             </Border>
-            <Border Grid.Row="1" Background="LightGray"/>
-            <dxg:GridControl AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" Grid.Row="1" Background="LightGray" x:Name="employeeGrid">
+            <Border Grid.Row="1" Background="White"/>
+            <dxg:GridControl AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" Grid.Row="1" Background="LightGray" x:Name="employeeGrid" SelectedItemChanged="employeeGrid_SelectedItemChanged">
                 <dxg:GridControl.Columns>
                     <dxg:GridColumn FieldName="Firstname" Header="AD" AllowEditing="False"/>
                     <dxg:GridColumn FieldName="Lastname" Header="SOYAD" AllowEditing="False"/>

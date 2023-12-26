@@ -1,5 +1,7 @@
 ﻿Imports DocuSign.eSign.Model
+Imports HRMS.UI.DepartmentPage
 Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Linq
 Imports System.Collections.ObjectModel
 Imports System.Net.Http
 Imports System.Text
@@ -7,16 +9,16 @@ Imports System.Text
 Public Class EmployeePage : Implements IPage
 
     Public Async Function Add() As Task Implements IPage.Add
-        Dim name = FirstName.Text
+        Dim name = firstname.Text
         Dim lastna = lastname.Text
         Dim birth = birthdate.SelectedDate
         Dim gend = gender.SelectedValue
-        Dim hire = hiredate.Text
+        Dim hire = hiredate.SelectedDate
         Dim mail = email.Text
         Dim phone = phonenumber.Text
-        Dim position = positionId.Text
-        Dim department = departmenId.Text
-        Dim manager = manegerId.Text
+        Dim position = positionId.SelectedValue
+        Dim department = departmenId.SelectedValue
+        Dim manager = manegerId.SelectedValue
         Dim annual = annualleave.Text
         Dim active = ısactive.IsChecked.HasValue
 
@@ -95,9 +97,120 @@ Public Class EmployeePage : Implements IPage
         Public Property Data As ObservableCollection(Of Employee)
     End Class
 
+    Private Sub employeeGrid_SelectedItemChanged(sender As Object, e As DevExpress.Xpf.Grid.SelectedItemChangedEventArgs)
+        Dim selected As Employee = TryCast(employeeGrid.SelectedItem, Employee)
+        If selected IsNot Nothing Then
+            firstname.Text = selected.Firstname
+            lastname.Text = selected.Lastname
+            birthdate.SelectedDate = selected.Birthdate
+            gender.SelectedValue = selected.Gender
+            hiredate.SelectedDate = selected.Hiredate
+            email.Text = selected.Email
+            phonenumber.Text = selected.Phonenumber
+            positionId.SelectedValue = selected.Positionid
+            departmenId.SelectedValue = selected.Departmanid
+            manegerId.SelectedValue = selected.Managerid
+            annualleave.Text = selected.Annualleave
+            ısactive.IsChecked = selected.Isactive
+            If selected.Gender IsNot Nothing Then
+                gender.SelectedItem = selected.Gender
+            Else
+                gender.SelectedIndex = -1 ' Hiçbir şey seçili değil
+            End If
+        End If
+    End Sub
+    Private Async Sub EmployeeControl_Loaded(sender As Object, e As RoutedEventArgs)
+        Using client As New HttpClient()
+            Dim response As HttpResponseMessage = Await client.GetAsync("https://localhost:50099/Employee/GetByPosition?positionId=3")
 
-    Public Function Delete() As Task Implements IPage.Delete
-        Throw New NotImplementedException()
+            If response.IsSuccessStatusCode Then
+                Dim json As String = Await response.Content.ReadAsStringAsync()
+                Dim wrapper = JsonConvert.DeserializeObject(Of DataWrapper(Of Employee))(json)
+
+                ' Seçim yapılmadı seçeneğini ekle
+                Dim defaultEmployee As New Employee With {.Id = -1, .Firstname = "Seçim", .Lastname = "Yapılmadı"}
+                wrapper.Data.Insert(0, defaultEmployee)
+
+                ' Combobox'ı verilerle doldur
+                manegerId.DisplayMemberPath = "FullName" ' Combobox'ta görünen metni belirtir
+                manegerId.SelectedValuePath = "Id" ' Combobox'ta seçilen değeri belirtir
+                manegerId.ItemsSource = wrapper.Data
+
+                ' Varsayılan olarak Seçim Yapılmadı seçeneğini seçili hale getir
+                manegerId.SelectedValue = defaultEmployee.Id
+            Else
+                ' Hata durumunu ele al
+            End If
+        End Using
+
+        Using client As New HttpClient()
+            Dim response As HttpResponseMessage = Await client.GetAsync("https://localhost:50099/Department/GetAll")
+            If response.IsSuccessStatusCode Then
+                Dim json As String = Await response.Content.ReadAsStringAsync()
+                Dim wrapper = JsonConvert.DeserializeObject(Of DataWrapper(Of Department))(json)
+
+                Dim defaultdepartman As New Department With {.Id = -1, .Departmentname = "Seçim Yapılmadı"}
+                wrapper.Data.Insert(0, defaultdepartman)
+
+                ' Combobox'ı verilerle doldur
+                departmenId.DisplayMemberPath = "Departmentname" ' Combobox'ta görünen metni belirtir
+                departmenId.SelectedValuePath = "Id" ' Combobox'ta seçilen değeri belirtir
+                departmenId.ItemsSource = wrapper.Data
+
+                ' Varsayılan olarak Seçim Yapılmadı seçeneğini seçili hale getir
+                departmenId.SelectedValue = defaultdepartman.Id
+            Else
+                ' Hata durumunu ele al
+            End If
+        End Using
+
+
+        Dim genders As New List(Of String) From {"Kadın", "Erkek"}
+
+        ' ComboBox'ı temizleyin
+        gender.Items.Clear()
+
+        ' Veriyi ComboBox'a ekleyin
+        For Each genderr In genders
+            gender.Items.Add(genderr)
+        Next
+
+
+    End Sub
+
+
+
+    Public Async Function Delete() As Task Implements IPage.Delete
+        Dim selected As Employee = TryCast(employeeGrid.SelectedItem, Employee)
+
+        Dim _httpClient As New HttpClient
+
+        Dim postObject As New With {
+           Key .id = selected.Id,
+           Key .firstName = selected.Firstname,
+           Key .lastname = selected.Lastname,
+           Key .birthdate = selected.Birthdate,
+           Key .gender = selected.Gender,
+           Key .hiredate = selected.Hiredate,
+           Key .email = selected.Email,
+           Key .phonenumber = selected.Phonenumber,
+           Key .positionId = selected.Positionid,
+           Key .departmentId = selected.Departmanid,
+           Key .managerId = selected.Managerid,
+           Key .ısactive = selected.Isactive,
+            Key .operation = "DELETE"
+        }
+
+        Dim jsonContent = JsonConvert.SerializeObject(postObject)
+        Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
+
+        Dim response As HttpResponseMessage = Await _httpClient.PostAsync("https://localhost:50099/Employee/SearchByLastNameAndBirthdate", content)
+
+        If response.StatusCode = Net.HttpStatusCode.OK Then
+
+        Else
+            MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
+        End If
     End Function
 
     Public Function Update() As Task Implements IPage.Update
@@ -112,11 +225,52 @@ Public Class EmployeePage : Implements IPage
 
     End Sub
 
-    Private Sub departmentName_LostFocus(sender As Object, e As RoutedEventArgs)
+    Private Sub LastnameTextBox_LostFocus(sender As Object, e As RoutedEventArgs)
         If lastname.Text = "" Then
             lastname.Text = "Soyad Giriniz:"
         End If
     End Sub
 
+    Private Async Sub departmenId_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+        Using client As New HttpClient()
+            ' Varsayılan olarak departmanId.SelectedItem, seçilen departmanı temsil eden bir nesnedir
+            Dim selectedDepartment As Department = CType(departmenId.SelectedItem, Department)
 
+            ' Bir departmanın seçilip seçilmediğini kontrol et
+            If selectedDepartment IsNot Nothing Then
+                ' URL veya istek parametrelerinde departman ID'sini kullan
+                Dim positionsUrl As String = $"https://localhost:50099/Department/ListPositions/{selectedDepartment.Id}"
+
+                ' İkinci API isteğini yap
+                Dim response As HttpResponseMessage = Await client.GetAsync(positionsUrl)
+
+                If response.IsSuccessStatusCode Then
+                    ' API'dan gelen JSON verisini oku
+                    Dim json As String = Await response.Content.ReadAsStringAsync()
+
+                    ' JSON verisini uygun tipe dönüştür
+                    Dim wrapper = JsonConvert.DeserializeObject(Of DataWrapper(Of Position))(json)
+
+
+
+                    Dim defaultposition As New Position With {.Id = -1, .PositionTitle = "Seçim Yapılmadı"}
+                    wrapper.Data.Insert(0, defaultposition)
+
+                    ' Combobox'ı verilerle doldur
+                    positionId.DisplayMemberPath = "PositionTitle" ' Combobox'ta görünen metni belirtir
+                    positionId.SelectedValuePath = "Id" ' Combobox'ta seçilen değeri belirtir
+                    positionId.ItemsSource = wrapper.Data
+
+                    ' Varsayılan olarak Seçim Yapılmadı seçeneğini seçili hale getir
+                    positionId.SelectedValue = defaultposition.Id
+
+
+                Else
+                    ' Hata durumunu ele al
+                End If
+            Else
+                ' Hiçbir departmanın seçilmediği durumu ele al
+            End If
+        End Using
+    End Sub
 End Class
