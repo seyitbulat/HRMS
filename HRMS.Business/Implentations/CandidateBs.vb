@@ -32,7 +32,9 @@ Public Class CandidateBs : Implements ICandidateBs
     End Function
 
     Public Async Function GetAll() As Task(Of ApiResponse(Of IEnumerable(Of CandidateGetDto))) Implements ICandidateBs.GetAll
-        Dim repoResponse = Await _repo.GetAllAsync()
+        Dim includeList As New List(Of String)
+        includeList.Add("Appliedposition")
+        Dim repoResponse = Await _repo.GetListAsync(includeList:=includeList)
         Dim dtoList = _mapper.Map(Of IEnumerable(Of CandidateGetDto))(repoResponse)
 
         Return ApiResponse(Of IEnumerable(Of CandidateGetDto)).Success(200, dtoList)

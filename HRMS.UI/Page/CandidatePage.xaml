@@ -41,7 +41,7 @@
                         <dxg:GridColumn FieldName="Firstname" Header="Ad" AllowEditing="false"/>
                         <dxg:GridColumn FieldName="Lastname" Header="Soyad" AllowEditing="false"/>
                         <dxg:GridColumn FieldName="Resumelink" Header="Özgeçmiş Bağlantısı" AllowEditing="false"/>
-                        <dxg:GridColumn FieldName="Appliedpositionid" Header="Pozisyon" AllowEditing="false"/>
+                        <dxg:GridColumn FieldName="Appliedposition.PositionTitle" Header="Pozisyon" AllowEditing="false"/>
                         <dxg:GridColumn FieldName="Applicationdate" Header="Başvuru Tarihi" AllowEditing="false"/>
                     </dxg:GridControl.Columns>
                     <dxg:GridControl.View>

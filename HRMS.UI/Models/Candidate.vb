@@ -9,4 +9,6 @@
     Public Property Resumelink As String
 
     Public Property Appliedpositionid As Long
+
+    Public Property Appliedposition As Position
 End Class
