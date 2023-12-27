@@ -65,6 +65,7 @@ Module Program
         End If
 
         app.UseHttpsRedirection()
+        app.UseStaticFiles()
 
         app.UseAuthorization()
 
