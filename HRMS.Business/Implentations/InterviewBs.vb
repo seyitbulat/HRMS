@@ -30,7 +30,10 @@ Public Class InterviewBs : Implements IInterviewBs
     End Function
 
     Public Async Function GetAll() As Task(Of ApiResponse(Of IEnumerable(Of InterviewGetDto))) Implements IInterviewBs.GetAll
-        Dim repoResponse = Await _repo.GetAllAsync()
+        Dim includeList As New List(Of String)
+        includeList.Add("Candidate")
+        includeList.Add("Interviewer")
+        Dim repoResponse = Await _repo.GetListAsync(includeList:=includeList)
         Dim dtoList = _mapper.Map(Of IEnumerable(Of InterviewGetDto))(repoResponse)
 
         Return ApiResponse(Of IEnumerable(Of InterviewGetDto)).Success(200, dtoList)

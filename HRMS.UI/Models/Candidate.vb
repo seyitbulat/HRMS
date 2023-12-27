@@ -10,8 +10,17 @@
 
     Public Property Appliedpositionid As Long
 
-<<<<<<< Updated upstream
+
     Public Property Appliedposition As Position
-=======
->>>>>>> Stashed changes
+
+
+    Public Property FullName As String
+        Get
+            Return Firstname + " " + Lastname
+        End Get
+        Set(value As String)
+
+        End Set
+    End Property
+
 End Class

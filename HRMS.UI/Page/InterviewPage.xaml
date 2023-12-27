@@ -36,7 +36,7 @@
                 <dxg:GridControl AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" x:Name="interviewGridControl" SelectionMode="Row">
                     <dxg:GridControl.Columns>
                         <dxg:GridColumn FieldName="Interviewdate" Header="Mülakat Tarihi" AllowEditing="false"/>
-                        <dxg:GridColumn FieldName="CandidateName" Header="Aday" AllowEditing="false"/>
+                        <dxg:GridColumn FieldName="Candidate.FullName" Header="Aday" AllowEditing="false"/>
 
                         <dxg:GridColumn FieldName="Interviewnotes" Header="Mülakat Notu" AllowEditing="false"/>
                         <dxg:GridColumn FieldName="Interviewoutcome" Header="Mülakat Sonucu" AllowEditing="false"/>

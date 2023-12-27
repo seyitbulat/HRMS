@@ -17,18 +17,13 @@ Public Class InterviewPage : Implements IPage
     End Class
     Public Async Function LoadInterview() As Task
         ' Önce aday isimlerini yükleyin
-        Dim candidateNames = Await LoadCandidateNames()
+        'Dim candidateNames = Await LoadCandidateNames()
 
         ' Sonra Interview bilgilerini yükleyin
         Dim response = Await httpclient.GetAsync("Interview/GetAll")
         If response.IsSuccessStatusCode Then
             Dim apiResponse = Await response.Content.ReadAsAsync(Of ApiResponse(Of Interview))()
-            For Each interview In apiResponse.Data
-                ' CandidateId kullanarak CandidateName'i atayın
-                If candidateNames.ContainsKey(interview.Candidateid) Then
-                    interview.CandidateName = candidateNames(interview.Candidateid)
-                End If
-            Next
+
             Interviews = New ObservableCollection(Of Interview)(apiResponse.Data)
             interviewGridControl.ItemsSource = Interviews
         End If

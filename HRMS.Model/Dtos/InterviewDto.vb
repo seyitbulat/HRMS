@@ -1,10 +1,15 @@
 ﻿Public Class InterviewGetDto
+    Public Property Id As Long
+
     Public Property Interviewdate As Date
 
     Public Property Interviewnotes As String
 
     Public Property Interviewoutcome As String
 
+    Public Overridable Property Candidate As CandidateGetDto
+
+    Public Overridable Property Interviewer As EmployeeGetDto
 
 End Class
 

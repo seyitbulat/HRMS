@@ -13,16 +13,23 @@ Public Class Interview
 
     Public Property Interviewerid As Long
 
-    Private _candidateName As String
-    Public Property CandidateName As String
-        Get
-            Return _candidateName
-        End Get
-        Set(value As String)
-            _candidateName = value
-            OnPropertyChanged("CandidateName")
-        End Set
-    End Property
+    Public Overridable Property Candidate As Candidate
+
+    Public Overridable Property Interviewer As Employee
+
+    'Private _candidateName As String
+    'Public Property CandidateName As String
+    '    Get
+    '        Return _candidateName
+    '    End Get
+    '    Set(value As String)
+    '        _candidateName = value
+    '        OnPropertyChanged("CandidateName")
+    '    End Set
+    'End Property
+
+
+
 
     ' PropertyChanged olayını tetikleyen yardımcı metod
     Protected Sub OnPropertyChanged(ByVal name As String)
