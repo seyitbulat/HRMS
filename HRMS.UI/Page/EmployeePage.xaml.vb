@@ -125,7 +125,7 @@ Public Class EmployeePage : Implements IPage
     End Sub
     Private Async Sub EmployeeControl_Loaded(sender As Object, e As RoutedEventArgs)
         Using client As New HttpClient()
-            Dim response As HttpResponseMessage = Await client.GetAsync("https://localhost:50099/Employee/GetByPosition?positionId=3")
+            Dim response As HttpResponseMessage = Await client.GetAsync("https://localhost:5030/Employee/GetByPosition?positionId=3")
 
             If response.IsSuccessStatusCode Then
                 Dim json As String = Await response.Content.ReadAsStringAsync()
@@ -148,7 +148,7 @@ Public Class EmployeePage : Implements IPage
         End Using
 
         Using client As New HttpClient()
-            Dim response As HttpResponseMessage = Await client.GetAsync("https://localhost:50099/Department/GetAll")
+            Dim response As HttpResponseMessage = Await client.GetAsync("https://localhost:5030/Department/GetAll")
             If response.IsSuccessStatusCode Then
                 Dim json As String = Await response.Content.ReadAsStringAsync()
                 Dim wrapper = JsonConvert.DeserializeObject(Of DataWrapper(Of Department))(json)
@@ -200,7 +200,7 @@ Public Class EmployeePage : Implements IPage
             If messageBoxResult = MessageBoxResult.Yes Then
                 Try
                     ' HttpClient nesnesini her seferinde yeniden oluştur
-                    Dim response As HttpResponseMessage = Await client.DeleteAsync($"https://localhost:50099/Employee/{selected.Id}")
+                    Dim response As HttpResponseMessage = Await client.DeleteAsync($"https://localhost:5030/Employee/{selected.Id}")
                     If response.IsSuccessStatusCode Then
                         MessageBox.Show("Çalışan başarıyla silindi.", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information)
                     Else
@@ -240,7 +240,7 @@ Public Class EmployeePage : Implements IPage
             ' Bir departmanın seçilip seçilmediğini kontrol et
             If selectedDepartment IsNot Nothing Then
                 ' URL veya istek parametrelerinde departman ID'sini kullan
-                Dim positionsUrl As String = $"https://localhost:50099/Department/ListPositions/{selectedDepartment.Id}"
+                Dim positionsUrl As String = $"https://localhost:5030/Department/ListPositions/{selectedDepartment.Id}"
 
                 ' İkinci API isteğini yap
                 Dim response As HttpResponseMessage = Await client.GetAsync(positionsUrl)

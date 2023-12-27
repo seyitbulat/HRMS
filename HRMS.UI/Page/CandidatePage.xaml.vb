@@ -12,7 +12,7 @@ Public Class CandidatePage : Implements IPage
     Public Sub New()
         InitializeComponent()
         httpclient = New HttpClient()
-        httpclient.BaseAddress = New Uri("https://localhost:50099/")
+        httpclient.BaseAddress = New Uri("https://localhost:5030/")
         Candidates = New ObservableCollection(Of Candidate)()
         Positions = New ObservableCollection(Of Position)()
         LoadCandidate()
