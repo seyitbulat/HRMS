@@ -69,6 +69,7 @@ Public Class EmployeeRepository : Inherits BaseRepository(Of Employee, Long, HRM
                                           While reader.Read()
                                               Dim employee As New Employee()
                                               ' Burada, SqlDataReader'dan alınan verileri Employee nesnesinin özelliklerine atayın.
+                                              employee.Id = If(IsDBNull(reader("ID")), Nothing, Convert.ToInt64(reader("ID")))
                                               employee.Firstname = If(IsDBNull(reader("FIRSTNAME")), String.Empty, reader("FIRSTNAME").ToString())
                                               employee.Lastname = If(IsDBNull(reader("LASTNAME")), String.Empty, reader("LASTNAME").ToString())
                                               employee.Birthdate = If(IsDBNull(reader("BIRTHDATE")), Nothing, Convert.ToDateTime(reader("BIRTHDATE")))
