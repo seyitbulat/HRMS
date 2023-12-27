@@ -31,7 +31,7 @@
                     <Label Content="Müdür Adı:" Grid.Column="0" Margin="10,50,10,0" VerticalAlignment="Top"/>
 
 
-                    <ComboBox x:Name="managerComboBox" Grid.Column="1" Margin="40,50,480,0" DisplayMemberPath="PositionTitle" SelectedValuePath="Id" VerticalAlignment="Top" />
+                    <ComboBox x:Name="managerComboBox" Grid.Column="1" Margin="40,50,480,0" DisplayMemberPath="FullName" SelectedValuePath="Id" VerticalAlignment="Top" />
 
                     <Label Content="Aktif Mi?" Grid.Column="0" Margin="10,90,10,0" VerticalAlignment="Top"/>
                     <CheckBox Grid.Column="1" Margin="40,90,600,0" VerticalAlignment="Top"/>

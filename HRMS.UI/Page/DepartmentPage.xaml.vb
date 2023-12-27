@@ -90,8 +90,8 @@ Partial Public Class DepartmentPage : Implements IPage
             If response.IsSuccessStatusCode Then
                 Dim json As String = Await response.Content.ReadAsStringAsync()
                 Dim wrapper = JsonConvert.DeserializeObject(Of DataWrapper(Of Employee))(json)
-
-                wrapper.Data.Add(New Employee With {.Id = -1, .Firstname = "Seçim", .Lastname = "Yapılmadı"})
+                Dim defaultManager = New Employee With {.Id = -1, .Firstname = "Seçim", .Lastname = "Yapılmadı"}
+                wrapper.Data.Insert(0, defaultManager)
 
                 ' İşlenmiş listeyi bir UI elementine bağla, örneğin bir ListBox'a
                 ' Bu örnekte, 'managersListBox' isminde bir ListBox varsayılmıştır.
@@ -147,13 +147,13 @@ Partial Public Class DepartmentPage : Implements IPage
 
         Using _httpClient = HttpClientFactory.Create()
 
+            Dim postObject = New With {
+                  Key .id = selected.Id,
+                  Key .departmentName = departmentName.Text,
+                  Key .managerId = managerComboBox.SelectedValue,
+                  Key .operation = "UPDATE"
+               }
 
-            Dim postObject As New With {
-           Key .id = selected.Id,
-           Key .departmentName = departmentName.Text,
-           Key .managerId = managerComboBox.SelectedValue,
-           Key .operation = "UPDATE"
-        }
 
             Dim jsonContent = JsonConvert.SerializeObject(postObject)
             Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
