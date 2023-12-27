@@ -12,7 +12,7 @@ Public Class PositionPage : Implements IPage
         InitializeComponent()
         httpClient = New HttpClient()
         ' BaseAddress'i sadece bir kez burada ayarlayın
-        httpClient.BaseAddress = New Uri("https://localhost:50099/")
+        httpClient.BaseAddress = New Uri("https://localhost:5030/")
         Positions = New ObservableCollection(Of Position)()
         LoadPositions()
     End Sub
@@ -83,7 +83,7 @@ Public Class PositionPage : Implements IPage
         Dim jsonContent = JsonConvert.SerializeObject(postObject)
         Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
 
-        Dim response As HttpResponseMessage = Await httpClient.PostAsync("https://localhost:50099/Position/ManagePosition", content)
+        Dim response As HttpResponseMessage = Await httpClient.PostAsync("https://localhost:5030/Position/ManagePosition", content)
 
         If response.IsSuccessStatusCode Then
             MessageBox.Show("Pozisyon başarıyla eklendi.", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information)
@@ -119,7 +119,7 @@ Public Class PositionPage : Implements IPage
         Dim jsonContent = JsonConvert.SerializeObject(postObject)
         Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
 
-        Dim response As HttpResponseMessage = Await _httpClient.PostAsync("https://localhost:50099/Position/ManagePosition", content)
+        Dim response As HttpResponseMessage = Await _httpClient.PostAsync("https://localhost:5030/Position/ManagePosition", content)
 
         If response.StatusCode = Net.HttpStatusCode.OK Then
 
@@ -144,7 +144,7 @@ Public Class PositionPage : Implements IPage
             Dim jsonContent = JsonConvert.SerializeObject(updatedPosition)
             Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
 
-            Dim response As HttpResponseMessage = Await httpClient.PostAsync("https://localhost:50099/Position/ManagePosition", content)
+            Dim response As HttpResponseMessage = Await httpClient.PostAsync("https://localhost:5030/Position/ManagePosition", content)
 
             If response.StatusCode = Net.HttpStatusCode.OK Then
                 MessageBox.Show("Pozisyon başarıyla güncellendi.", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information)
