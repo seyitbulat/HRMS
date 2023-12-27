@@ -38,5 +38,12 @@ Public Class AutoMapperProfiles : Inherits Profile
         CreateMap(Of User, UserGetDto)()
         CreateMap(Of UserPostDto, User)()
         CreateMap(Of UserPutDto, User)()
+
+        ' Image mappings
+        CreateMap(Of Image, ImageGetDto)()
+        CreateMap(Of ImagePostDto, Image)()
+        CreateMap(Of ImagePutDto, Image)()
+        CreateMap(Of Image, ImagePutDto)()
+
     End Sub
 End Class
