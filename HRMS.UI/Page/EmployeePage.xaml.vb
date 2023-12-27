@@ -46,7 +46,7 @@ Public Class EmployeePage : Implements IPage
 
             If response.IsSuccessStatusCode Then
                 ' Handle successful response if needed
-                MessageBox.Show("Employee added successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information)
+                MessageBox.Show("Çalışan başarılı bir şekilde eklendi.", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information)
             Else
                 ' Display an error message for unsuccessful response
                 Dim errorMessage = Await response.Content.ReadAsStringAsync()
@@ -54,7 +54,7 @@ Public Class EmployeePage : Implements IPage
             End If
         Catch ex As Exception
             ' Handle exceptions
-            MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error)
+            MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error)
         End Try
     End Function
 
