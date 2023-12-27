@@ -26,10 +26,12 @@ Namespace Models
         Public Property Managerid As Long?
 
         Public Property Annualleave As Integer?
+        Public Property ImageId As Long?
 
 
         Public Overridable Property Departman As Department
 
+        Public Overridable ReadOnly Property Images As ICollection(Of Image) = New List(Of Image)()
         Public Overridable ReadOnly Property Departments As ICollection(Of Department) = New List(Of Department)()
 
         Public Overridable ReadOnly Property Interviews As ICollection(Of Interview) = New List(Of Interview)()
