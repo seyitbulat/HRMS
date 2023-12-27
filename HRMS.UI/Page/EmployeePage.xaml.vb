@@ -9,51 +9,55 @@ Imports System.Text
 Public Class EmployeePage : Implements IPage
 
     Public Async Function Add() As Task Implements IPage.Add
-        Dim name = firstname.Text
-        Dim lastna = lastname.Text
-        Dim birth = birthdate.SelectedDate
-        Dim gend = gender.SelectedValue
-        Dim hire = hiredate.SelectedDate
-        Dim mail = email.Text
-        Dim phone = phonenumber.Text
-        Dim position = positionId.SelectedValue
-        Dim department = departmenId.SelectedValue
-        Dim manager = manegerId.SelectedValue
-        Dim annual = annualleave.Text
-        Dim active = ısactive.IsChecked.HasValue
+        Try
+            Dim name = firstname.Text
+            Dim lastna = lastname.Text
+            Dim birth = birthdate.SelectedDate
+            Dim gend = gender.SelectedValue
+            Dim hire = hiredate.SelectedDate
+            Dim mail = email.Text
+            Dim phone = phonenumber.Text
+            Dim position = positionId.SelectedValue
+            Dim department = departmenId.SelectedValue
+            Dim manager = manegerId.SelectedValue
+            Dim annual = annualleave.Text
+            Dim active = ısactive.IsChecked.HasValue
 
+            Dim _httpClient As New HttpClient
 
-
-
-        Dim _httpClient As New HttpClient
-
-        Dim postObject As New With {
-           Key .firstname = name,
-           Key .lastname = lastna,
-           Key .birthdate = birth,
-           Key .gender = gend,
-           Key .hiredate = hire,
-           Key .email = mail,
-           Key .phonenumber = phone,
-           Key .positionId = position,
-           Key .departmentId = department,
-           Key .managerId = manager,
-           Key .annualleave = annual,
-           Key .ısactive = active,
-           Key .operation = "ADD"
+            Dim postObject As New Employee With {
+            .Firstname = name,
+            .Lastname = lastna,
+            .Birthdate = birth,
+            .Gender = gend,
+            .Hiredate = hire,
+            .Email = mail,
+            .Phonenumber = phone,
+            .Positionid = position,
+            .Departmanid = department,
+            .Managerid = manager,
+            .Annualleave = annual
         }
 
-        Dim jsonContent = JsonConvert.SerializeObject(postObject)
-        Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
+            Dim jsonContent = JsonConvert.SerializeObject(postObject)
+            Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
 
+            Dim response As HttpResponseMessage = Await _httpClient.PostAsync("https://localhost:50099/Employee", content)
 
-        Dim response As HttpResponseMessage = Await _httpClient.PostAsync("https://localhost:50099/Employee/SearchByLastNameAndBirthdate", content)
-        If response.StatusCode = Net.HttpStatusCode.OK Then
-
-        Else
-            MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
-        End If
+            If response.IsSuccessStatusCode Then
+                ' Handle successful response if needed
+                MessageBox.Show("Çalışan başarılı bir şekilde eklendi.", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information)
+            Else
+                ' Display an error message for unsuccessful response
+                Dim errorMessage = Await response.Content.ReadAsStringAsync()
+                MessageBox.Show($"Error: {response.StatusCode}, {errorMessage}", "Error", MessageBoxButton.OK, MessageBoxImage.Error)
+            End If
+        Catch ex As Exception
+            ' Handle exceptions
+            MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error)
+        End Try
     End Function
+
 
     Private Async Sub searchEmployeeButton_Click(sender As Object, e As RoutedEventArgs)
         Using client As New HttpClient()
@@ -181,37 +185,34 @@ Public Class EmployeePage : Implements IPage
 
 
     Public Async Function Delete() As Task Implements IPage.Delete
-        Dim selected As Employee = TryCast(employeeGrid.SelectedItem, Employee)
+        Using client As New HttpClient()
+            Dim selected As Employee = TryCast(employeeGrid.SelectedItem, Employee)
 
-        Dim _httpClient As New HttpClient
+            If selected Is Nothing Then
+                MessageBox.Show("Lütfen silinecek bir çalışan seçin.", "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
+                Return
+            End If
 
-        Dim postObject As New With {
-           Key .id = selected.Id,
-           Key .firstName = selected.Firstname,
-           Key .lastname = selected.Lastname,
-           Key .birthdate = selected.Birthdate,
-           Key .gender = selected.Gender,
-           Key .hiredate = selected.Hiredate,
-           Key .email = selected.Email,
-           Key .phonenumber = selected.Phonenumber,
-           Key .positionId = selected.Positionid,
-           Key .departmentId = selected.Departmanid,
-           Key .managerId = selected.Managerid,
-           Key .ısactive = selected.Isactive,
-            Key .operation = "DELETE"
-        }
+            ' Onay kutusu göster
+            Dim messageBoxResult As MessageBoxResult = MessageBox.Show("Bu çalışanı silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButton.YesNo, MessageBoxImage.Warning)
 
-        Dim jsonContent = JsonConvert.SerializeObject(postObject)
-        Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
-
-        Dim response As HttpResponseMessage = Await _httpClient.PostAsync("https://localhost:50099/Employee/SearchByLastNameAndBirthdate", content)
-
-        If response.StatusCode = Net.HttpStatusCode.OK Then
-
-        Else
-            MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
-        End If
+            ' Eğer kullanıcı Evet'i seçerse, silme işlemini gerçekleştir
+            If messageBoxResult = MessageBoxResult.Yes Then
+                Try
+                    ' HttpClient nesnesini her seferinde yeniden oluştur
+                    Dim response As HttpResponseMessage = Await client.DeleteAsync($"https://localhost:50099/Employee/{selected.Id}")
+                    If response.IsSuccessStatusCode Then
+                        MessageBox.Show("Çalışan başarıyla silindi.", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information)
+                    Else
+                        MessageBox.Show($"Bir hata oluştu: {response.StatusCode}", "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
+                    End If
+                Catch ex As Exception
+                    MessageBox.Show($"Hata: {ex.Message}", "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
+                End Try
+            End If
+        End Using
     End Function
+
 
     Public Function Update() As Task Implements IPage.Update
         Throw New NotImplementedException()
