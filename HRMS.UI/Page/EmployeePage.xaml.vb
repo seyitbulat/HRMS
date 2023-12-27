@@ -42,7 +42,7 @@ Public Class EmployeePage : Implements IPage
             Dim jsonContent = JsonConvert.SerializeObject(postObject)
             Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
 
-            Dim response As HttpResponseMessage = Await _httpClient.PostAsync("https://localhost:50099/Employee", content)
+            Dim response As HttpResponseMessage = Await _httpClient.PostAsync("https://localhost:5030/Employee", content)
 
             If response.IsSuccessStatusCode Then
                 ' Handle successful response if needed
@@ -72,7 +72,7 @@ Public Class EmployeePage : Implements IPage
                 ' birthdate'i "yyyy-MM-dd" formatına çevir
                 Dim formattedBirthdate As String = selected?.ToString("yyyy-MM-dd")
 
-                response = Await client.GetAsync($"https://localhost:50099/Employee/SearchByLastNameAndBirthdate?lastname={lastname.Text}&birthdate={formattedBirthdate}")
+                response = Await client.GetAsync($"https://localhost:5030/Employee/SearchByLastNameAndBirthdate?lastname={lastname.Text}&birthdate={formattedBirthdate}")
 
                 If response.IsSuccessStatusCode Then
                     Dim json As String = Await response.Content.ReadAsStringAsync()
@@ -83,7 +83,7 @@ Public Class EmployeePage : Implements IPage
                     employeeGrid.ItemsSource = New ObservableCollection(Of Employee)() ' Hata durumunda boş bir koleksiyon atayın
                 End If
             Else
-                response = Await client.GetAsync("https://localhost:50099/Employee/GetAll")
+                response = Await client.GetAsync("https://localhost:5030/Employee/GetAll")
                 If response.IsSuccessStatusCode Then
                     Dim json As String = Await response.Content.ReadAsStringAsync()
                     Dim wrapper = JsonConvert.DeserializeObject(Of DataWrapper)(json)
