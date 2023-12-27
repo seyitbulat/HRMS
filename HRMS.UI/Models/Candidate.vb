@@ -1,5 +1,5 @@
 ﻿Public Class Candidate
-
+    Public Property Id As String
     Public Property Firstname As String
 
     Public Property Lastname As String

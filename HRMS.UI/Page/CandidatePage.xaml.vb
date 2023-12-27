@@ -1,6 +1,8 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.Net.Http
+Imports System.Text
 Imports DocuSign.eSign.Client
+Imports Newtonsoft.Json
 
 Public Class CandidatePage : Implements IPage
 
@@ -10,7 +12,7 @@ Public Class CandidatePage : Implements IPage
     Public Sub New()
         InitializeComponent()
         httpclient = New HttpClient()
-        httpclient.BaseAddress = New Uri("https://localhost:5030/")
+        httpclient.BaseAddress = New Uri("https://localhost:50099/")
         Candidates = New ObservableCollection(Of Candidate)()
         Positions = New ObservableCollection(Of Position)()
         LoadCandidate()
@@ -77,13 +79,88 @@ Public Class CandidatePage : Implements IPage
         End If
     End Sub
 
-    Public Function Add() As Task Implements IPage.Add
-        Throw New NotImplementedException()
+    Public Async Function AddCandidate() As Task Implements IPage.Add
+        ' Kullanıcı arayüzünden verileri al
+        Dim firstNameValue As String = firstName.Text
+        Dim lastNameValue As String = lastName.Text
+        Dim resumeLinkValue As String = resumeLink.Text
+        Dim applicationDateValue As Date? = birthdate.SelectedDate
+        Dim appliedPositionIdValue As Long? = CType(positionComboBox.SelectedValue, Long?)
+
+        ' HTTP isteği için nesne oluştur
+        Dim candidateData As New With {
+        Key .FirstName = firstNameValue,
+        Key .LastName = lastNameValue,
+        Key .ResumeLink = resumeLinkValue,
+        Key .ApplicationDate = applicationDateValue,
+        Key .AppliedPositionId = appliedPositionIdValue,
+        Key .Operation = "ADD"
+    }
+        Dim jsonContent = JsonConvert.SerializeObject(candidateData)
+        Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
+
+        Try
+            Dim response As HttpResponseMessage = Await httpclient.PostAsync("https://localhost:50099/Candidate/Procedure", content)
+            If response.IsSuccessStatusCode Then
+                MessageBox.Show("Aday başarıyla eklendi.", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information)
+                Await LoadCandidate()
+            Else
+                MessageBox.Show("Aday eklenirken bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Hata: " & ex.Message, "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
+        End Try
     End Function
 
-    Public Function Delete() As Task Implements IPage.Delete
-        Throw New NotImplementedException()
+    'Public Async Function Delete() As Task Implements IPage.Delete
+    '    Dim selected As Candidate = TryCast(candidateGridControl.SelectedItem, Candidate)
+
+    '    Dim _httpClient As New HttpClient
+
+    '    Dim candidateData As New With {
+    '    Key .id = selected.Id,
+    '    Key .FirstName = selected.Firstname,
+    '    Key .LastName = selected.Lastname,
+    '    Key .Applicationdate = selected.Applicationdate,
+    '    Key .ResumeLink = selected.Resumelink,
+    '    Key .Appliedpositionid = selected.Appliedpositionid
+    '    }
+    '    Dim jsonContent = JsonConvert.SerializeObject(candidateData)
+    '    Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
+    '    Dim response As HttpResponseMessage = Await _httpClient.PostAsync("https://localhost:50099/Candidate/{id}", content)
+    '    If response.StatusCode = Net.HttpStatusCode.OK Then
+    '    Else
+    '        MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), MessageBoxButton.OK, MessageBoxImage.Error)
+    '    End If
+    'End Function
+    Public Async Function Delete() As Task Implements IPage.Delete
+        Dim selected As Candidate = TryCast(candidateGridControl.SelectedItem, Candidate)
+
+        If selected Is Nothing Then
+            MessageBox.Show("Lütfen silinecek bir aday seçin.", "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
+            Return
+        End If
+
+        ' Onay kutusu göster
+        Dim messageBoxResult As MessageBoxResult = MessageBox.Show("Bu adayı silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButton.YesNo, MessageBoxImage.Warning)
+
+        ' Eğer kullanıcı Evet'i seçerse, silme işlemini gerçekleştir
+        If messageBoxResult = MessageBoxResult.Yes Then
+            Try
+                ' HttpClient nesnesini sınıf seviyesinde kullanın
+                Dim response As HttpResponseMessage = Await httpclient.DeleteAsync($"Candidate/{selected.Id}")
+                If response.IsSuccessStatusCode Then
+                    MessageBox.Show("Aday başarıyla silindi.", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information)
+                    Await LoadCandidate()
+                Else
+                    MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
+                End If
+            Catch ex As Exception
+                MessageBox.Show("Hata: " & ex.Message, "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
+            End Try
+        End If
     End Function
+
 
     Public Function Update() As Task Implements IPage.Update
         Throw New NotImplementedException()

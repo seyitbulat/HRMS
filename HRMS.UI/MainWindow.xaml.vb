@@ -71,16 +71,10 @@ Namespace HRMS.UI
         End Sub
 
         Private Sub CandidateButton_Click(ByVal sender As Object, ByVal e As ItemClickEventArgs)
-
-            ' Öncelikle mevcut içeriği temizleyin
+            _selector = 1
             MainContentPanel.Children.Clear()
-
-            ' DepartmentPage UserControl'ünü oluşturun
             Dim canidatePage As New CandidatePage()
-
-
-
-            ' UserControl'ü ana içerik paneline ekleyin
+            _page = canidatePage
             MainContentPanel.Children.Add(canidatePage)
         End Sub
 
