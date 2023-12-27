@@ -21,15 +21,15 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Adı:" Grid.Column="0" Margin="10,10,10,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="firstName" Text="Adı Giriniz..." Grid.Column="1" Margin="40,10,480,0" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top" GotFocus="candidateFirstName_GotFocus" LostFocus="candidateFirstName_LostFocus"/>
+                    <TextBox x:Name="firstName" Text="Adı Giriniz..." Grid.Column="1" Margin="40,10,400,0" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top" GotFocus="candidateFirstName_GotFocus" LostFocus="candidateFirstName_LostFocus"/>
                     <Label Content="Soyad:" Grid.Column="0" Margin="10,50,10,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="lastName" Text="Soyad Giriniz..." Grid.Column="1" Margin="40,50,480,0" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top" GotFocus="candidateLastName_GotFocus" LostFocus="candidateLastName_LostFocus"/>
+                    <TextBox x:Name="lastName" Text="Soyad Giriniz..." Grid.Column="1" Margin="40,50,400,0" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Top" GotFocus="candidateLastName_GotFocus" LostFocus="candidateLastName_LostFocus"/>
                     <Label Content="Özgeçmiş Bağlantısı:" Grid.Column="0" Margin="10,90,10,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="resumeLink" Text="Özgeçmiş Bağlantısını Giriniz..." Grid.Column="1" Margin="40,0,440,0" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Center" GotFocus="candidateResumeLink_GotFocus" LostFocus="candidateResumeLink_LostFocus"/>
+                    <TextBox x:Name="resumeLink" Text="Özgeçmiş Bağlantısını Giriniz..." Grid.Column="1" Margin="40,0,400,0" BorderThickness="0,0,0,1" Background="{x:Null}" VerticalAlignment="Center" GotFocus="candidateResumeLink_GotFocus" LostFocus="candidateResumeLink_LostFocus"/>
                     <Label Content="Pozisyon:" Grid.Column="0" Margin="10,130,10,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="positionComboBox" Grid.Column="1" Margin="40,130,440,0" DisplayMemberPath="PositionTitle" SelectedValuePath="Id" VerticalAlignment="Top" />
-                    <Label Content="Başvuru Tarihi:" Grid.Column="0" Margin="10,170,10,0" VerticalAlignment="Top"/>
-                    <DatePicker x:Name="birthdate" VerticalAlignment="Top" Margin="40,170,0,0" Grid.Column="1" HorizontalAlignment="Left" Width="192"/>
+                    <ComboBox x:Name="positionComboBox" Grid.Column="1" Margin="40,130,400,0" DisplayMemberPath="PositionTitle" SelectedValuePath="Id" VerticalAlignment="Top" />
+                    <Label Content="Başvuru Tarihi:" Grid.Column="0" Margin="10,170,10,0" VerticalAlignment="Top" BorderThickness="0,0,0,1"/>
+                    <DatePicker x:Name="birthdate" VerticalAlignment="Top" Margin="40,170,0,0" Grid.Column="1" HorizontalAlignment="Left" Width="232"/>
                 </Grid>
 
             </Border>
