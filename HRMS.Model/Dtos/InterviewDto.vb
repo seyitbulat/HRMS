@@ -5,6 +5,7 @@
 
     Public Property Interviewoutcome As String
 
+
 End Class
 
 Public Class InterviewPostDto

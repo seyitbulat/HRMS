@@ -10,5 +10,8 @@
 
     Public Property Appliedpositionid As Long
 
+<<<<<<< Updated upstream
     Public Property Appliedposition As Position
+=======
+>>>>>>> Stashed changes
 End Class
