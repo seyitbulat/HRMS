@@ -79,5 +79,14 @@ Namespace HRMS.UI
             _page = interviewPage
             MainContentPanel.Children.Add(interviewPage)
         End Sub
+
+        Private Sub LeaveButton_Click(ByVal sender As Object, ByVal e As ItemClickEventArgs)
+            '_selector = 1
+            MainContentPanel.Children.Clear()
+            Dim leavePage As New LeavePage()
+            '_page = interviewPage
+            MainContentPanel.Children.Add(leavePage)
+        End Sub
+
     End Class
 End Namespace

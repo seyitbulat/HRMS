@@ -44,6 +44,7 @@
                         <dxb:BarButtonItem Content="Poziyon" LargeGlyph="{dx:DXImage SvgImages/Business Objects/BO_Position_v92.svg}" ItemClick="PositionButton_Click"/>
                         <dxb:BarButtonItem Content="Adaylar" LargeGlyph="{dx:DXImage SvgImages/Business Objects/BO_Department.svg}" ItemClick="CandidateButton_Click"/>
                         <dxb:BarButtonItem Content="Mülakat" LargeGlyph="{dx:DXImage SvgImages/Business Objects/BO_Document.svg}" ItemClick="InterviewButton_Click"/>
+                        <dxb:BarButtonItem Content="Ayrılanlar" LargeGlyph="{dx:DXImage SvgImages/HybridDemoIcons/Tiles/HybridDemo_On Leave.svg}" ItemClick="LeaveButton_Click"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
 
