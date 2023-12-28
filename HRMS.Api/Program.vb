@@ -1,3 +1,5 @@
+Imports System.Text.Json
+Imports System.Text.Json.Serialization
 Imports HRMS.Business
 Imports HRMS.Repository
 Imports Microsoft.AspNetCore.Builder
@@ -13,7 +15,12 @@ Module Program
 
         ' Add services to the container.
 
-        builder.Services.AddControllers()
+        'Dim options As JsonSerializerOptions = New JsonSerializerOptions() With {
+        '    .ReferenceHandler = ReferenceHandler.IgnoreCycles,
+        '    .WriteIndented = True
+        '}
+
+        builder.Services.AddControllers().AddJsonOptions(Sub(opt) opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles)
         ' Learn more about configuring Swagger/OpenAPI at https://aka.ms/
         builder.Services.AddEndpointsApiExplorer()
         builder.Services.AddSwaggerGen()

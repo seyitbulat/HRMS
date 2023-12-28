@@ -30,4 +30,16 @@ Public Class LeaveController
         Return Ok(result.Data)
 
     End Function
+
+    <HttpGet("GetByEmployee/{employeeId}")>
+    Public Async Function GetByEmployee(<FromRoute> employeeId As Long) As Task(Of IActionResult)
+        Dim result As ApiResponse(Of List(Of LeafGetDto)) = Await _service.GetByEmployeeId(employeeId)
+        Return SendResponse(result)
+    End Function
+
+    <HttpGet>
+    Public Async Function GetAll() As Task(Of IActionResult)
+        Dim result As ApiResponse(Of List(Of LeafGetDto)) = Await _service.GetAll()
+        Return SendResponse(result)
+    End Function
 End Class

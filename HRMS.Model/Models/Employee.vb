@@ -40,7 +40,7 @@ Namespace Models
 
         Public Overridable ReadOnly Property InverseManager As ICollection(Of Employee) = New List(Of Employee)()
 
-        Public Overridable ReadOnly Property Leaves As ICollection(Of Leaf) = New List(Of Leaf)()
+        'Public Overridable ReadOnly Property Leaves As ICollection(Of Leaves) = New List(Of Leaves)()
 
         Public Overridable Property Manager As Employee
 

@@ -5,7 +5,7 @@ Public Class LeavesTypeGetDto
 
     Public Property Description As String
 
-    Public Overridable ReadOnly Property Leaves As ICollection(Of Leaf) = New List(Of Leaf)()
+    'Public Overridable ReadOnly Property Leaves As ICollection(Of Leaves) = New List(Of Leaves)()
 End Class
 
 Public Class LeavesTypePostDto

@@ -64,4 +64,27 @@ Public Class LeaveBs
             ' employee Nothing ise bu durumu ele alın
         End If
     End Function
+
+    Public Async Function GetByEmployeeId(employeeId As Long) As Task(Of ApiResponse(Of List(Of LeafGetDto))) Implements ILeaveBs.GetByEmployeeId
+        Dim includeList As New List(Of String)
+        includeList.Add("Leavetype")
+        includeList.Add("Employee")
+        Dim repoResponse = Await _repo.GetListAsync(Function(l) l.Employeeid = employeeId, includeList)
+
+        Dim mapped = _mapper.Map(Of List(Of LeafGetDto))(repoResponse)
+
+        Return ApiResponse(Of List(Of LeafGetDto)).Success(200, mapped)
+    End Function
+
+    Public Async Function GetAll() As Task(Of ApiResponse(Of List(Of LeafGetDto))) Implements ILeaveBs.GetAll
+        Dim includeList As New List(Of String)
+        includeList.Add("Leavetype")
+
+        includeList.Add("Employee")
+
+        Dim repoResponse = Await _repo.GetListAsync(includeList:=includeList)
+        Dim mapped = _mapper.Map(Of List(Of LeafGetDto))(repoResponse)
+
+        Return ApiResponse(Of List(Of LeafGetDto)).Success(200, mapped)
+    End Function
 End Class

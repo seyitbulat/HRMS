@@ -1,11 +1,15 @@
-﻿Public Class LeafGetDto
+﻿Imports HRMS.Model.Models
+
+Public Class LeafGetDto
     Public Property Startdate As Date?
 
     Public Property Enddate As Date?
 
     Public Property Status As String
 
+    Public Property Leavetype As LeavesTypeGetDto
 
+    Public Property Employee As EmployeeGetDto
 End Class
 
 

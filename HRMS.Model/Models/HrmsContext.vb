@@ -203,9 +203,9 @@ Namespace Models
                         HasMaxLength(50).
                         HasColumnName("STATUS")
 
-                    entity.HasOne(Function(d) d.Employee).WithMany(Function(p) p.Leaves).
-                        HasForeignKey(Function(d) d.Employeeid).
-                        HasConstraintName("FK_Leaves_Employees")
+                    'entity.HasOne(Function(d) d.Employee).WithMany(Function(p) p.Leaves).
+                    '    HasForeignKey(Function(d) d.Employeeid).
+                    '    HasConstraintName("FK_Leaves_Employees")
 
                     entity.HasOne(Function(d) d.Leavetype).WithMany(Function(p) p.Leaves).
                         HasForeignKey(Function(d) d.Leavetypeid).

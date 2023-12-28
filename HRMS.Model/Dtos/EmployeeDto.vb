@@ -1,4 +1,6 @@
-﻿Public Class EmployeeGetDto
+﻿Imports HRMS.Model.Models
+
+Public Class EmployeeGetDto
     Public Property Id As Long
 
     Public Property Firstname As String
@@ -12,6 +14,9 @@
     Public Property Departmanid As Long
     Public Property Managerid As Long
     Public Property Annualleave As Integer?
+
+    Public Property Leaves As ICollection(Of Leaf) = New List(Of Leaf)()
+
 End Class
 Public Class EmployeePostDto
     Public Property Firstname As String
