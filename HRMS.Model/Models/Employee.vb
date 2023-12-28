@@ -19,20 +19,22 @@ Namespace Models
 
         Public Property Phonenumber As String
 
-        Public Property Positionid As Long?
+        Public Property Positionid As Long
 
-        Public Property Departmanid As Long?
+        Public Property Departmanid As Long
 
         Public Property Managerid As Long?
 
         Public Property Annualleave As Integer?
-        Public Property ImageId As Long?
 
+
+        Public Property ImageId As Long?
 
         Public Overridable Property Departman As Department
 
-        Public Overridable ReadOnly Property Images As ICollection(Of Image) = New List(Of Image)()
         Public Overridable ReadOnly Property Departments As ICollection(Of Department) = New List(Of Department)()
+
+        Public Overridable Property Image As Image
 
         Public Overridable ReadOnly Property Interviews As ICollection(Of Interview) = New List(Of Interview)()
 

@@ -3,13 +3,13 @@ Imports System.Collections.Generic
 Imports Microsoft.EntityFrameworkCore
 
 Namespace Models
-    Partial Public Class HrmsContext
+    Partial Public Class HRMSContext
         Inherits DbContext
 
         Public Sub New()
         End Sub
 
-        Public Sub New(options As DbContextOptions(Of HrmsContext))
+        Public Sub New(options As DbContextOptions(Of HRMSContext))
             MyBase.New(options)
         End Sub
 
@@ -18,6 +18,8 @@ Namespace Models
         Public Overridable Property Departments As DbSet(Of Department)
 
         Public Overridable Property Employees As DbSet(Of Employee)
+
+        Public Overridable Property Images As DbSet(Of Image)
 
         Public Overridable Property Interviews As DbSet(Of Interview)
 
@@ -35,9 +37,11 @@ Namespace Models
 
         Public Overridable Property Users As DbSet(Of User)
 
+        Public Overridable Property UserSessions As DbSet(Of UserSession)
+
         Protected Overrides Sub OnConfiguring(optionsBuilder As DbContextOptionsBuilder)
             'TODO /!\ To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-R04PVQ3\SQLEXPRESS02; Initial Catalog=HRMS; Integrated Security=true; TrustServerCertificate=True")
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-R04PVQ3\SQLEXPRESS; Initial Catalog=HRMS; Integrated Security=true; TrustServerCertificate=True")
         End Sub
 
         Protected Overrides Sub OnModelCreating(modelBuilder As ModelBuilder)
@@ -65,6 +69,10 @@ Namespace Models
                         HasForeignKey(Function(d) d.Appliedpositionid).
                         OnDelete(DeleteBehavior.ClientSetNull).
                         HasConstraintName("FK_Candidates_Positions")
+
+                    entity.HasOne(Function(d) d.Image).WithMany(Function(p) p.Candidates).
+                        HasForeignKey(Function(d) d.ImageId).
+                        HasConstraintName("FK__Candidate__Image__5224328E")
                 End Sub)
 
             modelBuilder.Entity(Of Department)(
@@ -118,7 +126,12 @@ Namespace Models
 
                     entity.HasOne(Function(d) d.Departman).WithMany(Function(p) p.Employees).
                         HasForeignKey(Function(d) d.Departmanid).
+                        OnDelete(DeleteBehavior.ClientSetNull).
                         HasConstraintName("FK_Employees_Departments")
+
+                    entity.HasOne(Function(d) d.Image).WithMany(Function(p) p.Employees).
+                        HasForeignKey(Function(d) d.ImageId).
+                        HasConstraintName("FK__Employees__Image__51300E55")
 
                     entity.HasOne(Function(d) d.Manager).WithMany(Function(p) p.InverseManager).
                         HasForeignKey(Function(d) d.Managerid).
@@ -126,7 +139,24 @@ Namespace Models
 
                     entity.HasOne(Function(d) d.Position).WithMany(Function(p) p.Employees).
                         HasForeignKey(Function(d) d.Positionid).
+                        OnDelete(DeleteBehavior.ClientSetNull).
                         HasConstraintName("FK_Employees_Positions")
+                End Sub)
+
+            modelBuilder.Entity(Of Image)(
+                Sub(entity)
+                    entity.HasKey(Function(e) e.ImageId).HasName("PK__Images__7516F4EC759B944B")
+
+                    entity.Property(Function(e) e.ImageId).HasColumnName("ImageID")
+                    entity.Property(Function(e) e.CreatedDate).
+                        HasDefaultValueSql("(getdate())").
+                        HasColumnType("datetime")
+                    entity.Property(Function(e) e.ImageName).
+                        IsRequired().
+                        HasMaxLength(255)
+                    entity.Property(Function(e) e.ImagePath).
+                        IsRequired().
+                        HasMaxLength(255)
                 End Sub)
 
             modelBuilder.Entity(Of Interview)(
@@ -158,6 +188,8 @@ Namespace Models
 
             modelBuilder.Entity(Of Leaf)(
                 Sub(entity)
+                    entity.ToTable(Sub(tb) tb.HasTrigger("trg_IzinEklendiginde"))
+
                     entity.Property(Function(e) e.Id).HasColumnName("ID")
                     entity.Property(Function(e) e.Employeeid).HasColumnName("EMPLOYEEID")
                     entity.Property(Function(e) e.Enddate).
@@ -279,6 +311,8 @@ Namespace Models
 
             modelBuilder.Entity(Of User)(
                 Sub(entity)
+                    entity.ToTable(Sub(tb) tb.HasTrigger("HashUserPassword"))
+
                     entity.Property(Function(e) e.Id).HasColumnName("ID")
                     entity.Property(Function(e) e.Email).
                         IsRequired().
@@ -286,9 +320,11 @@ Namespace Models
                         HasColumnName("EMAIL")
                     entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
                     entity.Property(Function(e) e.Password).
-                        IsRequired().
                         HasMaxLength(50).
                         HasColumnName("PASSWORD")
+                    entity.Property(Function(e) e.Passwordhash).
+                        HasMaxLength(32).
+                        HasColumnName("PASSWORDHASH")
                     entity.Property(Function(e) e.Phone).
                         IsRequired().
                         HasMaxLength(50).
@@ -297,6 +333,26 @@ Namespace Models
                         IsRequired().
                         HasMaxLength(50).
                         HasColumnName("USERNAME")
+                End Sub)
+
+            modelBuilder.Entity(Of UserSession)(
+                Sub(entity)
+                    entity.HasKey(Function(e) e.Id).HasName("PK__UserSess__C9F49270C12822EA")
+
+                    entity.Property(Function(e) e.Id).ValueGeneratedNever()
+                    entity.Property(Function(e) e.CreatedAt).HasColumnType("datetime")
+                    entity.Property(Function(e) e.ExpiresAt).HasColumnType("datetime")
+                    entity.Property(Function(e) e.Ipaddress).
+                        HasMaxLength(50).
+                        HasColumnName("IPAddress")
+                    entity.Property(Function(e) e.LastActivity).HasColumnType("datetime")
+                    entity.Property(Function(e) e.Token).HasMaxLength(255)
+                    entity.Property(Function(e) e.UserAgent).HasMaxLength(255)
+                    entity.Property(Function(e) e.UserId).HasColumnName("UserID")
+
+                    entity.HasOne(Function(d) d.User).WithMany(Function(p) p.UserSessions).
+                        HasForeignKey(Function(d) d.UserId).
+                        HasConstraintName("FK__UserSessi__UserI__2A164134")
                 End Sub)
 
             OnModelCreatingPartial(modelBuilder)
