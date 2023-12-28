@@ -13,7 +13,7 @@ Namespace Models
 
         Public Property Candidateid As Long
 
-        Public Property Interviewerid As Long
+        Public Property Interviewerid As Long?
 
 
         Public Overridable Property Candidate As Candidate

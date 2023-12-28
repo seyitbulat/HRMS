@@ -2,6 +2,7 @@
 Imports System.Net.Http
 Imports System.Text
 Imports DocuSign.eSign.Client
+Imports Microsoft.VisualBasic.ApplicationServices
 Imports Newtonsoft.Json
 
 Public Class CandidatePage : Implements IPage
@@ -111,28 +112,6 @@ Public Class CandidatePage : Implements IPage
             MessageBox.Show("Hata: " & ex.Message, "Hata", MessageBoxButton.OK, MessageBoxImage.Error)
         End Try
     End Function
-
-    'Public Async Function Delete() As Task Implements IPage.Delete
-    '    Dim selected As Candidate = TryCast(candidateGridControl.SelectedItem, Candidate)
-
-    '    Dim _httpClient As New HttpClient
-
-    '    Dim candidateData As New With {
-    '    Key .id = selected.Id,
-    '    Key .FirstName = selected.Firstname,
-    '    Key .LastName = selected.Lastname,
-    '    Key .Applicationdate = selected.Applicationdate,
-    '    Key .ResumeLink = selected.Resumelink,
-    '    Key .Appliedpositionid = selected.Appliedpositionid
-    '    }
-    '    Dim jsonContent = JsonConvert.SerializeObject(candidateData)
-    '    Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
-    '    Dim response As HttpResponseMessage = Await _httpClient.PostAsync("https://localhost:50099/Candidate/{id}", content)
-    '    If response.StatusCode = Net.HttpStatusCode.OK Then
-    '    Else
-    '        MessageBox.Show("Bir hata oluştu: " & response.StatusCode.ToString(), MessageBoxButton.OK, MessageBoxImage.Error)
-    '    End If
-    'End Function
     Public Async Function Delete() As Task Implements IPage.Delete
         Dim selected As Candidate = TryCast(candidateGridControl.SelectedItem, Candidate)
 
@@ -165,4 +144,15 @@ Public Class CandidatePage : Implements IPage
     Public Function Update() As Task Implements IPage.Update
         Throw New NotImplementedException()
     End Function
+
+    Private Sub OnCandidateSelectionChanged(sender As Object, e As DevExpress.Xpf.Grid.SelectedItemChangedEventArgs)
+        Dim selectedCandidate As Candidate = TryCast(candidateGridControl.SelectedItem, Candidate)
+        If selectedCandidate IsNot Nothing Then
+            firstName.Text = selectedCandidate.Firstname
+            lastName.Text = selectedCandidate.Lastname
+            resumeLink.Text = selectedCandidate.Resumelink
+            birthdate.SelectedDate = selectedCandidate.Applicationdate
+
+        End If
+    End Sub
 End Class

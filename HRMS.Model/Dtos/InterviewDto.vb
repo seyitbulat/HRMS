@@ -22,7 +22,7 @@ Public Class InterviewPostDto
 
     Public Property Candidateid As Long
 
-    Public Property Interviewerid As Long
+    Public Property Interviewerid As Long?
 End Class
 
 
@@ -36,5 +36,7 @@ Public Class InterviewPutDto
 
     Public Property Candidateid As Long
 
-    Public Property Interviewerid As Long
+    Public Property Interviewerid As Long?
+
+    Public Property Operation As String
 End Class

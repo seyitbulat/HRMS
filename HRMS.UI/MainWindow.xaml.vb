@@ -73,10 +73,10 @@ Namespace HRMS.UI
         End Sub
 
         Private Sub InterviewButton_Click(ByVal sender As Object, ByVal e As ItemClickEventArgs)
-            '_selector = 1
+            _selector = 1
             MainContentPanel.Children.Clear()
             Dim interviewPage As New InterviewPage()
-            '_page = canidatePage
+            _page = interviewPage
             MainContentPanel.Children.Add(interviewPage)
         End Sub
     End Class

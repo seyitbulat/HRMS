@@ -41,5 +41,11 @@ Public Class InterviewController
         Dim response = Await _service.ScheduleInterview(dto.Interviewdate, dto.Candidateid, dto.Interviewerid, dto.Interviewnotes, dto.Interviewoutcome)
         Return SendResponse(response)
     End Function
+
+    <HttpPost("Manage")>
+    Public Async Function ManageInterview(<FromBody> dto As InterviewPutDto) As Task(Of IActionResult)
+        Dim response = Await _service.ManageInterview(dto.Id, dto.Interviewdate, dto.Candidateid, dto.Interviewerid, dto.Operation, dto.Interviewnotes, dto.Interviewoutcome)
+        Return SendResponse(response)
+    End Function
 End Class
 
