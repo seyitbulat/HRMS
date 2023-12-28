@@ -49,8 +49,45 @@ Public Class InterviewPage : Implements IPage
         End If
     End Function
 
-    Public Function Add() As Task Implements IPage.Add
-        Throw New NotImplementedException()
+    Public Async Function Add() As Task Implements IPage.Add
+        ' Collect data from the user interface
+        Dim interviewDateValue As Date? = interviewDate.SelectedDate
+        Dim interviewNotesValue As String = txtInterviewNotes.Text
+        Dim interviewOutcomeValue As String = txtInterviewOutcome.Text
+        Dim interviewerIdValue As Long? = 0  ' Update this based on your logic for selecting interviewer
+        Dim candidateIdValue As Long? = Convert.ToInt64(candidateComboBox.SelectedValue)
+
+        ' Check if the required fields are provided
+        If interviewDateValue Is Nothing OrElse candidateIdValue Is Nothing OrElse candidateIdValue = -1 Then
+            MessageBox.Show("Please fill in all required fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error)
+            Return
+        End If
+
+        ' Create the object for the HTTP request
+        Dim interviewData As New With {
+        Key .InterviewDate = interviewDateValue,
+        Key .InterviewNotes = interviewNotesValue,
+        Key .InterviewOutcome = interviewOutcomeValue,
+        Key .InterviewerId = interviewerIdValue,
+        Key .CandidateId = candidateIdValue,
+        Key .Operation = "ADD"
+    }
+
+        Dim jsonContent = JsonConvert.SerializeObject(interviewData)
+        Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
+
+        Try
+            ' Send the HTTP request
+            Dim response As HttpResponseMessage = Await httpclient.PostAsync("https://localhost:5030/Interview/Schedule", content)
+            If response.IsSuccessStatusCode Then
+                MessageBox.Show("Mülakat başarı ile eklendi.", "Success", MessageBoxButton.OK, MessageBoxImage.Information)
+                Await LoadInterview()
+            Else
+                MessageBox.Show("Mülakat eklenirken problem oldu: " & response.StatusCode.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error)
+        End Try
     End Function
 
     Public Async Function Delete() As Task Implements IPage.Delete
