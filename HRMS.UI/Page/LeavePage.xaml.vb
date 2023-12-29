@@ -1,8 +1,10 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.Net.Http
+Imports System.Text
 Imports DevExpress.XtraRichEdit.Model
 Imports DocuSign.eSign.Client
 Imports DocuSign.eSign.Model
+Imports Newtonsoft.Json
 
 Public Class LeavePage : Implements IPage
     Private httpclient As HttpClient
@@ -65,8 +67,36 @@ Public Class LeavePage : Implements IPage
     Public Class ApiResponse(Of T)
         Public Property Data As List(Of T)
     End Class
-    Public Function Add() As Task Implements IPage.Add
-        Throw New NotImplementedException()
+    Public Async Function Add() As Task Implements IPage.Add
+        Dim leaveStartDateValue As Date? = leaveStartDate.SelectedDate
+        Dim leaveEndDateValue As Date? = leaveEndDate.SelectedDate
+        Dim employeeComboboxValue As Long? = Convert.ToInt64(employeeCombobox.SelectedValue)
+        Dim leaveTypeComboboxValue As Long? = Convert.ToInt64(leaveTypeCombobox.SelectedValue)
+        Dim leaveTextBoxValue As String = leaveTextBox.Text
+
+
+        Dim leaveData As New With {
+            Key .LeaveStartDate = leaveStartDateValue,
+            Key .LeaveEndDate = leaveEndDateValue,
+            Key .EmployeeId = employeeComboboxValue,
+            Key .LeaveTypeId = leaveTypeComboboxValue,
+            Key .LeaveDescription = leaveTextBoxValue,
+            Key .Operation = "ADD"
+            }
+        Dim jsonContent = JsonConvert.SerializeObject(leaveData)
+        Dim content = New StringContent(jsonContent, Encoding.UTF8, "application/json")
+        Try
+            ' Send the HTTP request
+            Dim response As HttpResponseMessage = Await httpclient.PostAsync("https://localhost:5030/Leave/ManageLeave", content)
+            If response.IsSuccessStatusCode Then
+                MessageBox.Show("Veri başarı ile eklendi.", "Success", MessageBoxButton.OK, MessageBoxImage.Information)
+                Await LoadLeave()
+            Else
+                MessageBox.Show("Veri eklenirken problem oldu: " & response.StatusCode.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error)
+        End Try
     End Function
 
     Public Async Function Delete() As Task Implements IPage.Delete
