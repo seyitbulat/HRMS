@@ -1,6 +1,7 @@
 ﻿Imports HRMS.Model.Models
 
 Public Class LeavesTypeGetDto
+    Public Property Id As Long
     Public Property Typename As String
 
     Public Property Description As String

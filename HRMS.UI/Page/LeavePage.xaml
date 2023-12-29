@@ -26,18 +26,21 @@
                     <Label Content="Çalışan:" Grid.Column="0" Margin="10,90,10,0" VerticalAlignment="Top"/>
                     <ComboBox x:Name="employeeCombobox" Grid.Column="1" Margin="10,90,480,0" VerticalAlignment="Top" BorderThickness="0,0,0,1" Background="{x:Null}"/>
                     <Label Content="Ayrılma Sebebi:" Grid.Column="0" Margin="10,130,10,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="levaleTypeCombobox" Grid.Column="1" Margin="10,130,480,0" VerticalAlignment="Top" BorderThickness="0,0,0,1" Background="{x:Null}"/>
+                    <ComboBox x:Name="leaveTypeCombobox" Grid.Column="1" Margin="10,130,480,0" VerticalAlignment="Top" BorderThickness="0,0,0,1" Background="{x:Null}"/>
+                    <Label Content="Ayrılma Açıklaması:" Grid.Column="0" Margin="10,170,10,0" VerticalAlignment="Top"/>
+                    <TextBox Text="Ayılık Açıklaması Giriniz:" Grid.Column="1" Margin="10,170,480,0" VerticalAlignment="Top" BorderThickness="0,0,0,1" Background="{x:Null}"/>
                 </Grid>
             </Border>
             <Border Grid.Row="1" Background="DarkGray">
 
-                <dxg:GridControl AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" x:Name="leaveGridControl" SelectionMode="Row" >
+                <dxg:GridControl AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" x:Name="leaveGridControl" SelectionMode="Row"  >
                     <dxg:GridControl.Columns>
                         <dxg:GridColumn FieldName="Startdate" Header="Başlama Tarihi" AllowEditing="false"/>
                         <dxg:GridColumn FieldName="Enddate" Header="Ayrılış Tarihi" AllowEditing="false"/>
 
-                        <dxg:GridColumn FieldName="Employeeid" Header="Çalışan" AllowEditing="false"/>
-                        <dxg:GridColumn FieldName="Leavetypeid" Header="Ayrılma Sebebi" AllowEditing="false"/>
+                        <dxg:GridColumn FieldName="Employee.FullName" Header="Çalışan" AllowEditing="false"/>
+                        <dxg:GridColumn FieldName="LeaveType.Typename" Header="Ayrılma Sebebi" AllowEditing="false"/>
+                        <dxg:GridColumn FieldName="LeaveType.Description" Header="Ayrılma Açıklaması" AllowEditing="false"/>
                     </dxg:GridControl.Columns>
                     <dxg:GridControl.View>
                         <dxg:TableView AutoWidth="True" ShowGroupPanel="False"/>
