@@ -48,7 +48,7 @@
                     <TextBox IsReadOnly="True" x:Name="txtSelectedFilePath" Grid.Column="2" VerticalAlignment="Top" Margin="90,10,0,0"  Background="{x:Null}"  HorizontalAlignment="Left" Width="177" Height="177"/>
                     <Button Content="Resim Ekle" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="85,202,0,0" Grid.Column="2" Width="85"/>
                     <Button Content="Sil" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,202,0,0" Grid.Column="2" Width="85"/>
-                    <Button Content="Ara" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,270,0,0" Grid.Column="0" Width="85"/>
+                    <Button Content="Ara" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,270,0,0" Grid.Column="0" Width="85" Click="searchEmployeeButton_Click" />
                 </Grid>
             </Border>
             <Border Grid.Row="1" Background="White">
