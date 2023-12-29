@@ -24,32 +24,32 @@ Public Class ImageController
         _rootPath = _webHost.WebRootPath
     End Sub
     <HttpGet("{id}")>
-    Public Async Function GetById(id As Long) As Task(Of ActionResult(Of ApiResponse(Of ImageGetDto)))
+    Public Async Function GetById(id As Long) As Task(Of IActionResult)
         Dim response = Await _imageService.GetById(id)
         Return SendResponse(response)
     End Function
 
     <HttpGet>
-    Public Async Function GetAll() As Task(Of ActionResult(Of ApiResponse(Of IEnumerable(Of ImageGetDto))))
+    Public Async Function GetAll() As Task(Of IActionResult)
         Dim response = Await _imageService.GetAll()
         Return SendResponse(response)
     End Function
 
     <HttpPost>
-    Public Async Function Add(<FromForm> dto As ImageUploadDto) As Task(Of ActionResult(Of ApiResponse(Of ImageGetDto)))
+    Public Async Function Add(<FromForm> dto As ImageUploadDto) As Task(Of IActionResult)
 
         Dim response = Await _imageService.Add(dto)
         Return SendResponse(response)
     End Function
 
     <HttpPut("{id}")>
-    Public Async Function Update(id As Long, <FromBody> dto As ImagePutDto) As Task(Of ActionResult(Of ApiResponse(Of ImageGetDto)))
+    Public Async Function Update(id As Long, <FromBody> dto As ImagePutDto) As Task(Of IActionResult)
         Dim response = Await _imageService.Update(id, dto)
         Return SendResponse(response)
     End Function
 
     <HttpDelete("{id}")>
-    Public Async Function Delete(id As Long) As Task(Of ActionResult(Of ApiResponse(Of NoData)))
+    Public Async Function Delete(id As Long) As Task(Of IActionResult)
         Dim response = Await _imageService.Delete(id)
         Return SendResponse(response)
     End Function
