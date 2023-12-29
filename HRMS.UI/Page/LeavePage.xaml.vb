@@ -73,6 +73,7 @@ Public Class LeavePage : Implements IPage
         Dim employeeComboboxValue As Long? = Convert.ToInt64(employeeCombobox.SelectedValue)
         Dim leaveTypeComboboxValue As Long? = Convert.ToInt64(leaveTypeCombobox.SelectedValue)
         Dim leaveTextBoxValue As String = leaveTextBox.Text
+        Dim leaveStatusValue As String = leaveStatus.Text
 
 
         Dim leaveData As New With {
@@ -80,7 +81,8 @@ Public Class LeavePage : Implements IPage
             Key .LeaveEndDate = leaveEndDateValue,
             Key .EmployeeId = employeeComboboxValue,
             Key .LeaveTypeId = leaveTypeComboboxValue,
-            Key .LeaveDescription = leaveTextBoxValue,
+            Key .Description = leaveTextBoxValue,
+            Key .Status = leaveStatusValue,
             Key .Operation = "ADD"
             }
         Dim jsonContent = JsonConvert.SerializeObject(leaveData)
