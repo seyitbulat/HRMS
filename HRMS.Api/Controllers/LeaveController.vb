@@ -42,4 +42,10 @@ Public Class LeaveController
         Dim result As ApiResponse(Of List(Of LeafGetDto)) = Await _service.GetAll()
         Return SendResponse(result)
     End Function
+
+    <HttpDelete("{id}")>
+    Async Function DeleteLeave(<FromRoute> id As Long) As Task(Of IActionResult)
+        Dim response = Await _service.Delete(id)
+        Return SendResponse(response)
+    End Function
 End Class

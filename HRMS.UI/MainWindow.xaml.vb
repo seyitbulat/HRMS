@@ -81,11 +81,19 @@ Namespace HRMS.UI
         End Sub
 
         Private Sub LeaveButton_Click(ByVal sender As Object, ByVal e As ItemClickEventArgs)
-            '_selector = 1
+            _selector = 1
             MainContentPanel.Children.Clear()
             Dim leavePage As New LeavePage()
-            '_page = interviewPage
+            _page = leavePage
             MainContentPanel.Children.Add(leavePage)
+        End Sub
+
+        Private Sub SalaryButton_Click(ByVal sender As Object, ByVal e As ItemClickEventArgs)
+            '_selector = 1
+            MainContentPanel.Children.Clear()
+            Dim salaryPage As New SalaryPage()
+            '_page = salaryPage
+            MainContentPanel.Children.Add(salaryPage)
         End Sub
 
     End Class

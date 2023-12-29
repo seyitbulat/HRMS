@@ -1,6 +1,7 @@
 ﻿Imports HRMS.Model.Models
 
 Public Class LeafGetDto
+    Public Property Id As Long
     Public Property Startdate As Date?
 
     Public Property Enddate As Date?

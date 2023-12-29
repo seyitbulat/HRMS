@@ -1,6 +1,7 @@
 ﻿Imports AutoMapper
 Imports HRMS.Model
 Imports HRMS.Repository
+Imports Infrastructure
 Imports Infrastructure.Infrastructure.Utilities.ApiResponses
 
 Public Class LeaveBs
@@ -86,5 +87,14 @@ Public Class LeaveBs
         Dim mapped = _mapper.Map(Of List(Of LeafGetDto))(repoResponse)
 
         Return ApiResponse(Of List(Of LeafGetDto)).Success(200, mapped)
+    End Function
+
+    Public Async Function Delete(id As Long) As Task(Of ApiResponse(Of Infrastructure.NoData)) Implements ILeaveBs.Delete
+        Dim result = Await _repo.DeleteAsync(id)
+        If result Then
+            Return ApiResponse(Of NoData).Success(200)
+        Else
+            Return ApiResponse(Of NoData).Fail(404, "Item not found")
+        End If
     End Function
 End Class
