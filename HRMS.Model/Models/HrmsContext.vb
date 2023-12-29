@@ -69,10 +69,6 @@ Namespace Models
                         HasForeignKey(Function(d) d.Appliedpositionid).
                         OnDelete(DeleteBehavior.ClientSetNull).
                         HasConstraintName("FK_Candidates_Positions")
-
-                    entity.HasOne(Function(d) d.Image).WithMany(Function(p) p.Candidates).
-                        HasForeignKey(Function(d) d.ImageId).
-                        HasConstraintName("FK__Candidate__Image__5224328E")
                 End Sub)
 
             modelBuilder.Entity(Of Department)(
@@ -129,10 +125,6 @@ Namespace Models
                         OnDelete(DeleteBehavior.ClientSetNull).
                         HasConstraintName("FK_Employees_Departments")
 
-                    entity.HasOne(Function(d) d.Image).WithMany(Function(p) p.Employees).
-                        HasForeignKey(Function(d) d.ImageId).
-                        HasConstraintName("FK__Employees__Image__51300E55")
-
                     entity.HasOne(Function(d) d.Manager).WithMany(Function(p) p.InverseManager).
                         HasForeignKey(Function(d) d.Managerid).
                         HasConstraintName("FK_Employees_Employees2")
@@ -145,18 +137,35 @@ Namespace Models
 
             modelBuilder.Entity(Of Image)(
                 Sub(entity)
-                    entity.HasKey(Function(e) e.ImageId).HasName("PK__Images__7516F4EC759B944B")
+                    entity.HasNoKey()
 
-                    entity.Property(Function(e) e.ImageId).HasColumnName("ImageID")
-                    entity.Property(Function(e) e.CreatedDate).
+                    entity.Property(Function(e) e.Candİdateid).HasColumnName("CANDİDATEID")
+                    entity.Property(Function(e) e.Employeeid).HasColumnName("EMPLOYEEID")
+                    entity.Property(Function(e) e.Id).
+                        ValueGeneratedOnAdd().
+                        HasColumnName("ID")
+                    entity.Property(Function(e) e.Imagename).
+                        IsRequired().
+                        HasMaxLength(50).
+                        HasColumnName("IMAGENAME")
+                    entity.Property(Function(e) e.Imagepath).
+                        IsRequired().
+                        HasMaxLength(500).
+                        HasColumnName("IMAGEPATH")
+                    entity.Property(Function(e) e.Imagetype).
+                        IsRequired().
+                        HasMaxLength(50).
                         HasDefaultValueSql("(getdate())").
-                        HasColumnType("datetime")
-                    entity.Property(Function(e) e.ImageName).
-                        IsRequired().
-                        HasMaxLength(255)
-                    entity.Property(Function(e) e.ImagePath).
-                        IsRequired().
-                        HasMaxLength(255)
+                        HasColumnName("IMAGETYPE")
+                    entity.Property(Function(e) e.Isactive).HasColumnName("ISACTIVE")
+
+                    entity.HasOne(Function(d) d.Candİdate).WithMany().
+                        HasForeignKey(Function(d) d.Candİdateid).
+                        HasConstraintName("FK_Images_Candidates")
+
+                    entity.HasOne(Function(d) d.Employee).WithMany().
+                        HasForeignKey(Function(d) d.Employeeid).
+                        HasConstraintName("FK_Images_Employees")
                 End Sub)
 
             modelBuilder.Entity(Of Interview)(
@@ -182,6 +191,7 @@ Namespace Models
 
                     entity.HasOne(Function(d) d.Interviewer).WithMany(Function(p) p.Interviews).
                         HasForeignKey(Function(d) d.Interviewerid).
+                        OnDelete(DeleteBehavior.ClientSetNull).
                         HasConstraintName("FK_Interviews_Employees")
                 End Sub)
 
@@ -203,9 +213,7 @@ Namespace Models
                         HasMaxLength(50).
                         HasColumnName("STATUS")
 
-                    'entity.HasOne(Function(d) d.Employee).WithMany(Function(p) p.Leaves).
-                    '    HasForeignKey(Function(d) d.Employeeid).
-                    '    HasConstraintName("FK_Leaves_Employees")
+
 
                     entity.HasOne(Function(d) d.Leavetype).WithMany(Function(p) p.Leaves).
                         HasForeignKey(Function(d) d.Leavetypeid).
@@ -333,6 +341,7 @@ Namespace Models
                         HasMaxLength(50).
                         HasColumnName("USERNAME")
                 End Sub)
+
 
 
             OnModelCreatingPartial(modelBuilder)

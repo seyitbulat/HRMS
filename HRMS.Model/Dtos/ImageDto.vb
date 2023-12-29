@@ -1,29 +1,65 @@
 ﻿
+Imports HRMS.Model.Models
 Imports Microsoft.AspNetCore.Http
 
 Public Class ImageGetDto
     Public Property Id As Long
-    Public Property ImagePath As String
 
-    Public Property ImageName As String
+    Public Property Imagename As String
 
-    Public Property CreatedDate As Date
+    Public Property Imagepath As String
+
+    Public Property Imagetype As String
+
+    Public Property Isactive As Boolean
+
+    Public Property Employeeid As Long?
+
+    Public Property Candİdateid As Long?
+
+    Public Overridable Property Candİdate As Candidate
+
+    Public Overridable Property Employee As Employee
 End Class
 
 Public Class ImagePostDto
-    Public Property ImagePath As String
+    Public Property Id As Long
 
-    Public Property ImageName As String
+    Public Property Imagename As String
 
-    Public Property CreatedDate As Date
+    Public Property Imagepath As String
+
+    Public Property Imagetype As String
+
+    Public Property Isactive As Boolean
+
+    Public Property Employeeid As Long?
+
+    Public Property Candİdateid As Long?
+
+    Public Overridable Property Candİdate As Candidate
+
+    Public Overridable Property Employee As Employee
     Public Property File As IFormFile
 End Class
 
 Public Class ImagePutDto
-    Public Property ImagePath As String
+    Public Property Id As Long
 
-    Public Property ImageName As String
+    Public Property Imagename As String
 
-    Public Property CreatedDate As Date
+    Public Property Imagepath As String
+
+    Public Property Imagetype As String
+
+    Public Property Isactive As Boolean
+
+    Public Property Employeeid As Long?
+
+    Public Property Candİdateid As Long?
+
+    Public Overridable Property Candİdate As Candidate
+
+    Public Overridable Property Employee As Employee
     Public Property File As IFormFile
 End Class
