@@ -32,12 +32,11 @@ Namespace Models
 
         Public Overridable ReadOnly Property Departments As ICollection(Of Department) = New List(Of Department)()
 
-
         Public Overridable ReadOnly Property Interviews As ICollection(Of Interview) = New List(Of Interview)()
 
         Public Overridable ReadOnly Property InverseManager As ICollection(Of Employee) = New List(Of Employee)()
 
-        'Public Overridable ReadOnly Property Leaves As ICollection(Of Leaves) = New List(Of Leaves)()
+        Public Overridable ReadOnly Property Leaves As ICollection(Of Leaf) = New List(Of Leaf)()
 
         Public Overridable Property Manager As Employee
 

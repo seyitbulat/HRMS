@@ -15,8 +15,8 @@ Namespace Models
 
         Public Property Appliedpositionid As Long
 
-        Public Overridable Property Appliedposition As Position
 
+        Public Overridable Property Appliedposition As Position
 
         Public Overridable ReadOnly Property Interviews As ICollection(Of Interview) = New List(Of Interview)()
     End Class

@@ -15,10 +15,7 @@ Module Program
 
         ' Add services to the container.
 
-        'Dim options As JsonSerializerOptions = New JsonSerializerOptions() With {
-        '    .ReferenceHandler = ReferenceHandler.IgnoreCycles,
-        '    .WriteIndented = True
-        '}
+
 
         builder.Services.AddControllers().AddJsonOptions(Sub(opt) opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles)
         ' Learn more about configuring Swagger/OpenAPI at https://aka.ms/
@@ -60,6 +57,10 @@ Module Program
         builder.Services.AddScoped(Of ISalaryRepository, SalaryRepository)
         builder.Services.AddScoped(Of ISalaryBs, SalaryBs)
 
+        builder.Services.AddScoped(Of IImageRepository, ImageRepository)
+        builder.Services.AddScoped(Of IImageBs, ImageBs)
+
+        builder.Services.AddSingleton(Of IWebRootProvider, WebRootProvider)
 
         Dim app = builder.Build()
 

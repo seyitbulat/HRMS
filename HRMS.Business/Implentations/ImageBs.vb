@@ -5,16 +5,21 @@ Imports HRMS.Model.Models
 Imports HRMS.Repository
 Imports Infrastructure
 Imports Infrastructure.Infrastructure.Utilities.ApiResponses
+Imports Microsoft.AspNetCore.Hosting
 
 Public Class ImageBs
     Implements IImageBs
 
     Private ReadOnly _repo As IImageRepository
     Private ReadOnly _mapper As IMapper
+    Private ReadOnly _webRootService As IWebRootProvider
+    Private ReadOnly _hostRoot As String
 
-    Public Sub New(repo As IImageRepository, mapper As IMapper)
+    Public Sub New(repo As IImageRepository, mapper As IMapper, webRootService As IWebRootProvider)
         _repo = repo
         _mapper = mapper
+        _webRootService = webRootService
+        _hostRoot = _webRootService.GetWebRootPath()
     End Sub
 
     Public Async Function GetById(id As Long) As Task(Of ApiResponse(Of ImageGetDto)) Implements IImageBs.GetById
@@ -25,9 +30,11 @@ Public Class ImageBs
     End Function
 
     ' ImageBs sınıfında
-    Public Async Function Add(dto As ImagePostDto) As Task(Of ApiResponse(Of ImageGetDto)) Implements IImageBs.Add
+    Public Async Function Add(dto As ImageUploadDto) As Task(Of ApiResponse(Of ImageGetDto)) Implements IImageBs.Add
+        Dim postObj As New ImagePostDto
         If dto.File IsNot Nothing AndAlso dto.File.Length > 0 Then
             Try
+
                 ' Dosya türünü kontrol et (Örneğin, sadece .jpg ve .png kabul edilsin)
                 If Not (dto.File.ContentType = "image/jpeg" OrElse dto.File.ContentType = "image/png") Then
                     Return ApiResponse(Of ImageGetDto).Fail(400, "Unsupported file format. Only .jpg and .png are allowed.")
@@ -39,13 +46,24 @@ Public Class ImageBs
                 End If
 
                 ' Dosyayı sunucuya kaydet
-                Dim filePath = Path.Combine("C:\Users\tugcedokgoz\Desktop\HRMS\HRMS\HRMS.Api\Images\", dto.File.FileName)
+                Dim filePath = Path.Combine($"{_hostRoot}\Images\", dto.File.FileName)
                 Using stream = New FileStream(filePath, FileMode.Create)
                     Await dto.File.CopyToAsync(stream)
                 End Using
 
                 ' DTO'daki ImagePath'i güncelle
-                dto.ImagePath = filePath
+                postObj.Imagepath = filePath
+
+
+                postObj.Imagename = dto.File.FileName
+                postObj.Imagetype = dto.File.ContentType
+                postObj.Isactive = True
+                postObj.Employeeid = dto.Employeeid
+                postObj.Candİdateid = dto.Candİdateid
+
+                postObj.File = dto.File
+
+
             Catch ex As Exception
                 ' Dosya yükleme sırasında bir hata oluşursa
                 Return ApiResponse(Of ImageGetDto).Fail(500, $"An error occurred while uploading the file: {ex.Message}")
@@ -55,7 +73,7 @@ Public Class ImageBs
         End If
 
         ' Automapper ile DTO'dan Entity'ye dönüştürme
-        Dim newItem = _mapper.Map(Of Image)(dto)
+        Dim newItem = _mapper.Map(Of Image)(postObj)
 
         ' Veritabanına yeni öğeyi ekleme
         Dim added = Await _repo.AddAsync(newItem)
@@ -79,7 +97,10 @@ Public Class ImageBs
                 ' Dosya boyutunu kontrol et
 
                 ' Mevcut dosyayı yeni dosya ile değiştir
-                Dim filePath = Path.Combine("C:\Users\tugcedokgoz\Desktop\HRMS\HRMS\HRMS.Api\Images\", dto.File.FileName)
+
+
+
+                Dim filePath = Path.Combine($"{_hostRoot}\Images\", dto.File.FileName)
                 Using stream = New FileStream(filePath, FileMode.Create)
                     Await dto.File.CopyToAsync(stream)
                 End Using
