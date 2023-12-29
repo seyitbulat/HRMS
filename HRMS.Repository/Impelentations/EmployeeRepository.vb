@@ -81,6 +81,7 @@ Public Class EmployeeRepository : Inherits BaseRepository(Of Employee, Long, HRM
                                               employee.Departmanid = If(IsDBNull(reader("DEPARTMANID")), Nothing, Convert.ToInt64(reader("DEPARTMANID")))
                                               employee.Managerid = If(IsDBNull(reader("MANAGERID")), Nothing, Convert.ToInt64(reader("MANAGERID")))
                                               employee.Annualleave = If(IsDBNull(reader("ANNUALLEAVE")), Nothing, Convert.ToInt32(reader("ANNUALLEAVE")))
+
                                               employees.Add(employee)
                                           End While
 

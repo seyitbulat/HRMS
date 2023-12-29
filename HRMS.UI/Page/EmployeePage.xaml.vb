@@ -21,7 +21,7 @@ Public Class EmployeePage : Implements IPage
             Dim department = departmenId.SelectedValue
             Dim manager = manegerId.SelectedValue
             Dim annual = annualleave.Text
-            Dim active = ısactive.IsChecked.HasValue
+
 
             Dim _httpClient As New HttpClient
 
@@ -115,7 +115,7 @@ Public Class EmployeePage : Implements IPage
             departmenId.SelectedValue = selected.Departmanid
             manegerId.SelectedValue = selected.Managerid
             annualleave.Text = selected.Annualleave
-            ısactive.IsChecked = selected.Isactive
+
             If selected.Gender IsNot Nothing Then
                 gender.SelectedItem = selected.Gender
             Else
